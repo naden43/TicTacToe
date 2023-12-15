@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoeclient;
+package tic_tac_toe;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  *
  * @author user
  */
-public class FXMLDocumentController implements Initializable {
+public class Computer_modeController implements Initializable {
     
     @FXML
     private Label label;
