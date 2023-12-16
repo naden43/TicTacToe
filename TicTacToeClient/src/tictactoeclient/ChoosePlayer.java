@@ -1,4 +1,4 @@
-package tic_tac_toe;
+package tictactoeclient;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
