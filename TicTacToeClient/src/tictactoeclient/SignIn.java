@@ -1,4 +1,4 @@
-package tic_tac_toe;
+package tictactoeclient;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

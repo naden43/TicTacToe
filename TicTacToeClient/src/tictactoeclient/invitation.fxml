@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #42C4F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="playername" layoutX="28.0" layoutY="83.0" prefHeight="21.0" prefWidth="93.0" text="  naden" textAlignment="CENTER" textFill="RED">
@@ -30,24 +29,24 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Button>
-      <ImageView layoutX="10.0" layoutY="10.0">
-         <image>
-            <Image url="@cloud.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="58.0" fitWidth="76.0" layoutX="289.0" layoutY="10.0">
          <image>
-            <Image url="@cloud.png" />
+            <Image url="@Images/cloud.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="47.0" fitWidth="76.0" layoutX="-24.0" layoutY="115.0">
          <image>
-            <Image url="@cloud.png" />
+            <Image url="@Images/cloud.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="58.0" fitWidth="76.0" layoutX="348.0" layoutY="115.0">
          <image>
-            <Image url="@cloud.png" />
+            <Image url="@Images/cloud.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="133.0" layoutX="7.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/cloud.png" />
          </image>
       </ImageView>
    </children>

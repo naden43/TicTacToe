@@ -18,27 +18,27 @@
             </Button>
             <ImageView fitHeight="161.0" fitWidth="243.0" layoutX="539.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Images/cloud.png" />
+                  <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="161.0" fitWidth="213.0" layoutX="72.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Images/cloud.png" />
+                  <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="144.0" fitWidth="238.0" layoutX="64.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Images/cloud.png" />
+                  <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="161.0" fitWidth="238.0" layoutX="599.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Images/cloud.png" />
+                  <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="480.0" fitWidth="238.0" layoutX="301.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Images/tic-tac-toe.png" />
+                  <Image url="@Images/tic-tac-toe.png" />
                </image>
             </ImageView>
          </children>

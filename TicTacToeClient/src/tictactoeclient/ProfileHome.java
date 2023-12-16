@@ -1,4 +1,4 @@
-package tic_tac_toe;
+package tictactoeclient;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -115,7 +115,7 @@ public class ProfileHome extends Pane {
         imageView4.setFitWidth(73.0);
         imageView4.setLayoutX(74.0);
         imageView4.setLayoutY(108.0);
-        imageView4.setImage(new Image(getClass().getResource("images/man2.png").toExternalForm()));
+        imageView4.setImage(new Image(getClass().getResource("Images/man2.png").toExternalForm()));
 
         label0.setLayoutX(172.0);
         label0.setLayoutY(131.0);
