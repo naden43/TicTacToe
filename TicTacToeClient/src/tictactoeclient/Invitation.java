@@ -1,11 +1,15 @@
-package tic_tac_toe;
+package tictactoeclient;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class Invitation extends Pane {
 
@@ -18,7 +22,7 @@ public class Invitation extends Pane {
     protected final ImageView imageView1;
     protected final ImageView imageView2;
 
-    public Invitation() {
+    public Invitation(Stage primarystage , Stage secondrystage) {
 
         playername = new Label();
         label = new Label();
@@ -72,26 +76,30 @@ public class Invitation extends Pane {
         rejectbtn.setTextFill(javafx.scene.paint.Color.WHITE);
         rejectbtn.setFont(new Font("Berlin Sans FB", 18.0));
 
-        imageView.setLayoutX(10.0);
+        imageView.setFitHeight(58.0);
+        imageView.setFitWidth(76.0);
+        imageView.setLayoutX(289.0);
         imageView.setLayoutY(10.0);
         imageView.setImage(new Image(getClass().getResource("Images/cloud.png").toExternalForm()));
 
-        imageView0.setFitHeight(58.0);
+        imageView0.setFitHeight(47.0);
         imageView0.setFitWidth(76.0);
-        imageView0.setLayoutX(289.0);
-        imageView0.setLayoutY(10.0);
+        imageView0.setLayoutX(-24.0);
+        imageView0.setLayoutY(115.0);
         imageView0.setImage(new Image(getClass().getResource("Images/cloud.png").toExternalForm()));
 
-        imageView1.setFitHeight(47.0);
+        imageView1.setFitHeight(58.0);
         imageView1.setFitWidth(76.0);
-        imageView1.setLayoutX(-24.0);
+        imageView1.setLayoutX(348.0);
         imageView1.setLayoutY(115.0);
         imageView1.setImage(new Image(getClass().getResource("Images/cloud.png").toExternalForm()));
 
-        imageView2.setFitHeight(58.0);
-        imageView2.setFitWidth(76.0);
-        imageView2.setLayoutX(348.0);
-        imageView2.setLayoutY(115.0);
+        imageView2.setFitHeight(82.0);
+        imageView2.setFitWidth(133.0);
+        imageView2.setLayoutX(7.0);
+        imageView2.setLayoutY(8.0);
+        imageView2.setPickOnBounds(true);
+        imageView2.setPreserveRatio(true);
         imageView2.setImage(new Image(getClass().getResource("Images/cloud.png").toExternalForm()));
 
         getChildren().add(playername);
@@ -102,6 +110,22 @@ public class Invitation extends Pane {
         getChildren().add(imageView0);
         getChildren().add(imageView1);
         getChildren().add(imageView2);
+        
+        acceptbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                secondrystage.close();
+                primarystage.setScene(new Scene(new Online_mode(primarystage)));
+            }
+        });
+        
+        rejectbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                secondrystage.close();
+            }
+        });
+        
 
     }
 }

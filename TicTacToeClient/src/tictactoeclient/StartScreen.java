@@ -1,4 +1,4 @@
-package tic_tac_toe;
+package tictactoeclient;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
-public class StartScreen extends AnchorPane {
+public  class StartScreen extends AnchorPane {
 
     protected final Pane pane;
     protected final Button startBtn;
@@ -35,8 +35,8 @@ public class StartScreen extends AnchorPane {
         setPrefWidth(870.0);
 
         pane.setLayoutY(-6.0);
-        pane.setPrefHeight(670.0);
-        pane.setPrefWidth(890.0);
+        pane.setPrefHeight(656.0);
+        pane.setPrefWidth(870.0);
         pane.setStyle("-fx-background-color: #42C4F7;");
 
         startBtn.setLayoutX(290.0);
