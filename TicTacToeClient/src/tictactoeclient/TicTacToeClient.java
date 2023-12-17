@@ -7,8 +7,22 @@ package tictactoeclient;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -16,15 +30,15 @@ import javafx.stage.Stage;
  * @author user
  */
 public class TicTacToeClient extends Application {
-    
+
     @Override
-    public void start(Stage stage) throws Exception {
-      ChoosePlayer root = new ChoosePlayer();
+    public void start(Stage stage) throws Exception { 
         
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.show();
+        new GameLogic().setDrawVideo(stage);
+//    LocalMode root = new LocalMode(stage);       
+//    Scene scene = new Scene(root);
+//    stage.setScene(scene);
+//   stage.show();
     }
 
     /**
@@ -33,5 +47,5 @@ public class TicTacToeClient extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
