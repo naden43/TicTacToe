@@ -11,7 +11,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #42C4F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+=======
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #42C4F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="84.0" fitWidth="125.0" layoutX="29.0" layoutY="7.0">
@@ -19,7 +23,11 @@
             <Image url="@images/cloud.png" />
          </image>
       </ImageView>
+<<<<<<< HEAD
       <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="613.0" layoutY="98.0">
+=======
+      <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="564.0" layoutY="95.0">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <image>
             <Image url="@images/cloud.png" />
          </image>
@@ -29,33 +37,57 @@
             <Image url="@images/cloud.png" />
          </image>
       </ImageView>
+<<<<<<< HEAD
       <ImageView fitHeight="67.0" fitWidth="125.0" layoutX="564.0" layoutY="16.0">
+=======
+      <ImageView fitHeight="67.0" fitWidth="125.0" layoutX="455.0" layoutY="13.0">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <image>
             <Image url="@images/cloud.png" />
          </image>
       </ImageView>
+<<<<<<< HEAD
       <Text fill="WHITE" layoutX="288.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
+=======
+      <Text fill="WHITE" layoutX="252.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <font>
             <Font name="Berlin Sans FB" size="36.0" />
          </font>
       </Text>
+<<<<<<< HEAD
       <Rectangle arcWidth="55.0" fill="WHITE" height="342.0" layoutX="74.0" layoutY="95.0" stroke="WHITE" strokeType="INSIDE" style="-fx-arc-height: 55;" width="524.0" />
+=======
+      <Rectangle arcWidth="55.0" fill="WHITE" height="286.0" layoutX="62.0" layoutY="99.0" stroke="WHITE" strokeType="INSIDE" style="-fx-arc-height: 55;" width="492.0" />
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
       <Label layoutX="96.0" layoutY="200.0" text="User Name :">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="101.0" layoutY="117.0">
+=======
+      <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="74.0" layoutY="108.0">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <image>
             <Image url="@images/man2.png" />
          </image>
       </ImageView>
+<<<<<<< HEAD
       <Label layoutX="215.0" layoutY="140.0" text="Ahmed" textFill="#000000ba">
+=======
+      <Label layoutX="172.0" layoutY="131.0" text="Ahmed" textFill="#000000ba">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <TextField disable="true" layoutX="200.0" layoutY="198.0" style="-fx-background-color: white; -fx-border-color: gray; -fx-background-radius: 15px; -fx-border-radius: 15px;" />
+=======
+      <TextField layoutX="200.0" layoutY="198.0" style="-fx-background-color: white; -fx-border-color: gray; -fx-background-radius: 15px; -fx-border-radius: 15px;" />
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
       <Label layoutX="96.0" layoutY="242.0" text="Password : ">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
@@ -82,6 +114,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Button>
+<<<<<<< HEAD
       <ImageView fitHeight="67.0" fitWidth="125.0" layoutX="613.0" layoutY="302.0">
          <image>
             <Image url="@images/cloud.png" />
@@ -107,5 +140,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Button>
+=======
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
    </children>
 </Pane>

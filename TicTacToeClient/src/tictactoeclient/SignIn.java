@@ -48,57 +48,57 @@ public class SignIn extends AnchorPane {
         setMaxWidth(USE_PREF_SIZE);
         setMinHeight(USE_PREF_SIZE);
         setMinWidth(USE_PREF_SIZE);
-        setPrefHeight(400.0);
-        setPrefWidth(600.0);
+        setPrefHeight(500.0);
+        setPrefWidth(700.0);
         setStyle("-fx-background-color: #42c4f7;");
 
-        anchorPane.setLayoutX(121.0);
-        anchorPane.setLayoutY(110.0);
-        anchorPane.setPrefHeight(245.0);
-        anchorPane.setPrefWidth(350.0);
+        anchorPane.setLayoutX(140.0);
+        anchorPane.setLayoutY(128.0);
+        anchorPane.setPrefHeight(335.0);
+        anchorPane.setPrefWidth(420.0);
         anchorPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10px;");
 
-        btnSignIn.setLayoutX(136.0);
-        btnSignIn.setLayoutY(125.0);
+        btnSignIn.setLayoutX(150.0);
+        btnSignIn.setLayoutY(168.0);
         btnSignIn.setMnemonicParsing(false);
-        btnSignIn.setPrefHeight(25.0);
-        btnSignIn.setPrefWidth(93.0);
+        btnSignIn.setPrefHeight(30.0);
+        btnSignIn.setPrefWidth(120.0);
         btnSignIn.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 10px;");
         btnSignIn.setText("Sign in");
         btnSignIn.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnSignIn.setFont(new Font("Berlin Sans FB Bold", 12.0));
+        btnSignIn.setFont(new Font("Berlin Sans FB Bold", 15.0));
+        
+        
 
-        btnPlayOffline.setLayoutX(136.0);
-        btnPlayOffline.setLayoutY(199.0);
+        btnPlayOffline.setLayoutX(150.0);
+        btnPlayOffline.setLayoutY(244.0);
         btnPlayOffline.setMnemonicParsing(false);
-        btnPlayOffline.setPrefHeight(25.0);
-        btnPlayOffline.setPrefWidth(93.0);
+        btnPlayOffline.setPrefHeight(30.0);
+        btnPlayOffline.setPrefWidth(120.0);
         btnPlayOffline.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 10px;");
         btnPlayOffline.setText("Play Offline");
         btnPlayOffline.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnPlayOffline.setFont(new Font("Berlin Sans FB Bold", 12.0));
+        btnPlayOffline.setFont(new Font("Berlin Sans FB Bold", 15.0));
 
-        btnRegister.setLayoutX(136.0);
-        btnRegister.setLayoutY(163.0);
+        btnRegister.setLayoutX(150.0);
+        btnRegister.setLayoutY(206.0);
         btnRegister.setMnemonicParsing(false);
-        btnRegister.setPrefHeight(25.0);
-        btnRegister.setPrefWidth(93.0);
+        btnRegister.setPrefHeight(30.0);
+        btnRegister.setPrefWidth(120.0);
         btnRegister.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 10px;");
         btnRegister.setText("Register");
         btnRegister.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnRegister.setFont(new Font("Berlin Sans FB Bold", 12.0));
+        btnRegister.setFont(new Font("Berlin Sans FB Bold", 15.0));
         btnRegister.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Scene scene = new Scene(new Register(stage));
-                stage.setScene(scene);
-                
+                stage.setScene(new Scene(new Register(stage)));
             }
         });
         
 
-        txtFieldUserName.setLayoutX(116.0);
-        txtFieldUserName.setLayoutY(35.0);
+        txtFieldUserName.setLayoutX(140.0);
+        txtFieldUserName.setLayoutY(71.0);
         txtFieldUserName.setPrefHeight(31.0);
         txtFieldUserName.setPrefWidth(135.0);
         txtFieldUserName.setPromptText("Enter Username");
@@ -106,22 +106,22 @@ public class SignIn extends AnchorPane {
 
         imgUserName.setFitHeight(38.0);
         imgUserName.setFitWidth(24.0);
-        imgUserName.setLayoutX(81.0);
-        imgUserName.setLayoutY(37.0);
+        imgUserName.setLayoutX(105.0);
+        imgUserName.setLayoutY(73.0);
         imgUserName.setPickOnBounds(true);
         imgUserName.setPreserveRatio(true);
         imgUserName.setImage(new Image(getClass().getResource("Images/icons8-username-48.png").toExternalForm()));
 
         imgPassward.setFitHeight(48.0);
         imgPassward.setFitWidth(20.0);
-        imgPassward.setLayoutX(83.0);
-        imgPassward.setLayoutY(80.0);
+        imgPassward.setLayoutX(107.0);
+        imgPassward.setLayoutY(116.0);
         imgPassward.setPickOnBounds(true);
         imgPassward.setPreserveRatio(true);
         imgPassward.setImage(new Image(getClass().getResource("Images/icons8-password-48.png").toExternalForm()));
 
-        passFieldPassward.setLayoutX(116.0);
-        passFieldPassward.setLayoutY(73.0);
+        passFieldPassward.setLayoutX(140.0);
+        passFieldPassward.setLayoutY(109.0);
         passFieldPassward.setPrefHeight(31.0);
         passFieldPassward.setPrefWidth(135.0);
         passFieldPassward.setPromptText("Enter Passward");
@@ -129,17 +129,17 @@ public class SignIn extends AnchorPane {
 
         textUserOrPassWrong.setDisable(true);
         textUserOrPassWrong.setFill(javafx.scene.paint.Color.RED);
-        textUserOrPassWrong.setLayoutX(119.0);
-        textUserOrPassWrong.setLayoutY(118.0);
+        textUserOrPassWrong.setLayoutX(140.0);
+        textUserOrPassWrong.setLayoutY(157.0);
         textUserOrPassWrong.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         textUserOrPassWrong.setStrokeWidth(0.0);
-        textUserOrPassWrong.setStyle("-fx-font-size: 9;");
+        textUserOrPassWrong.setStyle("-fx-font-size: 10;");
         textUserOrPassWrong.setText("wrong username or passward");
         textUserOrPassWrong.setVisible(false);
-        textUserOrPassWrong.setWrappingWidth(135.00000029802322);
+        textUserOrPassWrong.setWrappingWidth(134.99999718368053);
 
-        imgHeader.setFitHeight(111.0);
-        imgHeader.setFitWidth(602.0);
+        imgHeader.setFitHeight(141.0);
+        imgHeader.setFitWidth(700.0);
         imgHeader.setLayoutX(-2.0);
         imgHeader.setPickOnBounds(true);
         imgHeader.setPreserveRatio(true);
@@ -152,12 +152,13 @@ public class SignIn extends AnchorPane {
         btnBack.setPrefWidth(39.0);
         btnBack.setStyle("-fx-background-color: #42c4f7;");
 
-        imageView.setFitHeight(28.0);
-        imageView.setFitWidth(27.0);
+        imageView.setFitHeight(33.0);
+        imageView.setFitWidth(33.0);
+        imageView.setLayoutX(37.0);
+        imageView.setLayoutY(35.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
         imageView.setImage(new Image(getClass().getResource("Images/back.png").toExternalForm()));
-        btnBack.setGraphic(imageView);
 
         anchorPane.getChildren().add(btnSignIn);
         anchorPane.getChildren().add(btnPlayOffline);
@@ -170,6 +171,9 @@ public class SignIn extends AnchorPane {
         getChildren().add(anchorPane);
         getChildren().add(imgHeader);
         getChildren().add(btnBack);
+        getChildren().add(imageView);
 
     }
+
+    
 }

@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<<<<<<< HEAD
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+=======
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #42C4F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text fill="WHITE" layoutX="259.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avaliable Players" wrappingWidth="182.11328125">
+=======
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #42C4F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fill="WHITE" layoutX="209.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avaliable Players" wrappingWidth="182.11328125">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <font>
             <Font name="Berlin Sans FB" size="24.0" />
          </font>
       </Text>
+<<<<<<< HEAD
       <Rectangle arcHeight="55.0" arcWidth="55.0" fill="WHITE" height="394.0" layoutX="18.0" layoutY="78.0" stroke="WHITE" strokeType="INSIDE" width="664.0" />
       <Text fill="#00000080" layoutX="73.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="name">
          <font>
@@ -30,17 +45,47 @@
       </Text>
       <Button fx:id="btnBack" layoutX="7.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: #42C4F7;" />
       <Button fx:id="profilrbtn" layoutX="604.0" layoutY="5.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="59.0" style="-fx-background-color: #42C4F7;">
+=======
+      <Rectangle arcHeight="55.0" arcWidth="55.0" fill="WHITE" height="302.0" layoutX="32.0" layoutY="64.0" stroke="WHITE" strokeType="INSIDE" width="547.0" />
+      <Text fill="#00000080" layoutX="84.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="name">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#00000080" layoutX="278.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="score">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Text>
+      <ListView fx:id="nameList" layoutX="84.0" layoutY="115.0" prefHeight="200.0" prefWidth="150.0" style="-fx-border-color: white;" visible="false" />
+      <ListView fx:id="scoreList" layoutX="278.0" layoutY="115.0" prefHeight="200.0" prefWidth="120.0" style="-fx-border-color: white;" />
+      <ListView fx:id="btnList" layoutX="426.0" layoutY="115.0" prefHeight="200.0" prefWidth="141.0" style="-fx-border-color: white;" />
+      <Button fx:id="btnBack" layoutX="7.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" style="-fx-background-color: #42C4F7;">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="25.0">
+               <image>
+                  <Image url="@images/back.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="profilrbtn" layoutX="518.0" layoutY="-7.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="59.0" style="-fx-background-color: #42C4F7;">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
          <graphic>
+<<<<<<< HEAD
             <ImageView fitHeight="56.0" fitWidth="67.0">
+=======
+            <ImageView fitHeight="47.0" fitWidth="44.0">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@../../../../TicTacToe/TicTacToeClient/src/tictactoeclient/Images/icons8-username-48.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
+<<<<<<< HEAD
       <Text fill="#00000080" layoutX="497.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invitation">
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
@@ -78,5 +123,12 @@
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
       </Button>
+=======
+      <Text fill="#00000080" layoutX="470.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invitation">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Text>
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
    </children>
 </Pane>

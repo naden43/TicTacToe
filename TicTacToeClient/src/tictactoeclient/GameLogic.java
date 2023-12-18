@@ -21,6 +21,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import java.util.Optional;
+import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
@@ -29,7 +36,7 @@ import javafx.stage.Stage;
  */
 public class GameLogic {
 
-    
+
     static public int checkWin(char [] board , Button [] btn) // 1-3(rows) 4-6(columns) 7-8(diagonal)   1-x 2-0 3-noOne
     {
         boolean flagX = false ;
@@ -118,31 +125,6 @@ public class GameLogic {
         
     }
     
-    /*static public boolean haveSameValue(char place1 , char place2 , char place3 )
-    {
-        
-        return true;
-    }*/
-    
-    static public void highlightWinPlace(int []indices , Button []btn)
-    {
-           
-    }
-    
-    public static void checkExit(Stage stage)
-    {
-        
-    }
-    
-    /*public static void setDrawDialog(Stage stage)
-    {
-        
-    }*/
-    
-
-    /*static public void highlightWinPlace(int [] indices, Button [] btn ) {
-
-    }*/
 
     public void setWinnerVideo(Stage stage) throws MalformedURLException {
         
@@ -205,10 +187,6 @@ public class GameLogic {
 
     }
 
-    /*public static void checkExit(Stage stage) {
-
-    }*/
-
     public void setDrawVideo(Stage stage) {
 
         Dialog<Void> alert = new Dialog<>();
@@ -240,4 +218,24 @@ public class GameLogic {
     }
 
 
+    public static void checkExit(Stage stage) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit Alarm");
+        alert.setHeaderText("Are you sure you want to quit the game?");
+        ButtonType buttonYes = new ButtonType("Yes");
+        ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonYes, buttonCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonYes) {
+            stage.setScene(new Scene(new SignIn(stage)));
+        }
+    }
+    static public void highlightWinPlace(int[] indices, Button[] btn) {
+        for (int index : indices) {
+            btn[index].setStyle("-fx-background-color: #00FF00;");
+        }
+    }
+    
 }
