@@ -12,7 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.derby.jdbc.ClientDriver;
+
 
 /**
  *
@@ -22,17 +22,19 @@ public class TicTacToeClient extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-      ProfileHome root = new ProfileHome(stage);
-        
+      Local_mode root = new Local_mode(stage);
+      ProfileHome root2 = new ProfileHome(stage);
       
       
-        DriverManager.registerDriver(new ClientDriver());
-        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Game","root" , "root");
-        con.close();
+      Stage stage2 = new Stage();
+      stage2.setScene(new Scene(root2));
+      
+
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
+        
         stage.show();
+        stage2.show();
     }
 
     /**
