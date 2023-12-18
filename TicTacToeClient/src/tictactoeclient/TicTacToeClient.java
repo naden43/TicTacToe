@@ -19,8 +19,7 @@ public class TicTacToeClient extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-
-        Computer_mode root = new Computer_mode(stage);
+      OnlineMode root = new OnlineMode(stage);
 
         
         Scene scene = new Scene(root);
