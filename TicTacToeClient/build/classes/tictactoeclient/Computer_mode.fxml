@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Pane blendMode="SRC_ATOP" depthTest="DISABLE" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #42C4F7;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="computer_view" fitHeight="80.0" fitWidth="92.0" layoutX="475.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/desktop.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="cScore" layoutX="479.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="72.98307228088379">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font></Text>
+            <Text fx:id="turn_txt" fill="WHITE" layoutX="203.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer Turn" textAlignment="CENTER" wrappingWidth="174.9830722808838">
+               <font>
+                  <Font name="Berlin Sans FB" size="26.0" />
+               </font></Text>
+            <ImageView fx:id="person1_view" fitHeight="80.0" fitWidth="92.0" layoutX="33.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/man1.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="p1Score" layoutX="45.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="CENTER" wrappingWidth="55.48697900772095">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font></Text>
+            <Button fx:id="btn1" contentDisplay="BOTTOM" layoutX="189.0" layoutY="130.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: #D0E7F3;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn2" contentDisplay="BOTTOM" layoutX="257.0" layoutY="130.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: F6FBFE;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn3" contentDisplay="BOTTOM" layoutX="325.0" layoutY="130.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: #D0E7F3;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn5" contentDisplay="BOTTOM" layoutX="257.0" layoutY="176.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: #D0E7F3;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn4" contentDisplay="BOTTOM" layoutX="189.0" layoutY="176.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: F6FBFE;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn6" contentDisplay="BOTTOM" layoutX="325.0" layoutY="176.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: F6FBFE;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn8" contentDisplay="BOTTOM" layoutX="257.0" layoutY="221.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: F6FBFE;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn9" contentDisplay="BOTTOM" layoutX="325.0" layoutY="222.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: #D0E7F3;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn7" contentDisplay="BOTTOM" layoutX="189.0" layoutY="221.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" style="-fx-background-radius: 15; -fx-background-color: #D0E7F3;" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="resetBtn" layoutX="128.0" layoutY="300.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="122.0" style="-fx-background-radius: 20; -fx-background-color: #00886D;" text="Reset" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font></Button>
+            <Button fx:id="exitBtn" layoutX="330.0" layoutY="300.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="122.0" style="-fx-background-radius: 20; -fx-background-color: CE091E;" text="Exit" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB" size="20.0" />
+               </font></Button>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

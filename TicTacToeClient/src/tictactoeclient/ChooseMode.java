@@ -1,5 +1,8 @@
 package tictactoeclient;
 
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -34,6 +37,14 @@ public  class ChooseMode extends AnchorPane {
         imageView3 = new ImageView();
         BackBtn = new Button();
         imageView4 = new ImageView();
+        
+        SingleModeBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.setScene(new Scene(new Computer_mode(stage)));
+            }
+        });
+        
 
         setId("AnchorPane");
         setMaxHeight(USE_PREF_SIZE);
