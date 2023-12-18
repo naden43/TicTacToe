@@ -95,6 +95,7 @@ public class ComputerMode extends BorderPane {
         turn_txt.setWrappingWidth(219.9830722808838);
         turn_txt.setFont(new Font("Berlin Sans FB", 31.0));
 
+
         person1_view.setFitHeight(105.0);
         person1_view.setFitWidth(103.0);
         person1_view.setLayoutX(53.0);

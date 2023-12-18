@@ -20,6 +20,7 @@ public class TicTacToeClient extends Application {
     @Override
     public void start(Stage stage) throws Exception {
       OnlineMode root = new OnlineMode(stage);
+
         
         Scene scene = new Scene(root);
         
