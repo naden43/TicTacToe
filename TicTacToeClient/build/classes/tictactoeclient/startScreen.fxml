@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #42C4F7;">
@@ -18,54 +17,26 @@
                </font>
             </Button>
             <ImageView fitHeight="103.0" fitWidth="157.0" layoutX="440.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
-=======
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane layoutY="-6.0" prefHeight="656.0" prefWidth="870.0" style="-fx-background-color: #42C4F7;">
-         <children>
-            <Button fx:id="startBtn" layoutX="290.0" layoutY="495.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="261.0" style="-fx-background-radius: 35; -fx-background-color: #6A629E;" text="Start" textFill="WHITE">
-               <font>
-                  <Font name="Berlin Sans FB Bold" size="35.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="161.0" fitWidth="243.0" layoutX="539.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
             <ImageView fitHeight="108.0" fitWidth="152.0" layoutX="36.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
-=======
-            <ImageView fitHeight="161.0" fitWidth="213.0" layoutX="72.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
             <ImageView fitHeight="119.0" fitWidth="187.0" layoutX="43.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
-=======
-            <ImageView fitHeight="144.0" fitWidth="238.0" layoutX="64.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
             <ImageView fitHeight="144.0" fitWidth="198.0" layoutX="488.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
-=======
-            <ImageView fitHeight="161.0" fitWidth="238.0" layoutX="599.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/cloud.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
             <ImageView fitHeight="211.0" fitWidth="176.0" layoutX="258.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
-=======
-            <ImageView fitHeight="480.0" fitWidth="238.0" layoutX="301.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/tic-tac-toe.png" />
                </image>

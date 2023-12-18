@@ -27,7 +27,6 @@ public class SignIn extends AnchorPane {
     protected final Text textUserOrPassWrong;
     protected final ImageView imgHeader;
     protected final Button btnBack;
-    protected final ImageView imageView;
 
     public SignIn(Stage stage) {
 
@@ -42,7 +41,6 @@ public class SignIn extends AnchorPane {
         textUserOrPassWrong = new Text();
         imgHeader = new ImageView();
         btnBack = new Button();
-        imageView = new ImageView();
 
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -52,78 +50,69 @@ public class SignIn extends AnchorPane {
         setPrefWidth(700.0);
         setStyle("-fx-background-color: #42c4f7;");
 
-        anchorPane.setLayoutX(140.0);
+        anchorPane.setLayoutX(138.0);
         anchorPane.setLayoutY(128.0);
         anchorPane.setPrefHeight(335.0);
         anchorPane.setPrefWidth(420.0);
         anchorPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10px;");
 
-        btnSignIn.setLayoutX(150.0);
+        btnSignIn.setLayoutX(123.0);
         btnSignIn.setLayoutY(168.0);
         btnSignIn.setMnemonicParsing(false);
-        btnSignIn.setPrefHeight(30.0);
-        btnSignIn.setPrefWidth(120.0);
-        btnSignIn.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 10px;");
+        btnSignIn.setPrefHeight(31.0);
+        btnSignIn.setPrefWidth(175.0);
+        btnSignIn.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 30px;");
         btnSignIn.setText("Sign in");
         btnSignIn.setTextFill(javafx.scene.paint.Color.WHITE);
         btnSignIn.setFont(new Font("Berlin Sans FB Bold", 15.0));
-        
-        
 
-        btnPlayOffline.setLayoutX(150.0);
+        btnPlayOffline.setLayoutX(123.0);
         btnPlayOffline.setLayoutY(244.0);
         btnPlayOffline.setMnemonicParsing(false);
-        btnPlayOffline.setPrefHeight(30.0);
-        btnPlayOffline.setPrefWidth(120.0);
-        btnPlayOffline.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 10px;");
+        btnPlayOffline.setPrefHeight(31.0);
+        btnPlayOffline.setPrefWidth(175.0);
+        btnPlayOffline.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 30px;");
         btnPlayOffline.setText("Play Offline");
         btnPlayOffline.setTextFill(javafx.scene.paint.Color.WHITE);
         btnPlayOffline.setFont(new Font("Berlin Sans FB Bold", 15.0));
 
-        btnRegister.setLayoutX(150.0);
+        btnRegister.setLayoutX(123.0);
         btnRegister.setLayoutY(206.0);
         btnRegister.setMnemonicParsing(false);
-        btnRegister.setPrefHeight(30.0);
-        btnRegister.setPrefWidth(120.0);
-        btnRegister.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 10px;");
+        btnRegister.setPrefHeight(31.0);
+        btnRegister.setPrefWidth(175.0);
+        btnRegister.setStyle("-fx-background-color: #a89aff; -fx-background-radius: 30px;");
         btnRegister.setText("Register");
         btnRegister.setTextFill(javafx.scene.paint.Color.WHITE);
         btnRegister.setFont(new Font("Berlin Sans FB Bold", 15.0));
-        btnRegister.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                stage.setScene(new Scene(new Register(stage)));
-            }
-        });
-        
 
-        txtFieldUserName.setLayoutX(140.0);
-        txtFieldUserName.setLayoutY(71.0);
+        txtFieldUserName.setLayoutX(95.0);
+        txtFieldUserName.setLayoutY(60.0);
         txtFieldUserName.setPrefHeight(31.0);
-        txtFieldUserName.setPrefWidth(135.0);
+        txtFieldUserName.setPrefWidth(222.0);
         txtFieldUserName.setPromptText("Enter Username");
         txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;");
 
         imgUserName.setFitHeight(38.0);
         imgUserName.setFitWidth(24.0);
-        imgUserName.setLayoutX(105.0);
-        imgUserName.setLayoutY(73.0);
+        imgUserName.setLayoutX(59.0);
+        imgUserName.setLayoutY(64.0);
         imgUserName.setPickOnBounds(true);
         imgUserName.setPreserveRatio(true);
         imgUserName.setImage(new Image(getClass().getResource("Images/icons8-username-48.png").toExternalForm()));
 
         imgPassward.setFitHeight(48.0);
         imgPassward.setFitWidth(20.0);
-        imgPassward.setLayoutX(107.0);
-        imgPassward.setLayoutY(116.0);
+        imgPassward.setLayoutX(61.0);
+        imgPassward.setLayoutY(115.0);
         imgPassward.setPickOnBounds(true);
         imgPassward.setPreserveRatio(true);
         imgPassward.setImage(new Image(getClass().getResource("Images/icons8-password-48.png").toExternalForm()));
 
-        passFieldPassward.setLayoutX(140.0);
-        passFieldPassward.setLayoutY(109.0);
+        passFieldPassward.setLayoutX(95.0);
+        passFieldPassward.setLayoutY(110.0);
         passFieldPassward.setPrefHeight(31.0);
-        passFieldPassward.setPrefWidth(135.0);
+        passFieldPassward.setPrefWidth(222.0);
         passFieldPassward.setPromptText("Enter Passward");
         passFieldPassward.setStyle("-fx-background-radius: 50px; -fx-background-radius: 50px;");
 
@@ -152,14 +141,6 @@ public class SignIn extends AnchorPane {
         btnBack.setPrefWidth(39.0);
         btnBack.setStyle("-fx-background-color: #42c4f7;");
 
-        imageView.setFitHeight(33.0);
-        imageView.setFitWidth(33.0);
-        imageView.setLayoutX(37.0);
-        imageView.setLayoutY(35.0);
-        imageView.setPickOnBounds(true);
-        imageView.setPreserveRatio(true);
-        imageView.setImage(new Image(getClass().getResource("Images/back.png").toExternalForm()));
-
         anchorPane.getChildren().add(btnSignIn);
         anchorPane.getChildren().add(btnPlayOffline);
         anchorPane.getChildren().add(btnRegister);
@@ -171,9 +152,20 @@ public class SignIn extends AnchorPane {
         getChildren().add(anchorPane);
         getChildren().add(imgHeader);
         getChildren().add(btnBack);
-        getChildren().add(imageView);
 
+        btnPlayOffline.setOnAction(e -> {
+
+            stage.setScene(new Scene(new ChooseMode(stage)));
+        });
+
+        btnRegister.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.setScene(new Scene(new Register(stage)));
+            }
+        });
+        btnSignIn.setOnAction(e -> {
+            stage.setScene(new Scene (new ChoosePlayer(stage)));
+        });
     }
-
-    
 }
