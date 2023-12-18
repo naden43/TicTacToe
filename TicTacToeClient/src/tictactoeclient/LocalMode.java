@@ -6,7 +6,9 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -38,6 +40,8 @@ public class LocalMode extends BorderPane {
     protected final ImageView videoRec;
     Stage stage;
     private int clickedBtnCounter = 0;
+    static Integer scorePlayer1 = 0 ;
+    static Integer scorePlayer2 = 0 ;
 
     public LocalMode(Stage stage) {
 
@@ -234,7 +238,24 @@ public class LocalMode extends BorderPane {
         pane.getChildren().add(Person2Name);
         pane.getChildren().add(person1Name);
         pane.getChildren().add(videoRec);
+        
+        exitBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+                stage.setScene(new Scene(new ChooseMode(stage)));
+            }
+        });
+        
+        resetBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.setScene(new Scene(new LocalMode(stage)));
+            }
+        });
 
+        p1Score.setText(scorePlayer1.toString());
+        p2Score.setText(scorePlayer2.toString());
     }
 
     public void handleButtonClick(int index) throws MalformedURLException {
@@ -254,12 +275,18 @@ public class LocalMode extends BorderPane {
             turn_txt.setText(personTurn ? "X-Player Turn" : "O-Player Turn");
         }
         if (currentStatus == 1) {
+            scorePlayer1++;
             turn_txt.setText("X-Player wins");
             new GameLogic().setWinnerVideo(stage);
+            stage.setScene(new Scene(new LocalMode(stage)));
+            
 
         } else if (currentStatus == 2) {
+            scorePlayer2++;
             turn_txt.setText("O-Player wins");
             new GameLogic().setLoserVideo(stage);
+            stage.setScene(new Scene(new LocalMode(stage)));
+            
         }
 
     }

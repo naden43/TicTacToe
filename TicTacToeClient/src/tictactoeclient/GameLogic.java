@@ -35,7 +35,7 @@ public class GameLogic {
         boolean flagX = false ;
         boolean flagO = false ;
         //horizontal
-        for(int i=0 ;i<9 ;i+=3)
+        for(int i=0 ;i<3 ;i+=3)
         {
             if(board[i]=='X' && board[i+1]=='X' && board[i+2]=='X')
             {
@@ -46,7 +46,7 @@ public class GameLogic {
             }
             if(board[i]=='O' && board[i+1]=='O' && board[i+2]=='O')
             {
-                flagX = true;
+                flagO= true;
                 int []index = {i , i+1 , i+2};
                 highlightWinPlace(index, btn);
                 break;
@@ -54,7 +54,7 @@ public class GameLogic {
             
         }
         //vertical
-        for(int i=0 ;i<9 ;i+=3)
+        for(int i=0 ;i<3 ;i+=1)
         {
             if(board[i]=='X' && board[i+3]=='X' && board[i+6]=='X')
             {
@@ -65,7 +65,7 @@ public class GameLogic {
             }
             if(board[i]=='O' && board[i+3]=='O' && board[i+6]=='O')
             {
-                flagX = true;
+                flagO = true;
                 int []index = {i , i+3 , i+6};
                 highlightWinPlace(index, btn);
                 break;
@@ -140,9 +140,9 @@ public class GameLogic {
     }*/
     
 
-    static public void highlightWinPlace(int [] indices, Button [] btn ) {
+    /*static public void highlightWinPlace(int [] indices, Button [] btn ) {
 
-    }
+    }*/
 
     public void setWinnerVideo(Stage stage) throws MalformedURLException {
         
@@ -198,15 +198,16 @@ public class GameLogic {
         
         alert.getDialogPane().setContent(content);
         ButtonType closeButton = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
+        
         alert.getDialogPane().getButtonTypes().add(closeButton);
         alert.setOnShowing(e -> mediaPlayer.play());
         alert.showAndWait();
 
     }
 
-    public static void checkExit(Stage stage) {
+    /*public static void checkExit(Stage stage) {
 
-    }
+    }*/
 
     public void setDrawVideo(Stage stage) {
 
