@@ -1,11 +1,15 @@
 package tictactoeclient;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class Invitation extends Pane {
 
@@ -18,7 +22,7 @@ public class Invitation extends Pane {
     protected final ImageView imageView1;
     protected final ImageView imageView2;
 
-    public Invitation() {
+    public Invitation(Stage primarystage , Stage secondrystage) {
 
         playername = new Label();
         label = new Label();
@@ -106,6 +110,22 @@ public class Invitation extends Pane {
         getChildren().add(imageView0);
         getChildren().add(imageView1);
         getChildren().add(imageView2);
+        
+        acceptbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                secondrystage.close();
+                primarystage.setScene(new Scene(new OnlineMode(primarystage)));
+            }
+        });
+        
+        rejectbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                secondrystage.close();
+            }
+        });
+        
 
     }
 }

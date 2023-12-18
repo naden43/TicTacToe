@@ -1,9 +1,10 @@
 package tictactoeclient;
 
 import java.net.MalformedURLException;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,37 +15,40 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-public class ComputerMode extends BorderPane {
+public class LocalMode extends BorderPane {
 
     protected final Pane pane;
-    protected final ImageView computer_view;
-    protected final Text cScore;
+    protected final ImageView person2_view;
+    protected final Text p2Score;
     protected final Text turn_txt;
     protected final ImageView person1_view;
     protected final Text p1Score;
+    protected final Button resetBtn;
+    protected final Button exitBtn;
     Button[] btn;
     char[] board = new char[9];
     boolean personTurn = true;
-    Random randomPlay = new Random();
-    protected final Button resetBtn;
-    protected final Button exitBtn;
     protected final Label xLabel;
     protected final Label oLabel;
-    static Integer computerScore = 0;
-    static Integer personScore = 0;
+    protected final Text Person2Name;
+    protected final Text person1Name;
+    protected final ImageView videoRec;
     Stage stage;
+    private int clickedBtnCounter = 0;
+    static Integer scorePlayer1 = 0 ;
+    static Integer scorePlayer2 = 0 ;
 
-    public ComputerMode(Stage stage) {
+    public LocalMode(Stage stage) {
 
         this.stage = stage;
         pane = new Pane();
-        computer_view = new ImageView();
-        cScore = new Text();
+        person2_view = new ImageView();
+        p2Score = new Text();
         turn_txt = new Text();
         person1_view = new ImageView();
         p1Score = new Text();
@@ -56,6 +60,9 @@ public class ComputerMode extends BorderPane {
         exitBtn = new Button();
         xLabel = new Label();
         oLabel = new Label();
+        Person2Name = new Text();
+        person1Name = new Text();
+        videoRec = new ImageView();
 
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -71,30 +78,29 @@ public class ComputerMode extends BorderPane {
         pane.setPrefWidth(200.0);
         pane.setStyle("-fx-background-color: #42C4F7;");
 
-        computer_view.setFitHeight(105.0);
-        computer_view.setFitWidth(103.0);
-        computer_view.setLayoutX(546.0);
-        computer_view.setLayoutY(133.0);
-        computer_view.setPickOnBounds(true);
-        computer_view.setPreserveRatio(true);
-        computer_view.setImage(new Image(getClass().getResource("Images/desktop.png").toExternalForm()));
+        person2_view.setFitHeight(105.0);
+        person2_view.setFitWidth(103.0);
+        person2_view.setLayoutX(546.0);
+        person2_view.setLayoutY(133.0);
+        person2_view.setPickOnBounds(true);
+        person2_view.setPreserveRatio(true);
+        person2_view.setImage(new Image(getClass().getResource("Images/man2.png").toExternalForm()));
 
-        cScore.setLayoutX(561.0);
-        cScore.setLayoutY(285.0);
-        cScore.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
-        cScore.setStrokeWidth(0.0);
-        cScore.setText("0");
-        cScore.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
-        cScore.setWrappingWidth(72.98307228088379);
-        cScore.setFont(new Font("Berlin Sans FB", 26.0));
-        cScore.setText(computerScore.toString());
+        p2Score.setLayoutX(563.0);
+        p2Score.setLayoutY(298.0);
+        p2Score.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+        p2Score.setStrokeWidth(0.0);
+        p2Score.setText("0");
+        p2Score.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        p2Score.setWrappingWidth(72.98307228088379);
+        p2Score.setFont(new Font("Berlin Sans FB", 26.0));
 
         turn_txt.setFill(javafx.scene.paint.Color.WHITE);
         turn_txt.setLayoutX(240.0);
         turn_txt.setLayoutY(87.0);
         turn_txt.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         turn_txt.setStrokeWidth(0.0);
-        turn_txt.setText("Your Turn");
+        turn_txt.setText("X-Player Turn");
         turn_txt.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         turn_txt.setWrappingWidth(219.9830722808838);
         turn_txt.setFont(new Font("Berlin Sans FB", 31.0));
@@ -108,14 +114,13 @@ public class ComputerMode extends BorderPane {
         person1_view.setImage(new Image(getClass().getResource("Images/man1.png").toExternalForm()));
 
         p1Score.setLayoutX(71.0);
-        p1Score.setLayoutY(283.0);
+        p1Score.setLayoutY(299.0);
         p1Score.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         p1Score.setStrokeWidth(0.0);
-        p1Score.setText("0");
+        p1Score.setText("6");
         p1Score.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         p1Score.setWrappingWidth(66.48697900772095);
         p1Score.setFont(new Font("Berlin Sans FB", 26.0));
-        p1Score.setText(personScore.toString());
 
         for (int i = 0; i < 9; i++) {
             btn[i].setContentDisplay(javafx.scene.control.ContentDisplay.BOTTOM);
@@ -152,7 +157,12 @@ public class ComputerMode extends BorderPane {
         for (int i = 0; i < 9; i++) {
             int index = i;
             btn[i].setOnAction((ActionEvent event) -> {
-                handleButtonClick(index);
+                try {
+                    handleButtonClick(index);
+                    clickedBtnCounter++;
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(LocalMode.class.getName()).log(Level.SEVERE, null, ex);
+                }
             });
         }
 
@@ -165,13 +175,6 @@ public class ComputerMode extends BorderPane {
         resetBtn.setText("Reset");
         resetBtn.setTextFill(javafx.scene.paint.Color.WHITE);
         resetBtn.setFont(new Font("Berlin Sans FB", 20.0));
-        resetBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                stage.setScene(new Scene(new ComputerMode(stage)));
-
-            }
-        });
 
         exitBtn.setLayoutX(399.0);
         exitBtn.setLayoutY(407.0);
@@ -192,10 +195,36 @@ public class ComputerMode extends BorderPane {
         oLabel.setLayoutY(94.0);
         oLabel.setText("O");
         oLabel.setFont(new Font("Berlin Sans FB", 25.0));
+
+        Person2Name.setLayoutX(515.0);
+        Person2Name.setLayoutY(267.0);
+        Person2Name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+        Person2Name.setStrokeWidth(0.0);
+        Person2Name.setText("O-Player");
+        Person2Name.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Person2Name.setWrappingWidth(168.279296875);
+        Person2Name.setFont(new Font(26.0));
+
+        person1Name.setLayoutX(20.0);
+        person1Name.setLayoutY(267.0);
+        person1Name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+        person1Name.setStrokeWidth(0.0);
+        person1Name.setText("X-Player");
+        person1Name.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        person1Name.setWrappingWidth(168.279296875);
+        person1Name.setFont(new Font(26.0));
+
+        videoRec.setFitHeight(47.0);
+        videoRec.setFitWidth(87.0);
+        videoRec.setLayoutX(326.0);
+        videoRec.setLayoutY(14.0);
+        videoRec.setPickOnBounds(true);
+        videoRec.setPreserveRatio(true);
+        videoRec.setImage(new Image(getClass().getResource("Images/video.png").toExternalForm()));
         setCenter(pane);
 
-        pane.getChildren().add(computer_view);
-        pane.getChildren().add(cScore);
+        pane.getChildren().add(person2_view);
+        pane.getChildren().add(p2Score);
         pane.getChildren().add(turn_txt);
         pane.getChildren().add(person1_view);
         pane.getChildren().add(p1Score);
@@ -206,60 +235,59 @@ public class ComputerMode extends BorderPane {
         pane.getChildren().add(exitBtn);
         pane.getChildren().add(xLabel);
         pane.getChildren().add(oLabel);
+        pane.getChildren().add(Person2Name);
+        pane.getChildren().add(person1Name);
+        pane.getChildren().add(videoRec);
+        
+        exitBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+                stage.setScene(new Scene(new ChooseMode(stage)));
+            }
+        });
+        
+        resetBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.setScene(new Scene(new LocalMode(stage)));
+            }
+        });
 
+        p1Score.setText(scorePlayer1.toString());
+        p2Score.setText(scorePlayer2.toString());
     }
 
-    public void handleButtonClick(int index) {
+    public void handleButtonClick(int index) throws MalformedURLException {
+        int currentStatus = 0;
+
         if (board[index] == '\0') {
             if (personTurn) {
                 btn[index].setText("X");
                 board[index] = 'X';
-                if (GameLogic.checkWin(board, btn) == 1) {
-                    personTurn = false;
-                    turn_txt.setText("Computer Turn");
-                    computerPlayRandom();
-                    if (GameLogic.checkWin(board, btn) == 2) {
-                        new GameLogic().setLoserVideo(stage);
-                        stage.setScene(new Scene(new ComputerMode(stage)));
-                        incrementComputerScore();
-                    }
-                } else {
-                    try {
-                        new GameLogic().setWinnerVideo(stage);
-                    } catch (MalformedURLException ex) {
-                        Logger.getLogger(ComputerMode.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    stage.setScene(new Scene(new ComputerMode(stage)));
-                    incrementPersonScore();
-                }
+                currentStatus = GameLogic.checkWin(board, btn);
+            } else {
+                btn[index].setText("O");
+                board[index] = 'O';
+                currentStatus = GameLogic.checkWin(board, btn);
             }
+            personTurn = !personTurn;
+            turn_txt.setText(personTurn ? "X-Player Turn" : "O-Player Turn");
         }
-    }
+        if (currentStatus == 1) {
+            scorePlayer1++;
+            turn_txt.setText("X-Player wins");
+            new GameLogic().setWinnerVideo(stage);
+            stage.setScene(new Scene(new LocalMode(stage)));
+            
 
-    public void computerPlayRandom() {
-        int emptyCells = 0;
-        for (char cell : board) {
-            if (cell == '\0') {
-                emptyCells++;
-            }
+        } else if (currentStatus == 2) {
+            scorePlayer2++;
+            turn_txt.setText("O-Player wins");
+            new GameLogic().setLoserVideo(stage);
+            stage.setScene(new Scene(new LocalMode(stage)));
+            
         }
-        if (emptyCells > 0) {
-            int randomIndex;
-            do {
-                randomIndex = randomPlay.nextInt(9);
-            } while (board[randomIndex] != '\0');
-            board[randomIndex] = 'O';
-            btn[randomIndex].setText("O");
-            personTurn = true;
-            turn_txt.setText("Your Turn");
-        }
-    }
 
-    public void incrementPersonScore() {
-        personScore++;
-    }
-
-    public void incrementComputerScore() {
-        computerScore++;
     }
 }

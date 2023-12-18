@@ -10,6 +10,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #42c4f7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="121.0" layoutY="110.0" prefHeight="245.0" prefWidth="350.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;">
+         <children>
+            <Button fx:id="btnRegister" layoutX="129.0" layoutY="171.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" style="-fx-background-radius: 10px; -fx-background-color: #a89aff;" text="Register" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB Bold" size="18.0" />
+               </font></Button>
+            <TextField fx:id="txtFieldUserName" layoutX="116.0" layoutY="35.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Username" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
+            <ImageView fx:id="imgUserName" fitHeight="38.0" fitWidth="24.0" layoutX="81.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+=======
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #42c4f7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="140.0" layoutY="128.0" prefHeight="335.0" prefWidth="420.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;">
@@ -20,33 +32,57 @@
                </font></Button>
             <TextField fx:id="txtFieldUserName" layoutX="150.0" layoutY="60.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Username" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
             <ImageView fx:id="imgUserName" fitHeight="38.0" fitWidth="24.0" layoutX="115.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/icons8-username-48.png" />
                </image>
             </ImageView>
+<<<<<<< HEAD
+            <ImageView fx:id="imgPassward" fitHeight="48.0" fitWidth="20.0" layoutX="83.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+=======
             <ImageView fx:id="imgPassward" fitHeight="48.0" fitWidth="20.0" layoutX="117.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/icons8-password-48.png" />
                </image>
             </ImageView>
+<<<<<<< HEAD
+            <PasswordField fx:id="passFieldPassward" layoutX="116.0" layoutY="75.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Passward" style="-fx-background-radius: 50px; -fx-background-radius: 50px;" />
+            <ImageView fitHeight="31.0" fitWidth="20.0" layoutX="83.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+=======
             <PasswordField fx:id="passFieldPassward" layoutX="150.0" layoutY="100.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Passward" style="-fx-background-radius: 50px; -fx-background-radius: 50px;" />
             <ImageView fitHeight="31.0" fitWidth="20.0" layoutX="117.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/pen-64.png" />
                </image>
             </ImageView>
+<<<<<<< HEAD
+            <TextField fx:id="txtFieldName" layoutX="115.0" layoutY="117.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Your Name" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
+            <Text fx:id="textUsernameTaken" fill="RED" layoutX="93.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 9;" text="user name is already taken, try another one" visible="false" wrappingWidth="198.13677978515625" />
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="imgHeader" fitHeight="111.0" fitWidth="602.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+=======
             <TextField fx:id="txtFieldName" layoutX="150.0" layoutY="142.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Your Name" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
             <Text fx:id="textUsernameTaken" fill="RED" layoutX="117.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 9;" text="user name is already taken, try another one" visible="false" wrappingWidth="198.13677978515625" />
          </children>
       </AnchorPane>
       <ImageView fx:id="imgHeader" fitHeight="141.0" fitWidth="700.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
          <image>
             <Image url="@Images/tic-tac-toe%20head.png" />
          </image>
       </ImageView>
+<<<<<<< HEAD
+      <Button fx:id="btnBack" layoutX="26.0" layoutY="18.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #42c4f7;">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+=======
       <Button fx:id="btnBack" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #42c4f7;">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+>>>>>>> fe865a6e88466aa6e52a9b80e2448820438c7cec
                <image>
                   <Image url="@Images/back.png" />
                </image>

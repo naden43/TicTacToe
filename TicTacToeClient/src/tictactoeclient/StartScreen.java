@@ -1,11 +1,14 @@
 package tictactoeclient;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public  class StartScreen extends AnchorPane {
 
@@ -17,7 +20,7 @@ public  class StartScreen extends AnchorPane {
     protected final ImageView imageView2;
     protected final ImageView imageView3;
 
-    public StartScreen() {
+    public StartScreen(Stage stage) {
 
         pane = new Pane();
         startBtn = new Button();
@@ -49,6 +52,9 @@ public  class StartScreen extends AnchorPane {
         startBtn.setTextFill(javafx.scene.paint.Color.WHITE);
         startBtn.setFont(new Font("Berlin Sans FB Bold", 35.0));
 
+        startBtn.setOnAction(e -> {
+            stage.setScene(new Scene(new SignIn(stage)));
+        });
         imageView.setFitHeight(161.0);
         imageView.setFitWidth(243.0);
         imageView.setLayoutX(539.0);
