@@ -5,6 +5,8 @@
  */
 package tictactoeclient;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -25,6 +27,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
 /**
  *
  * @author user
@@ -32,13 +35,30 @@ import javafx.stage.Stage;
 public class TicTacToeClient extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception { 
+
+    public void start(Stage stage) throws Exception {
+      LocalMode root = new LocalMode(stage);
+      //ProfileHome root2 = new ProfileHome(stage);
+      
+      
+      Stage stage2 = new Stage();
+      //stage2.setScene(new Scene(root2));
+      
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         
-        new GameLogic().setDrawVideo(stage);
+        stage.show();
+        //stage2.show();
+
+   
+        
+        //new GameLogic().setDrawVideo(stage);
 //    LocalMode root = new LocalMode(stage);       
 //    Scene scene = new Scene(root);
 //    stage.setScene(scene);
 //   stage.show();
+
     }
 
     /**
