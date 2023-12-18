@@ -1,4 +1,4 @@
-package tic_tac_toe;
+package tictactoeclient;
 
 import java.util.Random;
 import javafx.event.ActionEvent;
@@ -83,6 +83,7 @@ public class Computer_mode extends BorderPane {
         turn_txt.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         turn_txt.setWrappingWidth(174.9830722808838);
         turn_txt.setFont(new Font("Berlin Sans FB", 26.0));
+        
 
         person1_view.setFitHeight(80.0);
         person1_view.setFitWidth(92.0);
