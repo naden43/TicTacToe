@@ -9,24 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+//import org.apache.derby.jdbc.ClientDriver;
 
 /**
  *
@@ -37,27 +23,17 @@ public class TicTacToeClient extends Application {
     @Override
 
     public void start(Stage stage) throws Exception {
-      LocalMode root = new LocalMode(stage);
-      //ProfileHome root2 = new ProfileHome(stage);
-      
-      
-      Stage stage2 = new Stage();
-      //stage2.setScene(new Scene(root2));
-      
-
+ 
+       // DriverManager.registerDriver(new ClientDriver());
+       // Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Game", "root", "root");
+        StartScreen root = new StartScreen(stage);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         
+        stage.setResizable(false);
         stage.show();
-        //stage2.show();
-
-   
         
-        //new GameLogic().setDrawVideo(stage);
-//    LocalMode root = new LocalMode(stage);       
-//    Scene scene = new Scene(root);
-//    stage.setScene(scene);
-//   stage.show();
+        
 
     }
 

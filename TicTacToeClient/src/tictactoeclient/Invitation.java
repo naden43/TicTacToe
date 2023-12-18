@@ -115,7 +115,7 @@ public class Invitation extends Pane {
             @Override
             public void handle(ActionEvent event) {
                 secondrystage.close();
-                primarystage.setScene(new Scene(new Online_mode(primarystage)));
+                primarystage.setScene(new Scene(new OnlineMode(primarystage)));
             }
         });
         

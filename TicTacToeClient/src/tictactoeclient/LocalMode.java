@@ -40,8 +40,8 @@ public class LocalMode extends BorderPane {
     protected final ImageView videoRec;
     Stage stage;
     private int clickedBtnCounter = 0;
-    static Integer scorePlayer1 = 0 ;
-    static Integer scorePlayer2 = 0 ;
+    static Integer scorePlayer1 = 0;
+    static Integer scorePlayer2 = 0;
 
     public LocalMode(Stage stage) {
 
@@ -238,15 +238,14 @@ public class LocalMode extends BorderPane {
         pane.getChildren().add(Person2Name);
         pane.getChildren().add(person1Name);
         pane.getChildren().add(videoRec);
-        
+
         exitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
-                stage.setScene(new Scene(new ChooseMode(stage)));
+                GameLogic.checkExit(stage);
             }
         });
-        
+
         resetBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -276,17 +275,17 @@ public class LocalMode extends BorderPane {
         }
         if (currentStatus == 1) {
             scorePlayer1++;
+            p1Score.setText(scorePlayer1.toString());
             turn_txt.setText("X-Player wins");
             new GameLogic().setWinnerVideo(stage);
-            stage.setScene(new Scene(new LocalMode(stage)));
-            
-
         } else if (currentStatus == 2) {
             scorePlayer2++;
+            p2Score.setText(scorePlayer2.toString());
             turn_txt.setText("O-Player wins");
-            new GameLogic().setLoserVideo(stage);
-            stage.setScene(new Scene(new LocalMode(stage)));
-            
+            new GameLogic().setWinnerVideo(stage);
+        } else if (currentStatus == 0 && clickedBtnCounter == 8) {
+            turn_txt.setText("Draw");
+            new GameLogic().setDrawVideo(stage);
         }
 
     }

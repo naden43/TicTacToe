@@ -215,7 +215,7 @@ public class ProfileHome extends Pane {
         imageView8.setLayoutY(446.0);
         imageView8.setImage(new Image(getClass().getResource("Images/cloud.png").toExternalForm()));
 
-        editBtn.setLayoutX(362.0);
+        editBtn.setLayoutX(395.0);
         editBtn.setLayoutY(236.0);
         editBtn.setMnemonicParsing(false);
         editBtn.setPrefHeight(27.0);
