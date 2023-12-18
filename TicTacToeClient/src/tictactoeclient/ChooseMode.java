@@ -40,7 +40,7 @@ public class ChooseMode extends AnchorPane {
         SingleModeBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                stage.setScene(new Scene(new Computer_mode(stage)));
+                stage.setScene(new Scene(new ComputerMode(stage)));
             }
         });
         
