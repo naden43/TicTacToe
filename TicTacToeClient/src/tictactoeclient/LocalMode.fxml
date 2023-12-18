@@ -23,7 +23,7 @@
                <font>
                   <Font name="Berlin Sans FB" size="26.0" />
                </font></Text>
-            <Text fx:id="turn_txt" fill="WHITE" layoutX="240.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aser Turn" textAlignment="CENTER" wrappingWidth="219.9830722808838">
+            <Text fx:id="turn_txt" fill="WHITE" layoutX="240.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X-Player Turn" textAlignment="CENTER" wrappingWidth="219.9830722808838">
                <font>
                   <Font name="Berlin Sans FB" size="31.0" />
                </font></Text>
@@ -115,12 +115,12 @@
                   <Font name="Berlin Sans FB" size="25.0" />
                </font>
             </Label>
-            <Text fx:id="Person2Name" layoutX="515.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mostafa" textAlignment="CENTER" wrappingWidth="168.279296875">
+            <Text fx:id="Person2Name" layoutX="515.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="O-Player" textAlignment="CENTER" wrappingWidth="168.279296875">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Text fx:id="person1Name" layoutX="20.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aser" textAlignment="CENTER" wrappingWidth="168.279296875">
+            <Text fx:id="person1Name" layoutX="20.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X-Player" textAlignment="CENTER" wrappingWidth="168.279296875">
                <font>
                   <Font size="26.0" />
                </font>
@@ -130,11 +130,6 @@
                   <Image url="@Images/video.png" />
                </image>
             </ImageView>
-            <Text fx:id="txtTime" layoutX="303.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00 : 59" textAlignment="CENTER" wrappingWidth="92.05078125">
-               <font>
-                  <Font name="Berlin Sans FB" size="21.0" />
-               </font>
-            </Text>
          </children>
       </Pane>
    </center>

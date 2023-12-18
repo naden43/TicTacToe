@@ -127,8 +127,13 @@ public class ProfileHome extends Pane {
 
         imageView4.setFitHeight(67.0);
         imageView4.setFitWidth(73.0);
+
         imageView4.setLayoutX(101.0);
         imageView4.setLayoutY(117.0);
+
+        imageView4.setLayoutX(74.0);
+        imageView4.setLayoutY(108.0);
+
         imageView4.setImage(new Image(getClass().getResource("Images/man2.png").toExternalForm()));
 
         label0.setLayoutX(215.0);
