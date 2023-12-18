@@ -5,26 +5,36 @@
  */
 package tictactoeclient;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+//import org.apache.derby.jdbc.ClientDriver;
 
 /**
  *
  * @author user
  */
 public class TicTacToeClient extends Application {
-    
+
     @Override
+
     public void start(Stage stage) throws Exception {
-      ChoosePlayer root = new ChoosePlayer();
-        
+ 
+       // DriverManager.registerDriver(new ClientDriver());
+       // Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Game", "root", "root");
+        StartScreen root = new StartScreen(stage);
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
+        
+        stage.setResizable(false);
         stage.show();
+        
+        
+
     }
 
     /**
@@ -33,5 +43,5 @@ public class TicTacToeClient extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
