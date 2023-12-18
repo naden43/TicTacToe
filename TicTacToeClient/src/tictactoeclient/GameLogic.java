@@ -62,7 +62,6 @@ public class GameLogic {
                 highlightWinPlace(index, btn);
                 break;
             }
-
         }
         //vertical
         for (int i = 0; i < 3; i += 1) {
@@ -78,10 +77,8 @@ public class GameLogic {
                 highlightWinPlace(index, btn);
                 break;
             }
-
         }
         //diagonal
-
         if (board[0] == 'X' && board[4] == 'X' && board[8] == 'X') {
             flagX = true;
             int[] index = {0, 4, 8};
@@ -101,25 +98,21 @@ public class GameLogic {
             flagX = true;
             int[] index = {2, 4, 6};
             highlightWinPlace(index, btn);
-
         }
-
         if (flagX) {
             return 1;
         }
         if (flagO) {
             return 2;
         }
-
         return 0;
-
     }
 
     public void setWinnerVideo(Stage stage) throws MalformedURLException {
 
-        Dialog<Void> alert = new Dialog<>();
-        alert.setTitle("STATUS");
-        alert.setHeaderText("");
+        Dialog<Void> winnerDialog = new Dialog<>();
+        winnerDialog.setTitle("STATUS");
+        winnerDialog.setHeaderText("");
         Media media = new Media(getClass().getResource("Images/winnerVideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -135,61 +128,61 @@ public class GameLogic {
         mainContent.setAlignment(Pos.CENTER);
 
         // hide the close button using CSS
-        DialogPane dialogPane = alert.getDialogPane();
+        DialogPane dialogPane = winnerDialog.getDialogPane();
         dialogPane.getButtonTypes().add(ButtonType.CLOSE);
         Node closeButton = dialogPane.lookupButton(ButtonType.CLOSE);
         closeButton.managedProperty().bind(closeButton.visibleProperty());
         closeButton.setVisible(false);
 
         // stretch the video
-        mediaView.fitWidthProperty().bind(alert.getDialogPane().widthProperty());
-        mediaView.fitHeightProperty().bind(alert.getDialogPane().heightProperty());
+        mediaView.fitWidthProperty().bind(winnerDialog.getDialogPane().widthProperty());
+        mediaView.fitHeightProperty().bind(winnerDialog.getDialogPane().heightProperty());
 
-        Label label = new Label("Winner Winner Chicken Dinner");
-        label.setFont(new Font("Berlin Sans FB", 30.0));
-        label.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
-        label.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
+        Label textOnVideo = new Label("Winner Winner Chicken Dinner");
+        textOnVideo.setFont(new Font("Berlin Sans FB", 30.0));
+        textOnVideo.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
+        textOnVideo.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
 
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), label);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1),textOnVideo );
         fadeIn.setFromValue(0.6);
         fadeIn.setToValue(1.0);
 
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), label);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), textOnVideo );
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.4);
 
         SequentialTransition sequentialTransition = new SequentialTransition(fadeIn, fadeOut);
         sequentialTransition.setCycleCount(SequentialTransition.INDEFINITE);
 
-        StackPane stackPane = new StackPane(mediaView, label);
-        StackPane.setAlignment(label, Pos.CENTER);
-        alert.getDialogPane().setContent(stackPane);
+        StackPane stackPane = new StackPane(mediaView, textOnVideo );
+        StackPane.setAlignment(textOnVideo , Pos.CENTER);
+        winnerDialog.getDialogPane().setContent(stackPane);
 
         mediaPlayer.setOnEndOfMedia(() -> {
             sequentialTransition.stop();
-            alert.setResult(null);
-            alert.close();
+            winnerDialog.setResult(null);
+            winnerDialog.close();
         });
 
-        alert.setOnShowing(e -> {
+        winnerDialog.setOnShowing(e -> {
             mediaPlayer.play();
             sequentialTransition.play();
         });
 
-        alert.setOnHidden(new EventHandler<DialogEvent>() {
+        winnerDialog.setOnHidden(new EventHandler<DialogEvent>() {
             @Override
             public void handle(DialogEvent event) {
                 mediaPlayer.stop();
             }
         });
-        alert.showAndWait();
+        winnerDialog.showAndWait();
     }
 
     public void setLoserVideo(Stage stage) {
 
-        Dialog<Void> alert = new Dialog<>();
-        alert.setTitle("STATUS");
-        alert.setHeaderText("");
+        Dialog<Void> loserDialog = new Dialog<>();
+        loserDialog.setTitle("STATUS");
+        loserDialog.setHeaderText("");
         Media media = new Media(getClass().getResource("Images/loserVieo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -205,61 +198,61 @@ public class GameLogic {
         mainContent.setAlignment(Pos.CENTER);
 
         //hide the close button using CSS
-        DialogPane dialogPane = alert.getDialogPane();
+        DialogPane dialogPane = loserDialog.getDialogPane();
         dialogPane.getButtonTypes().add(ButtonType.CLOSE);
         Node closeButton = dialogPane.lookupButton(ButtonType.CLOSE);
         closeButton.managedProperty().bind(closeButton.visibleProperty());
         closeButton.setVisible(false);
 
         // stretch the video
-        mediaView.fitWidthProperty().bind(alert.getDialogPane().widthProperty());
-        mediaView.fitHeightProperty().bind(alert.getDialogPane().heightProperty());
+        mediaView.fitWidthProperty().bind(loserDialog.getDialogPane().widthProperty());
+        mediaView.fitHeightProperty().bind(loserDialog.getDialogPane().heightProperty());
 
-        Label label = new Label("   ...Hard Luck...   ");
-        label.setFont(new Font("Berlin Sans FB", 30.0));
-        label.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
-        label.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
+        Label textOnVideo  = new Label("   ...Hard Luck...   ");
+        textOnVideo .setFont(new Font("Berlin Sans FB", 30.0));
+        textOnVideo .setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
+        textOnVideo .setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
 
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), label);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), textOnVideo);
         fadeIn.setFromValue(0.6);
         fadeIn.setToValue(1.0);
 
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), label);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), textOnVideo);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.4);
 
         SequentialTransition sequentialTransition = new SequentialTransition(fadeIn, fadeOut);
         sequentialTransition.setCycleCount(SequentialTransition.INDEFINITE);
 
-        StackPane stackPane = new StackPane(mediaView, label);
-        StackPane.setAlignment(label, Pos.CENTER);
-        alert.getDialogPane().setContent(stackPane);
+        StackPane stackPane = new StackPane(mediaView, textOnVideo);
+        StackPane.setAlignment(textOnVideo, Pos.CENTER);
+        loserDialog.getDialogPane().setContent(stackPane);
 
         mediaPlayer.setOnEndOfMedia(() -> {
             sequentialTransition.stop();
-            alert.setResult(null);
-            alert.close();
+           loserDialog.setResult(null);
+            loserDialog.close();
         });
 
-        alert.setOnShowing(e -> {
+        loserDialog.setOnShowing(e -> {
             mediaPlayer.play();
             sequentialTransition.play();
         });
 
-        alert.setOnHidden(new EventHandler<DialogEvent>() {
+        loserDialog.setOnHidden(new EventHandler<DialogEvent>() {
             @Override
             public void handle(DialogEvent event) {
                 mediaPlayer.stop();
             }
         });
-        alert.showAndWait();
+       loserDialog.showAndWait();
     }
 
     public void setDrawVideo(Stage stage) {
 
-        Dialog<Void> alert = new Dialog<>();
-        alert.setTitle("STATUS");
-        alert.setHeaderText("");
+        Dialog<Void> drawDialog = new Dialog<>();
+        drawDialog.setTitle("STATUS");
+        drawDialog.setHeaderText("");
         Media media = new Media(getClass().getResource("Images/drawVideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -275,54 +268,54 @@ public class GameLogic {
         mainContent.setAlignment(Pos.CENTER);
 
         //hide close button using CSS
-        DialogPane dialogPane = alert.getDialogPane();
+        DialogPane dialogPane = drawDialog.getDialogPane();
         dialogPane.getButtonTypes().add(ButtonType.CLOSE);
         Node closeButton = dialogPane.lookupButton(ButtonType.CLOSE);
         closeButton.managedProperty().bind(closeButton.visibleProperty());
         closeButton.setVisible(false);
 
         // stretch the video 
-        mediaView.fitWidthProperty().bind(alert.getDialogPane().widthProperty());
-        mediaView.fitHeightProperty().bind(alert.getDialogPane().heightProperty());
+        mediaView.fitWidthProperty().bind(drawDialog.getDialogPane().widthProperty());
+        mediaView.fitHeightProperty().bind(drawDialog.getDialogPane().heightProperty());
 
-        Label label = new Label("     ... Draw ...     ");
-        label.setFont(new Font("Berlin Sans FB", 30.0));
-        label.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
-        label.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
+        Label textOnVideo  = new Label("     ... Draw ...     ");
+        textOnVideo.setFont(new Font("Berlin Sans FB", 30.0));
+        textOnVideo.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
+        textOnVideo.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
 
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), label);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), textOnVideo);
         fadeIn.setFromValue(0.6);
         fadeIn.setToValue(1.0);
 
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), label);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), textOnVideo);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.4);
 
         SequentialTransition sequentialTransition = new SequentialTransition(fadeIn, fadeOut);
         sequentialTransition.setCycleCount(SequentialTransition.INDEFINITE);
 
-        StackPane stackPane = new StackPane(mediaView, label);
-        StackPane.setAlignment(label, Pos.CENTER);
-        alert.getDialogPane().setContent(stackPane);
+        StackPane stackPane = new StackPane(mediaView, textOnVideo);
+        StackPane.setAlignment(textOnVideo, Pos.CENTER);
+        drawDialog.getDialogPane().setContent(stackPane);
 
         mediaPlayer.setOnEndOfMedia(() -> {
             sequentialTransition.stop();
-            alert.setResult(null);
-            alert.close();
+            drawDialog.setResult(null);
+            drawDialog.close();
         });
 
-        alert.setOnShowing(e -> {
+        drawDialog.setOnShowing(e -> {
             mediaPlayer.play();
             sequentialTransition.play();
         });
 
-        alert.setOnHidden(new EventHandler<DialogEvent>() {
+        drawDialog.setOnHidden(new EventHandler<DialogEvent>() {
             @Override
             public void handle(DialogEvent event) {
                 mediaPlayer.stop();
             }
         });
-        alert.showAndWait();
+       drawDialog.showAndWait();
 
     }
 
