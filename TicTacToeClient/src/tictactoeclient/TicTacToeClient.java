@@ -37,7 +37,7 @@ public class TicTacToeClient extends Application {
     @Override
 
     public void start(Stage stage) throws Exception {
-      LocalMode root = new LocalMode(stage);
+      StartScreen root = new StartScreen(stage);
       //ProfileHome root2 = new ProfileHome(stage);
       
       

@@ -42,7 +42,7 @@ public class GameLogic {
         boolean flagX = false ;
         boolean flagO = false ;
         //horizontal
-        for(int i=0 ;i<3 ;i+=3)
+        for(int i=0 ;i<9 ;i+=3)
         {
             if(board[i]=='X' && board[i+1]=='X' && board[i+2]=='X')
             {
