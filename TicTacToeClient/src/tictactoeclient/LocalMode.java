@@ -18,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 public class LocalMode extends BorderPane {
@@ -40,8 +41,8 @@ public class LocalMode extends BorderPane {
     protected final ImageView videoRec;
     Stage stage;
     private int clickedBtnCounter = 0;
-    static Integer scorePlayer1 = 0 ;
-    static Integer scorePlayer2 = 0 ;
+    static Integer scorePlayer1 = 0;
+    static Integer scorePlayer2 = 0;
 
     public LocalMode(Stage stage) {
 
@@ -159,7 +160,6 @@ public class LocalMode extends BorderPane {
             btn[i].setOnAction((ActionEvent event) -> {
                 try {
                     handleButtonClick(index);
-                    clickedBtnCounter++;
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(LocalMode.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -238,15 +238,14 @@ public class LocalMode extends BorderPane {
         pane.getChildren().add(Person2Name);
         pane.getChildren().add(person1Name);
         pane.getChildren().add(videoRec);
-        
+
         exitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
-                stage.setScene(new Scene(new ChooseMode(stage)));
+                GameLogic.checkExit(stage);
             }
         });
-        
+
         resetBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -256,6 +255,9 @@ public class LocalMode extends BorderPane {
 
         p1Score.setText(scorePlayer1.toString());
         p2Score.setText(scorePlayer2.toString());
+        
+        
+
     }
 
     public void handleButtonClick(int index) throws MalformedURLException {
@@ -266,27 +268,29 @@ public class LocalMode extends BorderPane {
                 btn[index].setText("X");
                 board[index] = 'X';
                 currentStatus = GameLogic.checkWin(board, btn);
+                clickedBtnCounter++;
             } else {
                 btn[index].setText("O");
                 board[index] = 'O';
                 currentStatus = GameLogic.checkWin(board, btn);
+                clickedBtnCounter++;
             }
             personTurn = !personTurn;
             turn_txt.setText(personTurn ? "X-Player Turn" : "O-Player Turn");
         }
         if (currentStatus == 1) {
             scorePlayer1++;
+            p1Score.setText(scorePlayer1.toString());
             turn_txt.setText("X-Player wins");
             new GameLogic().setWinnerVideo(stage);
-            stage.setScene(new Scene(new LocalMode(stage)));
-            
-
         } else if (currentStatus == 2) {
             scorePlayer2++;
+            p2Score.setText(scorePlayer2.toString());
             turn_txt.setText("O-Player wins");
-            new GameLogic().setLoserVideo(stage);
-            stage.setScene(new Scene(new LocalMode(stage)));
-            
+            new GameLogic().setWinnerVideo(stage);
+        } else if (currentStatus == 0 && clickedBtnCounter == 9) {
+            turn_txt.setText("Draw");
+            new GameLogic().setDrawVideo(stage);
         }
 
     }

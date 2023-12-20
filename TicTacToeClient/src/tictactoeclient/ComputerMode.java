@@ -18,6 +18,7 @@ import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ComputerMode extends BorderPane {
 
@@ -38,6 +39,7 @@ public class ComputerMode extends BorderPane {
     static Integer computerScore = 0;
     static Integer personScore = 0;
     Stage stage;
+    int clickedBtnCounter = 0;
 
     public ComputerMode(Stage stage) {
 
@@ -207,35 +209,74 @@ public class ComputerMode extends BorderPane {
         pane.getChildren().add(xLabel);
         pane.getChildren().add(oLabel);
 
+        exitBtn.setOnAction(e -> {
+            GameLogic.checkExit(stage);
+        });
+        
+
+        
     }
+
+    /*public void handleButtonClick(int index) throws MalformedURLException {
+        int currentStatus = 0;
+        if(clickedBtnCounter == 9) return;
+        if (board[index] == '\0') {
+            if (personTurn) {
+                btn[index].setText("X");
+                board[index] = 'X';
+                currentStatus = GameLogic.checkWin(board, btn);
+                clickedBtnCounter++;
+            }
+            if (currentStatus == 0 && clickedBtnCounter <= 8) {
+                turn_txt.setText("Computer Turn");
+                computerPlayRandom();
+                currentStatus = GameLogic.checkWin(board, btn);
+                clickedBtnCounter++;
+            }
+            
+            
+        }
+        if (currentStatus == 1) {
+            incrementPersonScore();
+            p1Score.setText(personScore.toString());
+            turn_txt.setText("You win");
+            new GameLogic().setWinnerVideo(stage);
+        } else if (currentStatus == 2) {
+            incrementComputerScore();
+            cScore.setText(computerScore.toString());
+            turn_txt.setText("Computer wins");
+            new GameLogic().setLoserVideo(stage);
+        } else if (currentStatus == 0 && clickedBtnCounter == 9) {
+            turn_txt.setText("Draw");
+            new GameLogic().setDrawVideo(stage);
+        }
+
+    }*/
 
     public void handleButtonClick(int index) {
         if (board[index] == '\0') {
             if (personTurn) {
                 btn[index].setText("X");
                 board[index] = 'X';
-                if (GameLogic.checkWin(board, btn) == 1) {
+                if (GameLogic.checkWin(board, btn)!= 1) {
                     personTurn = false;
                     turn_txt.setText("Computer Turn");
                     computerPlayRandom();
                     if (GameLogic.checkWin(board, btn) == 2) {
-                        new GameLogic().setLoserVideo(stage);
-                        stage.setScene(new Scene(new ComputerMode(stage)));
                         incrementComputerScore();
+                        new GameLogic().setLoserVideo(stage);
                     }
                 } else {
+                    incrementPersonScore();
                     try {
                         new GameLogic().setWinnerVideo(stage);
                     } catch (MalformedURLException ex) {
                         Logger.getLogger(ComputerMode.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    stage.setScene(new Scene(new ComputerMode(stage)));
-                    incrementPersonScore();
                 }
             }
         }
     }
-
     public void computerPlayRandom() {
         int emptyCells = 0;
         for (char cell : board) {
@@ -251,8 +292,9 @@ public class ComputerMode extends BorderPane {
             board[randomIndex] = 'O';
             btn[randomIndex].setText("O");
             personTurn = true;
-            turn_txt.setText("Your Turn");
+           turn_txt.setText("Your Turn");
         }
+
     }
 
     public void incrementPersonScore() {
@@ -262,4 +304,5 @@ public class ComputerMode extends BorderPane {
     public void incrementComputerScore() {
         computerScore++;
     }
+
 }

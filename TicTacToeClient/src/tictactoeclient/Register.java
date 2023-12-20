@@ -68,6 +68,9 @@ public class Register extends AnchorPane {
         btnRegister.setTextFill(javafx.scene.paint.Color.WHITE);
         btnRegister.setFont(new Font("Berlin Sans FB Bold", 18.0));
 
+        btnRegister.setOnAction(e ->{
+            stage.setScene(new Scene(new SignIn(stage)));
+        });
         txtFieldUserName.setLayoutX(150.0);
         txtFieldUserName.setLayoutY(60.0);
         txtFieldUserName.setPrefHeight(31.0);
