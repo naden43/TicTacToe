@@ -26,31 +26,18 @@
                <font>
                   <Font name="Berlin Sans FB Bold" size="15.0" />
                </font></Button>
-<<<<<<< HEAD
-            <TextField fx:id="txtFieldUserName" layoutX="140.0" layoutY="71.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Username" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
-            <ImageView fx:id="imgUserName" fitHeight="38.0" fitWidth="24.0" layoutX="105.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-=======
             <TextField fx:id="txtFieldUserName" layoutX="95.0" layoutY="60.0" prefHeight="31.0" prefWidth="222.0" promptText="Enter Username" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
             <ImageView fx:id="imgUserName" fitHeight="38.0" fitWidth="24.0" layoutX="59.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> aa53e0f48f0634ac902eb7dd262eec0303b1ca3a
                <image>
                   <Image url="@Images/icons8-username-48.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
-            <ImageView fx:id="imgPassward" fitHeight="48.0" fitWidth="20.0" layoutX="107.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
-=======
             <ImageView fx:id="imgPassward" fitHeight="48.0" fitWidth="20.0" layoutX="61.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
->>>>>>> aa53e0f48f0634ac902eb7dd262eec0303b1ca3a
                <image>
                   <Image url="@Images/icons8-password-48.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
-            <PasswordField fx:id="passFieldPassward" layoutX="140.0" layoutY="109.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Passward" style="-fx-background-radius: 50px; -fx-background-radius: 50px;" />
-=======
             <PasswordField fx:id="passFieldPassward" layoutX="95.0" layoutY="110.0" prefHeight="31.0" prefWidth="222.0" promptText="Enter Passward" style="-fx-background-radius: 50px; -fx-background-radius: 50px;" />
->>>>>>> aa53e0f48f0634ac902eb7dd262eec0303b1ca3a
             <Text fx:id="textUserOrPassWrong" disable="true" fill="RED" layoutX="140.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 10;" text="wrong username or passward" visible="false" wrappingWidth="134.99999718368053" />
          </children>
       </AnchorPane>
@@ -60,13 +47,5 @@
          </image>
       </ImageView>
       <Button fx:id="btnBack" layoutX="26.0" layoutY="18.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="39.0" style="-fx-background-color: #42c4f7;" />
-<<<<<<< HEAD
-      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="37.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/back.png" />
-         </image>
-      </ImageView>
-=======
->>>>>>> aa53e0f48f0634ac902eb7dd262eec0303b1ca3a
    </children>
 </Pane>
