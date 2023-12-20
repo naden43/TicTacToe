@@ -335,7 +335,7 @@ public class GameLogic {
             ComputerMode.computerScore = 0;
             LocalMode.scorePlayer1 = 0;
             LocalMode.scorePlayer2 = 0;
-            stage.setScene(new Scene(new SignIn(stage)));
+            stage.setScene(new Scene(new ChooseMode(stage)));
         }
     }
 

@@ -18,6 +18,7 @@ import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ComputerMode extends BorderPane {
 
@@ -153,12 +154,7 @@ public class ComputerMode extends BorderPane {
         for (int i = 0; i < 9; i++) {
             int index = i;
             btn[i].setOnAction((ActionEvent event) -> {
-                try {
-                    handleButtonClick(index);
-
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(ComputerMode.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                handleButtonClick(index);
             });
         }
 
@@ -217,9 +213,11 @@ public class ComputerMode extends BorderPane {
             GameLogic.checkExit(stage);
         });
         
+
+        
     }
 
-    public void handleButtonClick(int index) throws MalformedURLException {
+    /*public void handleButtonClick(int index) throws MalformedURLException {
         int currentStatus = 0;
         if(clickedBtnCounter == 9) return;
         if (board[index] == '\0') {
@@ -237,7 +235,7 @@ public class ComputerMode extends BorderPane {
                 clickedBtnCounter++;
             }
             
-            turn_txt.setText("person Turn");
+            
         }
         if (currentStatus == 1) {
             incrementPersonScore();
@@ -254,14 +252,14 @@ public class ComputerMode extends BorderPane {
             new GameLogic().setDrawVideo(stage);
         }
 
-    }
+    }*/
 
-    /*public void handleButtonClick(int index) {
+    public void handleButtonClick(int index) {
         if (board[index] == '\0') {
             if (personTurn) {
                 btn[index].setText("X");
                 board[index] = 'X';
-                if (GameLogic.checkWin(board, btn)==1) {
+                if (GameLogic.checkWin(board, btn)!= 1) {
                     personTurn = false;
                     turn_txt.setText("Computer Turn");
                     computerPlayRandom();
@@ -279,7 +277,7 @@ public class ComputerMode extends BorderPane {
                 }
             }
         }
-    }*/
+    }
     public void computerPlayRandom() {
         int emptyCells = 0;
         for (char cell : board) {
@@ -295,7 +293,7 @@ public class ComputerMode extends BorderPane {
             board[randomIndex] = 'O';
             btn[randomIndex].setText("O");
             personTurn = true;
-            turn_txt.setText("Your Turn");
+           turn_txt.setText("Your Turn");
         }
 
     }
