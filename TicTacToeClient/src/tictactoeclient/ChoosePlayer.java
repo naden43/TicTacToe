@@ -210,7 +210,7 @@ public class ChoosePlayer extends Pane {
             
             vBox.getChildren().add(text_name);
             vBox.getChildren().add(new Text("\n \n"));
-                        //vBox.getChildren().add(new Text("\n"));
+                       
 
             vBox0.getChildren().add(text_score);
             vBox0.getChildren().add(new Text("\n\n"));

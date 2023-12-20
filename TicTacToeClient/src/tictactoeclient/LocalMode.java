@@ -18,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 public class LocalMode extends BorderPane {
@@ -159,7 +160,6 @@ public class LocalMode extends BorderPane {
             btn[i].setOnAction((ActionEvent event) -> {
                 try {
                     handleButtonClick(index);
-                    clickedBtnCounter++;
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(LocalMode.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -255,6 +255,9 @@ public class LocalMode extends BorderPane {
 
         p1Score.setText(scorePlayer1.toString());
         p2Score.setText(scorePlayer2.toString());
+        
+        
+
     }
 
     public void handleButtonClick(int index) throws MalformedURLException {
@@ -265,10 +268,12 @@ public class LocalMode extends BorderPane {
                 btn[index].setText("X");
                 board[index] = 'X';
                 currentStatus = GameLogic.checkWin(board, btn);
+                clickedBtnCounter++;
             } else {
                 btn[index].setText("O");
                 board[index] = 'O';
                 currentStatus = GameLogic.checkWin(board, btn);
+                clickedBtnCounter++;
             }
             personTurn = !personTurn;
             turn_txt.setText(personTurn ? "X-Player Turn" : "O-Player Turn");
@@ -283,7 +288,7 @@ public class LocalMode extends BorderPane {
             p2Score.setText(scorePlayer2.toString());
             turn_txt.setText("O-Player wins");
             new GameLogic().setWinnerVideo(stage);
-        } else if (currentStatus == 0 && clickedBtnCounter == 8) {
+        } else if (currentStatus == 0 && clickedBtnCounter == 9) {
             turn_txt.setText("Draw");
             new GameLogic().setDrawVideo(stage);
         }
