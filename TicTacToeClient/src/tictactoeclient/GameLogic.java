@@ -112,7 +112,7 @@ public class GameLogic {
 
         Dialog<Void> winnerDialog = new Dialog<>();
         winnerDialog.setTitle("STATUS");
-        winnerDialog.setHeaderText("");
+
         Media media = new Media(getClass().getResource("Images/winnerVideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -123,7 +123,7 @@ public class GameLogic {
         VBox content = new VBox(mediaView);
 
         //main content VBox
-        VBox mainContent = new VBox(10, content);
+        VBox mainContent = new VBox(content);
         mainContent.setPrefSize(500, 300);
         mainContent.setAlignment(Pos.CENTER);
 
@@ -182,7 +182,6 @@ public class GameLogic {
 
         Dialog<Void> loserDialog = new Dialog<>();
         loserDialog.setTitle("STATUS");
-        loserDialog.setHeaderText("");
         Media media = new Media(getClass().getResource("Images/loserVieo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -193,7 +192,7 @@ public class GameLogic {
         VBox content = new VBox(mediaView);
 
         //main content VBox
-        VBox mainContent = new VBox(10, content);
+        VBox mainContent = new VBox(content);
         mainContent.setPrefSize(500, 300);
         mainContent.setAlignment(Pos.CENTER);
 
@@ -252,7 +251,7 @@ public class GameLogic {
 
         Dialog<Void> drawDialog = new Dialog<>();
         drawDialog.setTitle("STATUS");
-        drawDialog.setHeaderText("");
+ 
         Media media = new Media(getClass().getResource("Images/drawVideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -263,7 +262,7 @@ public class GameLogic {
         VBox content = new VBox(mediaView);
 
         //main content VBox
-        VBox mainContent = new VBox(10, content);
+        VBox mainContent = new VBox(content);
         mainContent.setPrefSize(500, 300);
         mainContent.setAlignment(Pos.CENTER);
 
