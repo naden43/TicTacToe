@@ -101,9 +101,5 @@ public  class StartScreen extends AnchorPane {
         pane.getChildren().add(imageView3);
         getChildren().add(pane);
         
-        
-        
-        
-
     }
 }
