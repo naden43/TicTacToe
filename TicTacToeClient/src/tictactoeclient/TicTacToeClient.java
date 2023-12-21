@@ -26,8 +26,8 @@ public class TicTacToeClient extends Application {
     public void start(Stage stage) throws Exception {
 
  
-       DriverManager.registerDriver(new ClientDriver());
-       Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/GameLogic", "root", "root");
+      // DriverManager.registerDriver(new ClientDriver());
+      // Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/GameLogic", "root", "root");
         StartScreen root = new StartScreen(stage);
 
         Scene scene = new Scene(root);
