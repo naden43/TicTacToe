@@ -9,28 +9,34 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import playerhelper.PlayerDetails;
+import com.google.gson.Gson;
+import java.util.ArrayList;
+import javafx.application.Platform;
 
 public class Register extends AnchorPane {
 
     protected final AnchorPane anchorPane;
     protected final Button btnRegister;
-    protected final TextField txtFieldUserName;
+    public static TextField txtFieldUserName;
     protected final ImageView imgUserName;
     protected final ImageView imgPassward;
-    protected final PasswordField passFieldPassward;
+    public static PasswordField passFieldPassward;
     protected final ImageView imageView;
-    protected final TextField txtFieldName;
-    protected final Text textUsernameTaken;
+    public static TextField txtFieldName;
+    public static Text textUsernameTaken;
     protected final ImageView imgHeader;
     protected final Button btnBack;
     protected final ImageView imageView0;
-
+    Gson gson ;
+    Thread th ;
+    static Stage stage ;
     public Register(Stage stage) {
 
+        this.stage = stage ;
         anchorPane = new AnchorPane();
         btnRegister = new Button();
         txtFieldUserName = new TextField();
@@ -43,6 +49,7 @@ public class Register extends AnchorPane {
         imgHeader = new ImageView();
         btnBack = new Button();
         imageView0 = new ImageView();
+        gson = new Gson();
 
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -68,9 +75,26 @@ public class Register extends AnchorPane {
         btnRegister.setTextFill(javafx.scene.paint.Color.WHITE);
         btnRegister.setFont(new Font("Berlin Sans FB Bold", 18.0));
 
-        btnRegister.setOnAction(e ->{
-            stage.setScene(new Scene(new SignIn(stage)));
+        btnRegister.setOnAction(e -> {
+            PlayerDetails playerDetails = new PlayerDetails();
+            playerDetails.setUserName(Register.txtFieldUserName.getText());
+            playerDetails.setPassword(Register.passFieldPassward.getText());
+            playerDetails.setName(Register.txtFieldName.getText());
+            
+            
+            // Convert PlayerDetails object to JSON
+            ArrayList jsonArr = new ArrayList();
+            jsonArr.add(1);
+            jsonArr.add(gson.toJson(playerDetails));
+   
+            String jsonRegistrationRequest = gson.toJson(jsonArr);
+            TicTacToeClient.playerHandler.sendRequest(jsonRegistrationRequest);
+            
+            // complete code here 
+            
         });
+
+        
         txtFieldUserName.setLayoutX(150.0);
         txtFieldUserName.setLayoutY(60.0);
         txtFieldUserName.setPrefHeight(31.0);
@@ -164,6 +188,19 @@ public class Register extends AnchorPane {
         getChildren().add(anchorPane);
         getChildren().add(imgHeader);
         getChildren().add(btnBack);
-
+        
+        
+        stage.setOnCloseRequest((e)->{
+            TicTacToeClient.playerHandler.closeConnection();
+            Platform.exit();
+        
+        });
+        
     }
+    static public void trueRegister()
+    {
+        stage.setScene(new Scene(new SignIn(stage)));
+    }
+    
+
 }

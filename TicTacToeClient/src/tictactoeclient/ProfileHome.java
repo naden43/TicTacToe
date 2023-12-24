@@ -270,7 +270,7 @@ public class ProfileHome extends Pane {
             @Override
             public void handle(ActionEvent event) {
 
-                stage.setScene(new Scene(new ChoosePlayer((stage))));
+                //stage.setScene(new Scene(new ChoosePlayer(stage,)));
 
             }
         });
