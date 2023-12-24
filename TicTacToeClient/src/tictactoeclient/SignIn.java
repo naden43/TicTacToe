@@ -1,5 +1,7 @@
 package tictactoeclient;
 
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import playerhelper.PlayerDetails;
 
 public class SignIn extends AnchorPane {
 
@@ -27,9 +30,11 @@ public class SignIn extends AnchorPane {
     protected final Text textUserOrPassWrong;
     protected final ImageView imgHeader;
     protected final Button btnBack;
-
+    Gson gson ;
+    Thread th ;
+    static Stage stage;
     public SignIn(Stage stage) {
-
+        this.stage = stage ;
         anchorPane = new AnchorPane();
         btnSignIn = new Button();
         btnPlayOffline = new Button();
@@ -41,6 +46,7 @@ public class SignIn extends AnchorPane {
         textUserOrPassWrong = new Text();
         imgHeader = new ImageView();
         btnBack = new Button();
+        gson = new Gson();
 
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -165,7 +171,24 @@ public class SignIn extends AnchorPane {
             }
         });
         btnSignIn.setOnAction(e -> {
-            stage.setScene(new Scene (new ChoosePlayer(stage)));
+            PlayerDetails playerDetails = new PlayerDetails();
+            playerDetails.setUserName(txtFieldUserName.getText());
+            playerDetails.setPassword(passFieldPassward.getText());
+          
+            
+            
+            // Convert PlayerDetails object to JSON
+            ArrayList jsonArr = new ArrayList();
+            jsonArr.add(2);
+            jsonArr.add(gson.toJson(playerDetails));
+   
+            String jsonRegistrationRequest = gson.toJson(jsonArr);
+            TicTacToeClient.playerHandler.sendRequest(jsonRegistrationRequest);
+            //stage.setScene(new Scene (new ChoosePlayer(stage)));
         });
+    }
+    static public void trueLogin(ArrayList<PlayerDetails> players)
+    {
+        stage.setScene(new Scene(new ChoosePlayer(stage , players)));
     }
 }
