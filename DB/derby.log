@@ -12,3 +12,5 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=E:\TicTacToe\DB
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Dec 25 23:15:25 EET 2023: Shutting down Derby engine
