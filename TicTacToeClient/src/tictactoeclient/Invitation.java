@@ -1,8 +1,11 @@
 package tictactoeclient;
 
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -22,7 +25,9 @@ public class Invitation extends Pane {
     protected final ImageView imageView1;
     protected final ImageView imageView2;
 
-    public Invitation(Stage primarystage , Stage secondrystage) {
+    Gson gson;
+
+    public Invitation(Stage primarystage, Alert secondrystage, String userName) {
 
         playername = new Label();
         label = new Label();
@@ -33,6 +38,7 @@ public class Invitation extends Pane {
         imageView1 = new ImageView();
         imageView2 = new ImageView();
 
+        gson = new Gson();
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
         setMinHeight(USE_PREF_SIZE);
@@ -45,7 +51,7 @@ public class Invitation extends Pane {
         playername.setLayoutY(83.0);
         playername.setPrefHeight(21.0);
         playername.setPrefWidth(93.0);
-        playername.setText("  naden");
+        playername.setText(userName);
         playername.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         playername.setTextFill(javafx.scene.paint.Color.RED);
         playername.setFont(new Font("Berlin Sans FB Demi Bold", 24.0));
@@ -110,22 +116,42 @@ public class Invitation extends Pane {
         getChildren().add(imageView0);
         getChildren().add(imageView1);
         getChildren().add(imageView2);
-        
+
         acceptbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
                 secondrystage.close();
-                primarystage.setScene(new Scene(new OnlineMode(primarystage)));
+                
+                //primarystage.setScene(new Scene(new OnlineMode(primarystage)));
+                ArrayList msg = new ArrayList();
+                msg.add(4);
+                msg.add(1);
+                msg.add(userName);
+
+                TicTacToeClient.playerHandler.sendRequest(gson.toJson(msg));
             }
         });
-        
+
         rejectbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                //secondrystage.close();
                 secondrystage.close();
+                ArrayList msg = new ArrayList();
+                msg.add(4);
+                msg.add(0);
+                msg.add(userName);
+                TicTacToeClient.playerHandler.sendRequest(gson.toJson(msg));
             }
         });
-        
 
+        secondrystage.setOnCloseRequest(e ->{
+            ArrayList msg = new ArrayList();
+                msg.add(4);
+                msg.add(0);
+                msg.add(userName);
+                TicTacToeClient.playerHandler.sendRequest(gson.toJson(msg));
+        });
     }
 }

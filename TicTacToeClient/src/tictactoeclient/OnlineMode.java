@@ -32,7 +32,7 @@ public class OnlineMode extends BorderPane {
     protected final ImageView videoRec;
     protected final Text txtTime;
 
-    public OnlineMode(Stage stage) {
+    public OnlineMode(Stage stage , String userNameX, String userNameO) {
 
         pane = new Pane();
         person2_view = new ImageView();
@@ -89,7 +89,7 @@ public class OnlineMode extends BorderPane {
         turn_txt.setLayoutY(87.0);
         turn_txt.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         turn_txt.setStrokeWidth(0.0);
-        turn_txt.setText("Aser Turn");
+        turn_txt.setText(userNameO);
         turn_txt.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         turn_txt.setWrappingWidth(219.9830722808838);
         turn_txt.setFont(new Font("Berlin Sans FB", 31.0));
@@ -106,7 +106,7 @@ public class OnlineMode extends BorderPane {
         p1Score.setLayoutY(299.0);
         p1Score.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         p1Score.setStrokeWidth(0.0);
-        p1Score.setText("6");
+        p1Score.setText("0");
         p1Score.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         p1Score.setWrappingWidth(66.48697900772095);
         p1Score.setFont(new Font("Berlin Sans FB", 26.0));
@@ -184,7 +184,7 @@ public class OnlineMode extends BorderPane {
         Person2Name.setLayoutY(267.0);
         Person2Name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         Person2Name.setStrokeWidth(0.0);
-        Person2Name.setText("Mostafa");
+        Person2Name.setText(userNameX);
         Person2Name.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         Person2Name.setWrappingWidth(168.279296875);
         Person2Name.setFont(new Font(26.0));
@@ -193,7 +193,7 @@ public class OnlineMode extends BorderPane {
         person1Name.setLayoutY(267.0);
         person1Name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         person1Name.setStrokeWidth(0.0);
-        person1Name.setText("Aser");
+        person1Name.setText(userNameO);
         person1Name.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         person1Name.setWrappingWidth(168.279296875);
         person1Name.setFont(new Font(26.0));
