@@ -28,9 +28,8 @@ public class PlayerHandler {
     String json;
 
     public PlayerHandler() {
-
         try {
-            socket = new Socket("127.0.0.1", 5010);
+            socket = new Socket("192.168.1.7", 5010);
             ear = new DataInputStream(socket.getInputStream());
             mouth = new PrintStream(socket.getOutputStream());
         } catch (IOException ex) {
