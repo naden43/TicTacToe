@@ -1,8 +1,8 @@
+
 package tictactoeserver;
 
 import com.google.gson.Gson;
 import database.DatabaseSupplier;
-
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -10,7 +10,6 @@ import java.net.Socket;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import database.PlayerDetails;
 import java.util.ArrayList;
 
@@ -27,7 +26,6 @@ public class ServerHandler {
     String UserName;
     String opponentUser;
     String playChar;
-
     public ServerHandler(Socket s) {
         try {
             ear = new DataInputStream(s.getInputStream());
@@ -80,7 +78,6 @@ public class ServerHandler {
 
     public void registration(String str) {
         int registrationResult = databaseSupplier.registerPlayer(str);
-
         // send registeration result back to Player handler
         requestData.clear();
         requestData.add(1);
@@ -95,7 +92,9 @@ public class ServerHandler {
         mouth.println(gson.toJson(requestData));
     }
 
-    public PlayerDetails login(String str) {
+    
+    public PlayerDetails login(String str)
+    {
         int registrationResult = databaseSupplier.loginPlayer(str);
         resultData = new ArrayList();
         resultData.add(2);
@@ -105,6 +104,7 @@ public class ServerHandler {
         resultData.add(registrationResult);
         ArrayList<PlayerDetails> players = databaseSupplier.getOnlineUsers(UserName);
         PlayerDetails player = databaseSupplier.getPlayer(UserName);
+
         for (int i = 0; i < players.size(); i++) {
             System.out.println(players.get(i).getPassword());
         }
@@ -113,11 +113,11 @@ public class ServerHandler {
         mouth.println(gson.toJson(resultData));
         return player;
     }
-
     synchronized public void notifyAllUpdate(PlayerDetails player) {
         for (int i = 0; i < playerList.size(); i++) {
             if (playerList.get(i).UserName != null && !(playerList.get(i).UserName.equals(UserName))) {
                 ArrayList notify = new ArrayList();
+
                 notify.add(5);
                 notify.add(UserName);
                 notify.add(gson.toJson(player));
@@ -125,6 +125,7 @@ public class ServerHandler {
             }
         }
     }
+
 
     public void sendRequestToPlay(String userName) {
         for (int i = 0; i < playerList.size(); i++) {
