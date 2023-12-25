@@ -1,7 +1,7 @@
-Sat Dec 23 14:13:47 EET 2023 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Mon Dec 25 18:23:24 EET 2023 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Sat Dec 23 14:13:47 EET 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018c-9698-8480-00003fc46bb0 
+Mon Dec 25 18:23:25 EET 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018c-a1c9-c662-00003fc46bb0 
 on database directory C:\Users\Ghost-\OneDrive\Desktop\JavaProject\TicTacToe\DB\GameLogic with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Program%20Files/glassfish-4.1/javadb/lib/derby.jar
 java.vendor=Oracle Corporation

@@ -35,7 +35,7 @@ public class TicTacToeClient extends Application {
         stage.setTitle("TicTacToe");
         stage.setResizable(false);
         stage.show();
-        playerHandler = new PlayerHandler();
+        playerHandler = new PlayerHandler(stage);
   
     }
 
@@ -46,4 +46,5 @@ public class TicTacToeClient extends Application {
         launch(args);
     }
 
+    
 }
