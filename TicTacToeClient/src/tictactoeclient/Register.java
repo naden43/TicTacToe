@@ -9,25 +9,29 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import playerhelper.PlayerDetails;
+import com.google.gson.Gson;
+import java.util.ArrayList;
+import javafx.application.Platform;
 
 public class Register extends AnchorPane {
 
     protected final AnchorPane anchorPane;
     protected final Button btnRegister;
-    protected final TextField txtFieldUserName;
+    public static TextField txtFieldUserName;
     protected final ImageView imgUserName;
     protected final ImageView imgPassward;
-    protected final PasswordField passFieldPassward;
+    public static PasswordField passFieldPassward;
     protected final ImageView imageView;
-    protected final TextField txtFieldName;
-    protected final Text textUsernameTaken;
+    public static TextField txtFieldName;
+    public static Text textUsernameTaken;
     protected final ImageView imgHeader;
     protected final Button btnBack;
     protected final ImageView imageView0;
+    Gson gson;
 
     public Register(Stage stage) {
 
@@ -43,6 +47,7 @@ public class Register extends AnchorPane {
         imgHeader = new ImageView();
         btnBack = new Button();
         imageView0 = new ImageView();
+        gson = new Gson();
 
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -58,8 +63,8 @@ public class Register extends AnchorPane {
         anchorPane.setPrefWidth(420.0);
         anchorPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10px;");
 
-        btnRegister.setLayoutX(162.0);
-        btnRegister.setLayoutY(213.0);
+        btnRegister.setLayoutX(157.0);
+        btnRegister.setLayoutY(212.0);
         btnRegister.setMnemonicParsing(false);
         btnRegister.setPrefHeight(38.0);
         btnRegister.setPrefWidth(107.0);
@@ -68,63 +73,76 @@ public class Register extends AnchorPane {
         btnRegister.setTextFill(javafx.scene.paint.Color.WHITE);
         btnRegister.setFont(new Font("Berlin Sans FB Bold", 18.0));
 
-        btnRegister.setOnAction(e ->{
-            stage.setScene(new Scene(new SignIn(stage)));
+        
+        txtFieldUserName.setOnKeyPressed((e) -> {
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
+            textUsernameTaken.setVisible(false);
+            textUsernameTaken.setText("");
         });
-        txtFieldUserName.setLayoutX(150.0);
-        txtFieldUserName.setLayoutY(60.0);
+
+        txtFieldUserName.setLayoutX(105.0);
+        txtFieldUserName.setLayoutY(61.0);
         txtFieldUserName.setPrefHeight(31.0);
-        txtFieldUserName.setPrefWidth(135.0);
+        txtFieldUserName.setPrefWidth(213.0);
         txtFieldUserName.setPromptText("Enter Username");
         txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;");
 
         imgUserName.setFitHeight(38.0);
         imgUserName.setFitWidth(24.0);
-        imgUserName.setLayoutX(115.0);
-        imgUserName.setLayoutY(62.0);
+        imgUserName.setLayoutX(70.0);
+        imgUserName.setLayoutY(64.0);
         imgUserName.setPickOnBounds(true);
         imgUserName.setPreserveRatio(true);
         imgUserName.setImage(new Image(getClass().getResource("Images/icons8-username-48.png").toExternalForm()));
 
         imgPassward.setFitHeight(48.0);
         imgPassward.setFitWidth(20.0);
-        imgPassward.setLayoutX(117.0);
-        imgPassward.setLayoutY(105.0);
+        imgPassward.setLayoutX(72.0);
+        imgPassward.setLayoutY(106.0);
         imgPassward.setPickOnBounds(true);
         imgPassward.setPreserveRatio(true);
         imgPassward.setImage(new Image(getClass().getResource("Images/icons8-password-48.png").toExternalForm()));
 
-        passFieldPassward.setLayoutX(150.0);
+        passFieldPassward.setLayoutX(105.0);
         passFieldPassward.setLayoutY(100.0);
         passFieldPassward.setPrefHeight(31.0);
-        passFieldPassward.setPrefWidth(135.0);
+        passFieldPassward.setPrefWidth(213.0);
         passFieldPassward.setPromptText("Enter Passward");
         passFieldPassward.setStyle("-fx-background-radius: 50px; -fx-background-radius: 50px;");
+        passFieldPassward.setOnKeyPressed((e) -> {
+            passFieldPassward.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
+            textUsernameTaken.setVisible(false);
+            textUsernameTaken.setText("");
+        });
 
         imageView.setFitHeight(31.0);
         imageView.setFitWidth(20.0);
-        imageView.setLayoutX(117.0);
+        imageView.setLayoutX(72.0);
         imageView.setLayoutY(148.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
         imageView.setImage(new Image(getClass().getResource("Images/pen-64.png").toExternalForm()));
 
-        txtFieldName.setLayoutX(150.0);
+        txtFieldName.setLayoutX(105.0);
         txtFieldName.setLayoutY(142.0);
         txtFieldName.setPrefHeight(31.0);
-        txtFieldName.setPrefWidth(135.0);
+        txtFieldName.setPrefWidth(213.0);
         txtFieldName.setPromptText("Enter Your Name");
         txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;");
-
+        txtFieldName.setOnKeyPressed((e) -> {
+            txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
+            textUsernameTaken.setVisible(false);
+        });
         textUsernameTaken.setFill(javafx.scene.paint.Color.RED);
-        textUsernameTaken.setLayoutX(117.0);
-        textUsernameTaken.setLayoutY(199.0);
+        textUsernameTaken.setLayoutX(102.0);
+        textUsernameTaken.setLayoutY(189.0);
         textUsernameTaken.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         textUsernameTaken.setStrokeWidth(0.0);
         textUsernameTaken.setStyle("-fx-font-size: 9;");
-        textUsernameTaken.setText("user name is already taken, try another one");
+        textUsernameTaken.setText("");
+        textUsernameTaken.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         textUsernameTaken.setVisible(false);
-        textUsernameTaken.setWrappingWidth(198.13677978515625);
+        textUsernameTaken.setWrappingWidth(212.99999776482582);
 
         imgHeader.setFitHeight(141.0);
         imgHeader.setFitWidth(700.0);
@@ -164,6 +182,5 @@ public class Register extends AnchorPane {
         getChildren().add(anchorPane);
         getChildren().add(imgHeader);
         getChildren().add(btnBack);
-
     }
 }

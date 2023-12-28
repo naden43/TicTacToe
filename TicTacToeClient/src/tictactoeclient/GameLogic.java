@@ -49,11 +49,7 @@ public class GameLogic {
         boolean flagX = false;
         boolean flagO = false;
         //horizontal
-<<<<<<< HEAD
-        for (int i = 0; i < 3; i += 3) {
-=======
         for (int i = 0; i < 9; i += 3) {
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
             if (board[i] == 'X' && board[i + 1] == 'X' && board[i + 2] == 'X') {
                 flagX = true;
                 int[] index = {i, i + 1, i + 2};
@@ -66,10 +62,6 @@ public class GameLogic {
                 highlightWinPlace(index, btn);
                 break;
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
         }
         //vertical
         for (int i = 0; i < 3; i += 1) {
@@ -85,10 +77,6 @@ public class GameLogic {
                 highlightWinPlace(index, btn);
                 break;
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
         }
         //diagonal
         if (board[0] == 'X' && board[4] == 'X' && board[8] == 'X') {
@@ -96,14 +84,6 @@ public class GameLogic {
             int[] index = {0, 4, 8};
             highlightWinPlace(index, btn);
 
-<<<<<<< HEAD
-        if (board[0] == 'X' && board[4] == 'X' && board[8] == 'X') {
-            flagX = true;
-            int[] index = {0, 4, 8};
-            highlightWinPlace(index, btn);
-
-=======
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
         } else if (board[0] == 'O' && board[4] == 'O' && board[8] == 'O') {
             flagO = true;
             int[] index = {0, 4, 8};
@@ -118,64 +98,25 @@ public class GameLogic {
             flagX = true;
             int[] index = {2, 4, 6};
             highlightWinPlace(index, btn);
-<<<<<<< HEAD
-
         }
-
-=======
-        }
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
         if (flagX) {
             return 1;
         }
         if (flagO) {
             return 2;
         }
-<<<<<<< HEAD
-
         return 0;
-
-=======
-        return 0;
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
     }
 
     public void setWinnerVideo(Stage stage) throws MalformedURLException {
 
-<<<<<<< HEAD
-        Dialog<Void> alert = new Dialog<>();
-        alert.setTitle("STATUS");
-        alert.setHeaderText("");
-=======
         Dialog<Void> winnerDialog = new Dialog<>();
         winnerDialog.setTitle("STATUS");
         winnerDialog.setHeaderText("");
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
         Media media = new Media(getClass().getResource("Images/winnerVideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
 
-<<<<<<< HEAD
-        Label label = new Label("Winner Winner Chicken Dinner");
-        label.setFont(new Font("Berlin Sans FB", 24.0));
-        label.setTextFill(javafx.scene.paint.Color.rgb(243, 81, 98));
-
-        mediaView.setFitWidth(600);
-        mediaView.setFitHeight(400);
-        mediaView.setPreserveRatio(false);
-
-        VBox content = new VBox(10, label, mediaView);
-        Stage window = new Stage();
-        content.setPrefSize(600, 500);
-        content.setAlignment(Pos.CENTER);
-
-        alert.getDialogPane().setContent(content);
-        ButtonType closeButton = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
-        alert.getDialogPane().getButtonTypes().add(closeButton);
-        alert.setOnShowing(e -> mediaPlayer.play());
-        alert.showAndWait();
-
-=======
         mediaView.setFitWidth(500);
         mediaView.setFitHeight(300);
 
@@ -235,45 +176,16 @@ public class GameLogic {
             }
         });
         winnerDialog.showAndWait();
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
     }
 
     public void setLoserVideo(Stage stage) {
 
-<<<<<<< HEAD
-        Dialog<Void> alert = new Dialog<>();
-        alert.setTitle("STATUS");
-        alert.setHeaderText("");
-        Media media = new Media(getClass().getResource("Images/loserVideo.mp4").toExternalForm());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        MediaView mediaView = new MediaView(mediaPlayer);
-
-        mediaView.setFitWidth(600);
-        mediaView.setFitHeight(400);
-
-        Label label = new Label("Hard Luck...");
-        label.setFont(new Font("Berlin Sans FB", 24.0));
-        label.setTextFill(javafx.scene.paint.Color.rgb(243, 81, 98));
-
-        VBox content = new VBox(10, label, mediaView);
-        Stage window = new Stage();
-        content.setPrefSize(600, 500);
-        content.setAlignment(Pos.CENTER);
-
-        alert.getDialogPane().setContent(content);
-        ButtonType closeButton = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
-
-        alert.getDialogPane().getButtonTypes().add(closeButton);
-        alert.setOnShowing(e -> mediaPlayer.play());
-        alert.showAndWait();
-=======
         Dialog<Void> loserDialog = new Dialog<>();
         loserDialog.setTitle("STATUS");
         loserDialog.setHeaderText("");
         Media media = new Media(getClass().getResource("Images/loserVieo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
 
         mediaView.setFitWidth(500);
         mediaView.setFitHeight(300);
@@ -344,27 +256,6 @@ public class GameLogic {
         Media media = new Media(getClass().getResource("Images/drawVideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
-<<<<<<< HEAD
-
-        mediaView.setFitWidth(600);
-        mediaView.setFitHeight(400);
-
-        Label label = new Label("Draw...");
-        label.setFont(new Font("Berlin Sans FB", 24.0));
-        label.setTextFill(javafx.scene.paint.Color.rgb(243, 81, 98));
-
-        VBox content = new VBox(10, label, mediaView);
-        Stage window = new Stage();
-        content.setPrefSize(600, 500);
-        content.setAlignment(Pos.CENTER);
-
-        alert.getDialogPane().setContent(content);
-        ButtonType closeButton = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
-        alert.getDialogPane().getButtonTypes().add(closeButton);
-        alert.setOnShowing(e -> mediaPlayer.play());
-        alert.showAndWait();
-
-=======
 
         mediaView.setFitWidth(500);
         mediaView.setFitHeight(300);
@@ -426,7 +317,6 @@ public class GameLogic {
         });
        drawDialog.showAndWait();
 
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
     }
 
     public static void checkExit(Stage stage) {
@@ -459,18 +349,4 @@ public class GameLogic {
         }
     }
 
-<<<<<<< HEAD
-    public static void highlitLosePlace(int[] indices, Button[] btn) {
-        for (int index : indices) {
-            btn[index].setStyle("-fx-background-color: #ff0000;");
-            for (int i = 0; i < 9; i++) {
-                if (i != indices[0] && i != indices[1] && i != indices[2]) {
-                    btn[i].setDisable(true);
-                }
-            }
-        }
-
-    }
-=======
->>>>>>> 544ca6d14e7147234b86e61483f726b3bb259bc0
 }

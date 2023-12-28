@@ -243,7 +243,7 @@ public class ChoosePlayer extends Pane {
         profilrbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                stage.setScene(new Scene(new ProfileHome(stage)));
+                //stage.setScene(new Scene(new ProfileHome(stage)));
             }
         });
         
