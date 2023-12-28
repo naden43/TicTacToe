@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.Gson;
-import com.sun.deploy.si.SingleInstanceImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,10 +25,10 @@ public class PlayerHandler {
     DataInputStream ear;
     PrintStream mouth;
     Socket socket;
-    public static Gson gson = new Gson();
     Thread th;
     private static List<Object> responseData = Collections.synchronizedList(new ArrayList<>());
     private static final Object lock = new Object();
+    public static Gson gson = new Gson();
     public static String json;
     public static PlayerDetails playerDetails = null;
 
@@ -67,7 +66,28 @@ public class PlayerHandler {
         mouth.println(json);
     }
 
-
+    public static void RegistrationResponse(Stage stage) {
+        synchronized (lock) {
+            while (responseData.isEmpty()) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            double registrationResult = (double) responseData.get(1);
+            if (registrationResult == 1) {
+                Platform.runLater(() -> {
+                    stage.setScene(new Scene(new SignIn(stage)));
+                });
+            } else if (registrationResult == 0) {
+                userNameExist();
+            } else {
+                serverFailed();
+            }
+            responseData.clear();
+        }
+    }
 
     public static void loginResponse(Stage stage) {
         synchronized (lock) {
@@ -100,5 +120,22 @@ public class PlayerHandler {
             }
         }
         responseData.clear();
+    }
+
+    public static void userNameExist() {
+        Platform.runLater(() -> {
+            textUsernameTaken.setVisible(true);
+            textUsernameTaken.setText("Username already exists");
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            passFieldPassward.setText("");
+            passFieldPassward.setPromptText("Enter Password");
+        });
+    }
+
+    public static void serverFailed() {
+        Platform.runLater(() -> {
+            textUsernameTaken.setVisible(true);
+            textUsernameTaken.setText("Server failed. Please try again later");
+        });
     }
 }

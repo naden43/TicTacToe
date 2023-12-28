@@ -16,6 +16,8 @@ import playerhelper.PlayerDetails;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Register extends AnchorPane {
 
@@ -73,7 +75,24 @@ public class Register extends AnchorPane {
         btnRegister.setTextFill(javafx.scene.paint.Color.WHITE);
         btnRegister.setFont(new Font("Berlin Sans FB Bold", 18.0));
 
-        
+        btnRegister.setOnAction(e -> {
+            if (validateAllFields() && validateUsername() && validatePassword() && validateName()) {
+                PlayerDetails playerDetails = new PlayerDetails();
+                playerDetails.setUserName(Register.txtFieldUserName.getText());
+                playerDetails.setPassword(Register.passFieldPassward.getText());
+                playerDetails.setName(Register.txtFieldName.getText());
+
+                // Convert PlayerDetails object to JSON
+                ArrayList jsonArr = new ArrayList();
+                jsonArr.add(1);
+                jsonArr.add(gson.toJson(playerDetails));
+
+                String jsonRegistrationRequest = gson.toJson(jsonArr);
+                TicTacToeClient.playerHandler.sendRequest(jsonRegistrationRequest);
+
+                playerhelper.PlayerHandler.RegistrationResponse(stage);
+            }
+        });
         txtFieldUserName.setOnKeyPressed((e) -> {
             txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
             textUsernameTaken.setVisible(false);
@@ -132,17 +151,18 @@ public class Register extends AnchorPane {
         txtFieldName.setOnKeyPressed((e) -> {
             txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
             textUsernameTaken.setVisible(false);
+            textUsernameTaken.setText("");
         });
         textUsernameTaken.setFill(javafx.scene.paint.Color.RED);
-        textUsernameTaken.setLayoutX(102.0);
-        textUsernameTaken.setLayoutY(189.0);
+        textUsernameTaken.setLayoutX(9.0);
+        textUsernameTaken.setLayoutY(195.0);
         textUsernameTaken.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         textUsernameTaken.setStrokeWidth(0.0);
         textUsernameTaken.setStyle("-fx-font-size: 9;");
-        textUsernameTaken.setText("");
+        textUsernameTaken.setText("user name is already taken, try another one");
         textUsernameTaken.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         textUsernameTaken.setVisible(false);
-        textUsernameTaken.setWrappingWidth(212.99999776482582);
+        textUsernameTaken.setWrappingWidth(403.9999977648258);
 
         imgHeader.setFitHeight(141.0);
         imgHeader.setFitWidth(700.0);
@@ -182,5 +202,66 @@ public class Register extends AnchorPane {
         getChildren().add(anchorPane);
         getChildren().add(imgHeader);
         getChildren().add(btnBack);
+
+        /*    stage.setOnCloseRequest((e)->{
+            TicTacToeClient.playerHandler.closeConnection();
+            Platform.exit();
+        
+        });*/
     }
+
+    private boolean validatePassword() {
+        String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).*$";
+        String password = passFieldPassward.getText();
+
+        if (!password.matches(passwordRegex)) {
+            textUsernameTaken.setText("Password should contain at least one capital letter, one small letter, and one number.");
+            textUsernameTaken.setVisible(true);
+            passFieldPassward.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateUsername() {
+        String username = txtFieldUserName.getText();
+
+        if (username.length() < 5) {
+            textUsernameTaken.setText("Username is too short");
+            textUsernameTaken.setVisible(true);
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        if (!username.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$")) {
+            textUsernameTaken.setText("Username should contain at least one uppercase letter, one lowercase letter, and one digit.");
+            textUsernameTaken.setVisible(true);
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateName() {
+        String name = txtFieldName.getText();
+        if (!name.matches(".*[a-zA-Z].*")) {
+            textUsernameTaken.setText("Name should have at least one character.");
+            textUsernameTaken.setVisible(true);
+            txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateAllFields() {
+        if (txtFieldUserName.getText().isEmpty() || passFieldPassward.getText().isEmpty() || txtFieldName.getText().isEmpty()) {
+            textUsernameTaken.setText("All fields must be filled.");
+            textUsernameTaken.setVisible(true);
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            passFieldPassward.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
+    }
+
 }
