@@ -1,5 +1,7 @@
 package tictactoeclient;
 
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import playerhelper.PlayerDetails;
 
 public class SignIn extends AnchorPane {
 
@@ -20,14 +23,16 @@ public class SignIn extends AnchorPane {
     protected final Button btnSignIn;
     protected final Button btnPlayOffline;
     protected final Button btnRegister;
-    protected final TextField txtFieldUserName;
+    protected static TextField txtFieldUserName;
     protected final ImageView imgUserName;
     protected final ImageView imgPassward;
-    protected final PasswordField passFieldPassward;
-    protected final Text textUserOrPassWrong;
+    protected static PasswordField passFieldPassward;
+    public static Text textUserOrPassWrong;
     protected final ImageView imgHeader;
     protected final Button btnBack;
-
+    Gson gson;
+    //static Stage stage;//
+    
     public SignIn(Stage stage) {
 
         anchorPane = new AnchorPane();
@@ -41,6 +46,7 @@ public class SignIn extends AnchorPane {
         textUserOrPassWrong = new Text();
         imgHeader = new ImageView();
         btnBack = new Button();
+        gson = new Gson();
 
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -65,6 +71,25 @@ public class SignIn extends AnchorPane {
         btnSignIn.setText("Sign in");
         btnSignIn.setTextFill(javafx.scene.paint.Color.WHITE);
         btnSignIn.setFont(new Font("Berlin Sans FB Bold", 15.0));
+        btnSignIn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                PlayerDetails playerDetails = new PlayerDetails();
+                playerDetails.setUserName(SignIn.txtFieldUserName.getText());
+                playerDetails.setPassword(SignIn.passFieldPassward.getText());
+                //convert the Player object into Gson object
+                
+                ArrayList gsonArr = new ArrayList();
+                gsonArr.add(2);
+                gsonArr.add(gson.toJson(playerDetails));
+                
+                //send the gson to PlayerHandler
+                String sendSignInInformation = gson.toJson(gsonArr);
+                TicTacToeClient.playerHandler.sendRequest(sendSignInInformation);
+                playerhelper.PlayerHandler.loginResponse(stage);
+
+            }
+        });
 
         btnPlayOffline.setLayoutX(123.0);
         btnPlayOffline.setLayoutY(244.0);
@@ -164,8 +189,20 @@ public class SignIn extends AnchorPane {
                 stage.setScene(new Scene(new Register(stage)));
             }
         });
-        btnSignIn.setOnAction(e -> {
-            stage.setScene(new Scene (new ChoosePlayer(stage)));
-        });
+//        btnSignIn.setOnAction(e -> {
+//            stage.setScene(new Scene(new ChoosePlayer(stage)));
+//        });
     }
+//    public void trueSignin(){ 
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(new ProfileHome(stage)));
+//    }
+    public static void wrongUserOrPassword(){
+        textUserOrPassWrong.setVisible(true);
+    }
+    public static void connectionError(){
+        textUserOrPassWrong.setText("connection error, please try again later");
+        textUserOrPassWrong.setVisible(true);
+    }
+    
 }

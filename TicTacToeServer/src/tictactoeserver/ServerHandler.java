@@ -1,8 +1,6 @@
 package tictactoeserver;
 
 import database.DatabaseSupplier;
-
-
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -11,7 +9,10 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.Gson;
+import database.PlayerDetails;
 import java.util.ArrayList;
+
+
 
 public class ServerHandler {
 
@@ -33,12 +34,14 @@ public class ServerHandler {
                     while (true) {
                         try {
                             String json = ear.readLine();
-             
+
                             requestData = gson.fromJson(json, ArrayList.class);
                             double key = (double) requestData.get(0);
                             if (key == 1) {
-                                registration((String)requestData.get(1));
-                            }                     
+                                registration((String) requestData.get(1));
+                            } else if (key == 2) {
+                                signinAuthentication((String) requestData.get(1));
+                            }
                         } catch (IOException ex) {
                             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                             break;
@@ -54,13 +57,23 @@ public class ServerHandler {
 
     public void registration(String str) {
         int registrationResult = databaseSupplier.registerPlayer(str);
-       
+
         // send registeration result back to Player handler
         requestData.clear();
         requestData.add(1);
-        requestData.add(registrationResult);   
+        requestData.add(registrationResult);
         mouth.println(gson.toJson(requestData));
     }
-    
+
+    public void signinAuthentication(String str) {
+        boolean status = databaseSupplier.getPlayerStatus(str);
+        PlayerDetails playerDetails = databaseSupplier.login(str);
+        requestData.clear();
+        requestData.add(2);
+        requestData.add(gson.toJson(playerDetails));
+        requestData.add(status); //status at index 2
+        mouth.println(gson.toJson(requestData));
+
+    }
 
 }
