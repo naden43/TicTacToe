@@ -229,6 +229,7 @@ public class ComputerMode extends BorderPane {
             }
             if (currentStatus == 0 && clickedBtnCounter <= 8) {
                 turn_txt.setText("Computer Turn");
+                personTurn = false;
                 computerPlayRandom();
                 currentStatus = GameLogic.checkWin(board, btn);
                 clickedBtnCounter++;

@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * @author user
  */
 public class TicTacToeServer extends Application {
-    
+        
     @Override
     public void start(Stage stage) throws Exception {
         
@@ -34,9 +34,9 @@ public class TicTacToeServer extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
-        //Server s = new Server();
-         
+
+        launch(args);    
+
     }
     
 }

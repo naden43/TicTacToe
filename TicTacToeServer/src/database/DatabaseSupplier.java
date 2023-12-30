@@ -26,6 +26,28 @@ public class DatabaseSupplier {
         }
     }
 
+    public int registerPlayer(String json) {
+        PlayerDetails playerDetails = gson.fromJson(json, PlayerDetails.class);
+        int resultStatement = 0;
+        Connection con = null;
+        PreparedStatement pst = null;
+        try {
+            con = getConnection();
+            pst = con.prepareStatement("insert into Player (username , password , name ) values (? , ? , ?)");
+            pst.setString(1, playerDetails.getUserName());
+            pst.setString(2, playerDetails.getPassword());
+            pst.setString(3, playerDetails.getName());
+            resultStatement = pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            closeStatement(pst);
+            closeConnection(con);
+        }
+        return resultStatement;
+    }
+
     public boolean isUserNameExist(String userName) throws SQLException {
         Connection con = null;
         PreparedStatement pst = null;
@@ -252,4 +274,5 @@ public class DatabaseSupplier {
         }
         return status;
     }
+
 }
