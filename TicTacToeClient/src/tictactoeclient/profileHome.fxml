@@ -59,7 +59,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passField" layoutX="198.0" layoutY="263.0" prefHeight="27.0" prefWidth="162.0" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 15px; -fx-background-radius: 15px;" />
+      <PasswordField fx:id="passtxt" layoutX="198.0" layoutY="263.0" prefHeight="27.0" prefWidth="162.0" style="-fx-background-color: white; -fx-border-color: gray; -fx-border-radius: 15px; -fx-background-radius: 15px;" />
       <Label layoutX="92.0" layoutY="315.0" text="Score :">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
@@ -70,7 +70,7 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="exitbtn" layoutX="257.0" layoutY="387.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="117.0" style="-fx-background-radius: 30px; -fx-background-color: #CE091E;" text="Exit" textFill="WHITE">
+      <Button fx:id="logoutbtn" layoutX="257.0" layoutY="387.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="117.0" style="-fx-background-radius: 30px; -fx-background-color: #CE091E;" text="Log out" textFill="WHITE">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
@@ -120,5 +120,16 @@
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Button>
+      <Button fx:id="cancelbtn1" layoutX="257.0" layoutY="387.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="117.0" style="-fx-background-radius: 30px; -fx-background-color: #CE091E;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="passField1" layoutX="202.0" layoutY="266.0" prefHeight="21.0" prefWidth="162.0" text="0" textFill="#000000ba">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="checkTxt" layoutX="199.0" layoutY="294.0" prefHeight="17.0" prefWidth="162.0" textFill="RED" />
    </children>
 </Pane>

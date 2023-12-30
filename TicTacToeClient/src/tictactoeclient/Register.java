@@ -15,9 +15,6 @@ import javafx.stage.Stage;
 import playerhelper.PlayerDetails;
 import com.google.gson.Gson;
 import java.util.ArrayList;
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class Register extends AnchorPane {
 
@@ -89,8 +86,6 @@ public class Register extends AnchorPane {
 
                 String jsonRegistrationRequest = gson.toJson(jsonArr);
                 TicTacToeClient.playerHandler.sendRequest(jsonRegistrationRequest);
-
-                playerhelper.PlayerHandler.RegistrationResponse(stage);
             }
         });
         txtFieldUserName.setOnKeyPressed((e) -> {

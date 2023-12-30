@@ -14,29 +14,29 @@
    <children>
       <AnchorPane layoutX="140.0" layoutY="128.0" prefHeight="335.0" prefWidth="420.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;">
          <children>
-            <Button fx:id="btnRegister" layoutX="157.0" layoutY="212.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" style="-fx-background-radius: 10px; -fx-background-color: #a89aff;" text="Register" textFill="WHITE">
+            <Button fx:id="btnRegister" layoutX="162.0" layoutY="213.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" style="-fx-background-radius: 10px; -fx-background-color: #a89aff;" text="Register" textFill="WHITE">
                <font>
                   <Font name="Berlin Sans FB Bold" size="18.0" />
                </font></Button>
-            <TextField fx:id="txtFieldUserName" layoutX="105.0" layoutY="61.0" prefHeight="31.0" prefWidth="213.0" promptText="Enter Username" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
-            <ImageView fx:id="imgUserName" fitHeight="38.0" fitWidth="24.0" layoutX="70.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="txtFieldUserName" layoutX="150.0" layoutY="60.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Username" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
+            <ImageView fx:id="imgUserName" fitHeight="38.0" fitWidth="24.0" layoutX="115.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/icons8-username-48.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgPassward" fitHeight="48.0" fitWidth="20.0" layoutX="72.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgPassward" fitHeight="48.0" fitWidth="20.0" layoutX="117.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/icons8-password-48.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="passFieldPassward" layoutX="105.0" layoutY="100.0" prefHeight="31.0" prefWidth="213.0" promptText="Enter Passward" style="-fx-background-radius: 50px; -fx-background-radius: 50px;" />
-            <ImageView fitHeight="31.0" fitWidth="20.0" layoutX="72.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+            <PasswordField fx:id="passFieldPassward" layoutX="150.0" layoutY="100.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Passward" style="-fx-background-radius: 50px; -fx-background-radius: 50px;" />
+            <ImageView fitHeight="31.0" fitWidth="20.0" layoutX="117.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/pen-64.png" />
                </image>
             </ImageView>
-            <TextField fx:id="txtFieldName" layoutX="105.0" layoutY="142.0" prefHeight="31.0" prefWidth="213.0" promptText="Enter Your Name" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
-            <Text fx:id="textUsernameTaken" fill="RED" layoutX="9.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 9;" text="user name is already taken, try another one" textAlignment="CENTER" visible="false" wrappingWidth="403.9999977648258" />
+            <TextField fx:id="txtFieldName" layoutX="150.0" layoutY="142.0" prefHeight="31.0" prefWidth="135.0" promptText="Enter Your Name" style="-fx-border-radius: 50px; -fx-background-radius: 50px;" />
+            <Text fx:id="textUsernameTaken" fill="RED" layoutX="117.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 9;" text="user name is already taken, try another one" visible="false" wrappingWidth="198.13677978515625" />
          </children>
       </AnchorPane>
       <ImageView fx:id="imgHeader" fitHeight="141.0" fitWidth="700.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
