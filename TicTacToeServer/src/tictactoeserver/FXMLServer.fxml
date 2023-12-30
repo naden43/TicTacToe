@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorePane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #42C4F7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoeserver.FXMLServerController">
+   <children>
+      <Button fx:id="controlBtn" layoutX="37.0" layoutY="194.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="236.0" style="-fx-background-color: #00886D; -fx-background-radius: 50;" text="START" textFill="#f8f8f8">
+         <font>
+            <Font name="Berlin Sans FB" size="44.0" />
+         </font>
+      </Button>
+      <PieChart fx:id="pieChart" layoutX="334.0" layoutY="42.0" prefHeight="417.0" prefWidth="326.0" />
+      <ImageView fitHeight="120.0" fitWidth="236.0" layoutX="37.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/tictactoeServer.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="onlineTxt" layoutX="52.0" layoutY="342.0" text="Online Players:  " textFill="#00886d">
+         <font>
+            <Font name="Berlin Sans FB" size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="offlineTxt" layoutX="51.0" layoutY="392.0" text="Offline Players:  " textFill="#ce091e">
+         <font>
+            <Font name="Berlin Sans FB" size="28.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
