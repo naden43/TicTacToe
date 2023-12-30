@@ -9,10 +9,12 @@ package tictactoeclient;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.apache.derby.jdbc.ClientDriver;
 import playerhelper.PlayerHandler;
 

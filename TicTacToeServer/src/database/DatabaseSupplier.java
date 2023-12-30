@@ -57,52 +57,45 @@ public class DatabaseSupplier {
             return -1;
         }
     }
-   public int loginPlayer(String str){
-      try {
+
+    public int loginPlayer(String str) {
+        try {
             PlayerDetails playerDetails = gson.fromJson(str, PlayerDetails.class);
-          
+
             pst = con.prepareStatement("select * from Player where USERNAME = ? AND PASSWORD = ?");
             pst.setString(1, playerDetails.getUserName());
             pst.setString(2, playerDetails.getPassword());
-            
+
             ResultSet res = pst.executeQuery();
-            if(res.next())
-            {
-                 pst = con.prepareStatement("update Player set STATUS = ? where USERNAME = ? ");
-                 pst.setBoolean(1, true);
-                 pst.setString(2, playerDetails.getUserName());
-                 pst.executeUpdate();
+            if (res.next()) {
+                pst = con.prepareStatement("update Player set STATUS = ? where USERNAME = ? ");
+                pst.setBoolean(1, true);
+                pst.setString(2, playerDetails.getUserName());
+                pst.executeUpdate();
                 return 1;
-            }
-            else
-            {
+            } else {
                 return -1;
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseSupplier.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
-        } 
-       
-   }
-   
-   public ArrayList<PlayerDetails> getOnlineUsers(String username)
-   {
+        }
+
+    }
+
+    public ArrayList<PlayerDetails> getOnlineUsers(String username) {
         ArrayList<PlayerDetails> players = new ArrayList<>();
         try {
             pst = con.prepareStatement("select * from Player where STATUS = ? AND ISPLAY = ? AND USERNAME<>?");
             pst.setBoolean(1, true);
             pst.setBoolean(2, false);
-            pst.setString(3,username);
+            pst.setString(3, username);
             ResultSet res = pst.executeQuery();
-            while(true)
-            {
-                
-                if(!res.next())
-                {
+            while (true) {
+
+                if (!res.next()) {
                     break;
-                }
-                else
-                {
+                } else {
                     PlayerDetails player = new PlayerDetails();
                     player.setUserName(res.getString(1));
                     player.setPassword(res.getString(2));
@@ -116,33 +109,77 @@ public class DatabaseSupplier {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseSupplier.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-       
-       
-       return players;
-       
-   }
-   
-   public PlayerDetails getPlayer(String username)
-   {
-       PlayerDetails player = new PlayerDetails();
+
+        return players;
+
+    }
+
+    public PlayerDetails getPlayer(String username) {
+        PlayerDetails player = new PlayerDetails();
         try {
             pst = con.prepareStatement("select * from Player where USERNAME = ?");
-            pst.setString(1,username);
+            pst.setString(1, username);
 
             ResultSet res = pst.executeQuery();
-            if(res.next())
-            {
+            if (res.next()) {
                 player.setUserName(res.getString(1));
                 player.setPassword(res.getString(2));
                 player.setName(res.getString(3));
                 player.setScore(res.getInt(4));
-                
+
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseSupplier.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return player ;
-   }
+        return player;
+    }
+
+    public void updateScore(double score, String userName) {
+        int Userscore = 10 * (int) score;
+        try {
+            pst = con.prepareStatement("select Score from PLAYER where USERNAME = ?");
+            pst.setString(1, userName);
+            ResultSet oldScore = pst.executeQuery();
+            oldScore.next();
+            Userscore += oldScore.getInt(1);
+            pst = con.prepareStatement("update Player set SCORE = ? where USERNAME = ?");
+            pst.setInt(1, Userscore);
+            pst.setString(2, userName);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseSupplier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateIsPlay(String player1, String player2) {
+        try {
+            pst = con.prepareStatement("update Player set ISPLAY = ? where USERNAME = ?");
+            pst.setBoolean(1, true);
+            pst.setString(2, player1);
+            pst.executeUpdate();
+            pst = con.prepareStatement("update Player set ISPLAY = ? where USERNAME = ?");
+            pst.setBoolean(1, true);
+            pst.setString(2, player2);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseSupplier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void setIsPlay(String player1 , String player2)
+    {
+        try {
+            pst = con.prepareStatement("update Player set ISPLAY = ? where USERNAME = ?");
+            pst.setBoolean(1, false);
+            pst.setString(2, player1);
+            pst.executeUpdate();
+            pst = con.prepareStatement("update Player set ISPLAY = ? where USERNAME = ?");
+            pst.setBoolean(1, false);
+            pst.setString(2, player2);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseSupplier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

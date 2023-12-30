@@ -51,6 +51,7 @@ public class ChoosePlayer extends ScrollPane {
 
     public ChoosePlayer(Stage stage, ArrayList<PlayerDetails> players) {
 
+        this.players = players;
         gson = new Gson();
         anchorPane = new AnchorPane();
         text = new Text();
@@ -177,6 +178,9 @@ public class ChoosePlayer extends ScrollPane {
         anchorPane.getChildren().add(vBox1);
         anchorPane.getChildren().add(logoutBut);
 
+        vBox.getChildren().clear();
+        vBox0.getChildren().clear();
+        vBox1.getChildren().clear();
         for (int i = 0; i < players.size(); i++) {
             /*if(i==5)
              {
@@ -243,59 +247,68 @@ public class ChoosePlayer extends ScrollPane {
         });
     }
 
-    static public void listPlayers(String user, PlayerDetails player) {
+    static public void listPlayers(ArrayList<PlayerDetails> player , String user) {
 
-        System.out.println(player.getUserName());
-        /*if(user.equals(player.getUserName()))
-         {
-         return;
-         }
-         else
-         {*/
-        players.add(player);
-        Text text_name = new Text();
-        text_name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
-        text_name.setStrokeWidth(0.0);
-        text_name.setText(player.getUserName());
-        text_name.setFont(new Font("Berlin Sans FB", 16.0));
-
-        Text text_score = new Text();
-        text_score.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
-        text_score.setStrokeWidth(0.0);
-        text_score.setText(player.getScore() + "");
-        text_score.setFont(new Font("Berlin Sans FB", 16.0));
-
-        Button invite = new Button();
-        invite.setMnemonicParsing(false);
-        invite.setPrefHeight(30.0);
-        invite.setPrefWidth(98.0);
-        invite.setStyle("-fx-background-color: green; -fx-border-radius: 15; -fx-background-radius: 15;");
-        invite.setText("Invite");
-        invite.setTextFill(javafx.scene.paint.Color.WHITE);
-        invite.setFont(new Font("Berlin Sans FB", 16.0));
-        buttons.add(invite);
-
-        vBox.getChildren().addAll(text_name, new Text("\n \n"));
-        vBox0.getChildren().addAll(text_score, new Text("\n \n"));
-        vBox1.getChildren().addAll(invite, new Text("\n"));
-
-        String userNamePlayer = player.getUserName();
-
-        invite.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ArrayList msg = new ArrayList();
-                msg.add(3);
-                msg.add(userNamePlayer);
-                String jsonInvitationonRequest = gson.toJson(msg);
-                TicTacToeClient.playerHandler.sendRequest(jsonInvitationonRequest);
-                invite.setDisable(true);
-                showAlertWithTimeout(userNamePlayer);
-                invite.setDisable(false);
-
+        
+        players = player ;
+        vBox.getChildren().clear();
+        vBox0.getChildren().clear();
+        vBox1.getChildren().clear();
+        for (int i = 0; i < players.size(); i++) {
+            /*if(i==5)
+             {
+             rectangle.setHeight(rectangle.getHeight()+((6-i)*75));
+             }*/
+            
+            if(players.get(i).equals(user))
+            {
+                continue;
             }
-        });
-        //}
+            
+            Text text_name = new Text();
+            text_name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+            text_name.setStrokeWidth(0.0);
+            text_name.setText(players.get(i).getUserName());
+            text_name.setFont(new Font("Berlin Sans FB", 16.0));
+
+            Text text_score = new Text();
+            text_score.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+            text_score.setStrokeWidth(0.0);
+            text_score.setText(players.get(i).getScore() + "");
+            text_score.setFont(new Font("Berlin Sans FB", 16.0));
+
+            Button invite = new Button();
+            invite.setMnemonicParsing(false);
+            invite.setPrefHeight(30.0);
+            invite.setPrefWidth(98.0);
+            invite.setStyle("-fx-background-color: green; -fx-border-radius: 15; -fx-background-radius: 15;");
+            invite.setText("Invite");
+            invite.setTextFill(javafx.scene.paint.Color.WHITE);
+            invite.setFont(new Font("Berlin Sans FB", 16.0));
+            buttons.add(invite);
+
+            vBox.getChildren().addAll(text_name, new Text("\n \n"));
+            vBox0.getChildren().addAll(text_score, new Text("\n \n"));
+            vBox1.getChildren().addAll(invite, new Text("\n"));
+
+            String userName = players.get(i).getUserName();
+            invite.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    invite.setDisable(true);
+                    ArrayList msg = new ArrayList();
+                    msg.add(3);
+                    msg.add(userName);
+                    String jsonInvitationonRequest = gson.toJson(msg);
+                    TicTacToeClient.playerHandler.sendRequest(jsonInvitationonRequest);
+                    invite.setDisable(true);
+                    showAlertWithTimeout(userName);
+                    invite.setDisable(false);
+
+                }
+            });
+
+        }
     }
 
     private static void showAlertWithTimeout(String userName) {
