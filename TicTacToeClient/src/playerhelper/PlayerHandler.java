@@ -15,6 +15,8 @@ import tictactoeclient.SignIn;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -29,6 +31,9 @@ import tictactoeclient.ChoosePlayer;
 import tictactoeclient.Invitation;
 import tictactoeclient.OnlineMode;
 import tictactoeclient.PlayAgainInvitation;
+import tictactoeclient.ProfileHome;
+import static tictactoeclient.Register.passFieldPassward;
+import static tictactoeclient.Register.txtFieldUserName;
 
 public class PlayerHandler {
 
@@ -37,10 +42,14 @@ public class PlayerHandler {
     Timeline timeline;
     PrintStream mouth;
     Socket socket;
-    Gson gson = new Gson();
+    static Gson gson = new Gson();
     Thread th;
-    ArrayList responseData;
-    String json;
+    //ArrayList responseData;
+    static String json;
+    public static PlayerDetails playerDetails = null;
+
+    private static List<Object> responseData = Collections.synchronizedList(new ArrayList<>());
+    private static final Object lock = new Object();
 
     public PlayerHandler(Stage stage) {
 
@@ -57,9 +66,13 @@ public class PlayerHandler {
                 while (true) {
                     try {
                         String json = ear.readLine();
+                        synchronized (lock) {
+                            responseData = gson.fromJson(json, ArrayList.class);
+                            lock.notifyAll();
+                        }
                         responseData = gson.fromJson(json, ArrayList.class);
                         double key = (double) responseData.get(0);
-                        if (key == 1) {
+                        /*if (key == 1) {
                             Platform.runLater(new Runnable() {
                                 public void run() {
                                     Register.trueRegister();
@@ -82,12 +95,12 @@ public class PlayerHandler {
 
                                 Platform.runLater(new Runnable() {
                                     public void run() {
-                                        SignIn.trueLogin(players);
+                                        //SignIn.trueLogin(players);
                                     }
 
                                 });
                             }
-                        }
+                        }*/
                         if (key == 3) {
 
                             Platform.runLater(new Runnable() {
@@ -154,7 +167,7 @@ public class PlayerHandler {
                             //PlayerDetails player = gson.fromJson((String) responseData.get(2), PlayerDetails.class);
                             Platform.runLater(new Runnable() {
                                 public void run() {
-                                    ChoosePlayer.listPlayers(players ,(String) responseData.get(2) );
+                                    ChoosePlayer.listPlayers(players, (String) responseData.get(2));
                                 }
 
                             });
@@ -231,7 +244,7 @@ public class PlayerHandler {
                         }
                         if (key == 11) {
                             if (((double) responseData.get(1)) == 1) {
-                                
+
                                 Platform.runLater(new Runnable() {
                                     @Override
                                     public void run() {
@@ -290,6 +303,84 @@ public class PlayerHandler {
         // Show the alert and start the timeline
         alert.show();
         timeline.play();
+    }
+
+    public static void RegistrationResponse(Stage stage) {
+        synchronized (lock) {
+            while (responseData.isEmpty()) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            double registrationResult = (double) responseData.get(1);
+            if (registrationResult == 1) {
+                Platform.runLater(() -> {
+                    stage.setScene(new Scene(new SignIn(stage)));
+                });
+            } else if (registrationResult == 0) {
+                userNameExist();
+            } else {
+                serverFailed();
+            }
+            responseData.clear();
+        }
+    }
+
+    public static void loginResponse(Stage stage) {
+        synchronized (lock) {
+            while (responseData.isEmpty()) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            String jsonPlayerDetails = (String) responseData.get(1);
+
+            playerDetails = gson.fromJson(jsonPlayerDetails, PlayerDetails.class);
+            Type arrayListType = new TypeToken<ArrayList<PlayerDetails>>() {
+            }.getType();
+            ArrayList<PlayerDetails> players = gson.fromJson((String) responseData.get(3), arrayListType);
+            if (playerDetails != null && !((boolean) responseData.get(2))) {
+                Platform.runLater(() -> {
+                    stage.setScene(new Scene(new ChoosePlayer(stage, players)));
+                    System.out.println(responseData.size() + "size of res");
+                });
+
+            } else if (playerDetails != null && ((boolean) responseData.get(2))) {
+                Platform.runLater(() -> {
+                    SignIn.textUserOrPassWrong.setText("this username is already logged in");
+                    SignIn.textUserOrPassWrong.setVisible(true);
+                });
+
+            } else if (playerDetails == null) {//incorrect username or password
+                System.out.println("playerDetails is null in loginResponse");
+                Platform.runLater(() -> {
+                    SignIn.textUserOrPassWrong.setText("username or password is incorret");
+                    SignIn.textUserOrPassWrong.setVisible(true); //set visible "username or password incorret"
+                });
+            }
+        }
+        responseData.clear();
+    }
+
+    public static void userNameExist() {
+        Platform.runLater(() -> {
+            textUsernameTaken.setVisible(true);
+            textUsernameTaken.setText("Username already exists");
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            passFieldPassward.setText("");
+            passFieldPassward.setPromptText("Enter Password");
+        });
+    }
+
+    public static void serverFailed() {
+        Platform.runLater(() -> {
+            textUsernameTaken.setVisible(true);
+            textUsernameTaken.setText("Server failed. Please try again later");
+        });
     }
 
 }

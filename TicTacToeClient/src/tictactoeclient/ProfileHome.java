@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import playerhelper.PlayerDetails;
 
 public class ProfileHome extends Pane {
 
@@ -40,7 +41,7 @@ public class ProfileHome extends Pane {
     protected final ImageView imageView8;
     protected final Button editBtn;
 
-    public ProfileHome(Stage stage) {
+    public ProfileHome(Stage stage , PlayerDetails player) {
 
         imageView = new ImageView();
         imageView0 = new ImageView();

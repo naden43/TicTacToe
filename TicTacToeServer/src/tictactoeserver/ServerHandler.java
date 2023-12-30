@@ -38,16 +38,16 @@ public class ServerHandler {
                         try {
                             String json = ear.readLine();
 
+                           ;
+
                             requestData = gson.fromJson(json, ArrayList.class);
-
                             double key = (double) requestData.get(0);
-
                             if (key == 1) {
                                 registration((String) requestData.get(1));
-                            } else if (key == 2) {//login()
-                                PlayerDetails player = login((String) requestData.get(1));
+                            } else if (key == 2) {
+                                signinAuthentication((String) requestData.get(1));
                                 notifyAllUpdate();
-                            } else if (key == 3) {
+                            }else if (key == 3) {
 
                                 sendRequestToPlay((String) requestData.get(1));
 
@@ -112,21 +112,38 @@ public class ServerHandler {
 
     public void registration(String str) {
         int registrationResult = databaseSupplier.registerPlayer(str);
+
         // send registeration result back to Player handler
         requestData.clear();
         requestData.add(1);
         requestData.add(registrationResult);
-        if (registrationResult == 0) {
-            requestData.add("Username already exists");
-        } else if (registrationResult > 0) {
-            requestData.add("Username registered successfully");
-        } else {
-            requestData.add("Server failed. Please try again later");
-        }
         mouth.println(gson.toJson(requestData));
     }
 
-    public PlayerDetails login(String str) {
+    public void signinAuthentication(String str) {
+        boolean status = databaseSupplier.getPlayerStatus(str);
+        PlayerDetails playerDetails = databaseSupplier.login(str);
+        ArrayList<PlayerDetails> players =  null;
+        
+        requestData.clear();
+        requestData.add(2);
+        requestData.add(gson.toJson(playerDetails));
+        requestData.add(status);
+        if(playerDetails!=null)
+        {
+            System.out.println("jjjjjjjjj");
+            UserName = playerDetails.getUserName();
+            players = databaseSupplier.getOnlineUsers(UserName);
+            System.out.println(players.size()+" mmmm");
+        }
+        requestData.add(gson.toJson(players));
+        System.out.println(requestData.size()+"size");
+        mouth.println(gson.toJson(requestData));
+
+    }
+
+
+    /*public PlayerDetails login(String str) {
         int registrationResult = databaseSupplier.loginPlayer(str);
         resultData = new ArrayList();
         resultData.add(2);
@@ -134,13 +151,11 @@ public class ServerHandler {
         UserName = playerDetails.getUserName();
         resultData.add(registrationResult);
         ArrayList<PlayerDetails> players = databaseSupplier.getOnlineUsers(UserName);
-        PlayerDetails player = databaseSupplier.getPlayer(UserName);
-
-    
+        PlayerDetails player = databaseSupplier.getPlayer(UserName);    
         resultData.add(gson.toJson(players));
         mouth.println(gson.toJson(resultData));
         return player;
-    }
+    }*/
 
     synchronized public void notifyAllUpdate() {
         for (int i = 0; i < playerList.size(); i++) {

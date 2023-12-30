@@ -16,6 +16,8 @@ import playerhelper.PlayerDetails;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Register extends AnchorPane {
 
@@ -31,12 +33,10 @@ public class Register extends AnchorPane {
     protected final ImageView imgHeader;
     protected final Button btnBack;
     protected final ImageView imageView0;
-    Gson gson ;
-    Thread th ;
-    static Stage stage ;
+    Gson gson;
+
     public Register(Stage stage) {
 
-        this.stage = stage ;
         anchorPane = new AnchorPane();
         btnRegister = new Button();
         txtFieldUserName = new TextField();
@@ -65,8 +65,8 @@ public class Register extends AnchorPane {
         anchorPane.setPrefWidth(420.0);
         anchorPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10px;");
 
-        btnRegister.setLayoutX(162.0);
-        btnRegister.setLayoutY(213.0);
+        btnRegister.setLayoutX(157.0);
+        btnRegister.setLayoutY(212.0);
         btnRegister.setMnemonicParsing(false);
         btnRegister.setPrefHeight(38.0);
         btnRegister.setPrefWidth(107.0);
@@ -76,79 +76,93 @@ public class Register extends AnchorPane {
         btnRegister.setFont(new Font("Berlin Sans FB Bold", 18.0));
 
         btnRegister.setOnAction(e -> {
-            PlayerDetails playerDetails = new PlayerDetails();
-            playerDetails.setUserName(Register.txtFieldUserName.getText());
-            playerDetails.setPassword(Register.passFieldPassward.getText());
-            playerDetails.setName(Register.txtFieldName.getText());
-            
-            
-            // Convert PlayerDetails object to JSON
-            ArrayList jsonArr = new ArrayList();
-            jsonArr.add(1);
-            jsonArr.add(gson.toJson(playerDetails));
-   
-            String jsonRegistrationRequest = gson.toJson(jsonArr);
-            TicTacToeClient.playerHandler.sendRequest(jsonRegistrationRequest);
-            
-            // complete code here 
-            
+            if (validateAllFields() && validateUsername() && validatePassword() && validateName()) {
+                PlayerDetails playerDetails = new PlayerDetails();
+                playerDetails.setUserName(Register.txtFieldUserName.getText());
+                playerDetails.setPassword(Register.passFieldPassward.getText());
+                playerDetails.setName(Register.txtFieldName.getText());
+
+                // Convert PlayerDetails object to JSON
+                ArrayList jsonArr = new ArrayList();
+                jsonArr.add(1);
+                jsonArr.add(gson.toJson(playerDetails));
+
+                String jsonRegistrationRequest = gson.toJson(jsonArr);
+                TicTacToeClient.playerHandler.sendRequest(jsonRegistrationRequest);
+
+                playerhelper.PlayerHandler.RegistrationResponse(stage);
+            }
+        });
+        txtFieldUserName.setOnKeyPressed((e) -> {
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
+            textUsernameTaken.setVisible(false);
+            textUsernameTaken.setText("");
         });
 
-        
-        txtFieldUserName.setLayoutX(150.0);
-        txtFieldUserName.setLayoutY(60.0);
+        txtFieldUserName.setLayoutX(105.0);
+        txtFieldUserName.setLayoutY(61.0);
         txtFieldUserName.setPrefHeight(31.0);
-        txtFieldUserName.setPrefWidth(135.0);
+        txtFieldUserName.setPrefWidth(213.0);
         txtFieldUserName.setPromptText("Enter Username");
         txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;");
 
         imgUserName.setFitHeight(38.0);
         imgUserName.setFitWidth(24.0);
-        imgUserName.setLayoutX(115.0);
-        imgUserName.setLayoutY(62.0);
+        imgUserName.setLayoutX(70.0);
+        imgUserName.setLayoutY(64.0);
         imgUserName.setPickOnBounds(true);
         imgUserName.setPreserveRatio(true);
         imgUserName.setImage(new Image(getClass().getResource("Images/icons8-username-48.png").toExternalForm()));
 
         imgPassward.setFitHeight(48.0);
         imgPassward.setFitWidth(20.0);
-        imgPassward.setLayoutX(117.0);
-        imgPassward.setLayoutY(105.0);
+        imgPassward.setLayoutX(72.0);
+        imgPassward.setLayoutY(106.0);
         imgPassward.setPickOnBounds(true);
         imgPassward.setPreserveRatio(true);
         imgPassward.setImage(new Image(getClass().getResource("Images/icons8-password-48.png").toExternalForm()));
 
-        passFieldPassward.setLayoutX(150.0);
+        passFieldPassward.setLayoutX(105.0);
         passFieldPassward.setLayoutY(100.0);
         passFieldPassward.setPrefHeight(31.0);
-        passFieldPassward.setPrefWidth(135.0);
+        passFieldPassward.setPrefWidth(213.0);
         passFieldPassward.setPromptText("Enter Passward");
         passFieldPassward.setStyle("-fx-background-radius: 50px; -fx-background-radius: 50px;");
+        passFieldPassward.setOnKeyPressed((e) -> {
+            passFieldPassward.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
+            textUsernameTaken.setVisible(false);
+            textUsernameTaken.setText("");
+        });
 
         imageView.setFitHeight(31.0);
         imageView.setFitWidth(20.0);
-        imageView.setLayoutX(117.0);
+        imageView.setLayoutX(72.0);
         imageView.setLayoutY(148.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
         imageView.setImage(new Image(getClass().getResource("Images/pen-64.png").toExternalForm()));
 
-        txtFieldName.setLayoutX(150.0);
+        txtFieldName.setLayoutX(105.0);
         txtFieldName.setLayoutY(142.0);
         txtFieldName.setPrefHeight(31.0);
-        txtFieldName.setPrefWidth(135.0);
+        txtFieldName.setPrefWidth(213.0);
         txtFieldName.setPromptText("Enter Your Name");
         txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;");
-
+        txtFieldName.setOnKeyPressed((e) -> {
+            txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: black;");
+            textUsernameTaken.setVisible(false);
+            textUsernameTaken.setText("");
+        });
         textUsernameTaken.setFill(javafx.scene.paint.Color.RED);
-        textUsernameTaken.setLayoutX(117.0);
-        textUsernameTaken.setLayoutY(199.0);
+        textUsernameTaken.setLayoutX(9.0);
+        textUsernameTaken.setLayoutY(195.0);
         textUsernameTaken.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         textUsernameTaken.setStrokeWidth(0.0);
         textUsernameTaken.setStyle("-fx-font-size: 9;");
         textUsernameTaken.setText("user name is already taken, try another one");
+        textUsernameTaken.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         textUsernameTaken.setVisible(false);
-        textUsernameTaken.setWrappingWidth(198.13677978515625);
+        textUsernameTaken.setWrappingWidth(403.9999977648258);
 
         imgHeader.setFitHeight(141.0);
         imgHeader.setFitWidth(700.0);
@@ -188,19 +202,66 @@ public class Register extends AnchorPane {
         getChildren().add(anchorPane);
         getChildren().add(imgHeader);
         getChildren().add(btnBack);
-        
-        
-        stage.setOnCloseRequest((e)->{
+
+        /*    stage.setOnCloseRequest((e)->{
             TicTacToeClient.playerHandler.closeConnection();
             Platform.exit();
         
-        });
-        
+        });*/
     }
-    static public void trueRegister()
-    {
-        stage.setScene(new Scene(new SignIn(stage)));
+
+    private boolean validatePassword() {
+        String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).*$";
+        String password = passFieldPassward.getText();
+
+        if (!password.matches(passwordRegex)) {
+            textUsernameTaken.setText("Password should contain at least one capital letter, one small letter, and one number.");
+            textUsernameTaken.setVisible(true);
+            passFieldPassward.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
     }
-    
+
+    private boolean validateUsername() {
+        String username = txtFieldUserName.getText();
+
+        if (username.length() < 5) {
+            textUsernameTaken.setText("Username is too short");
+            textUsernameTaken.setVisible(true);
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        if (!username.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$")) {
+            textUsernameTaken.setText("Username should contain at least one uppercase letter, one lowercase letter, and one digit.");
+            textUsernameTaken.setVisible(true);
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateName() {
+        String name = txtFieldName.getText();
+        if (!name.matches(".*[a-zA-Z].*")) {
+            textUsernameTaken.setText("Name should have at least one character.");
+            textUsernameTaken.setVisible(true);
+            txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateAllFields() {
+        if (txtFieldUserName.getText().isEmpty() || passFieldPassward.getText().isEmpty() || txtFieldName.getText().isEmpty()) {
+            textUsernameTaken.setText("All fields must be filled.");
+            textUsernameTaken.setVisible(true);
+            txtFieldUserName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            passFieldPassward.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            txtFieldName.setStyle("-fx-border-radius: 50px; -fx-background-radius: 50px;-fx-text-fill: red;");
+            return false;
+        }
+        return true;
+    }
 
 }

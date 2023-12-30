@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -41,7 +43,7 @@ public class ChoosePlayer extends ScrollPane {
     static ArrayList<PlayerDetails> players;
     static Alert alert;
     static Timeline timeline;
-    
+    protected final ImageView profile;
 
     static {
         vBox = new VBox();
@@ -65,6 +67,7 @@ public class ChoosePlayer extends ScrollPane {
         rectangle = new Rectangle();
         text1 = new Text();
         text2 = new Text();
+        profile = new ImageView();
 
         this.players = players;
         setContent(anchorPane);
@@ -99,13 +102,14 @@ public class ChoosePlayer extends ScrollPane {
         btnBack.setPrefWidth(22.0);
         btnBack.setStyle("-fx-background-color: #42C4F7;");
 
-        profilrbtn.setLayoutX(604.0);
+        /*profilrbtn.setLayoutX(604.0);
         profilrbtn.setLayoutY(5.0);
         profilrbtn.setMnemonicParsing(false);
         profilrbtn.setPrefHeight(49.0);
         profilrbtn.setPrefWidth(59.0);
         profilrbtn.setStyle("-fx-background-color: #42C4F7;");
         profilrbtn.setFont(new Font("Berlin Sans FB", 18.0));
+        */
         rectangle.setArcHeight(55.0);
         rectangle.setArcWidth(55.0);
         rectangle.setFill(javafx.scene.paint.Color.WHITE);
@@ -115,6 +119,19 @@ public class ChoosePlayer extends ScrollPane {
         rectangle.setStroke(javafx.scene.paint.Color.WHITE);
         rectangle.setStrokeType(javafx.scene.shape.StrokeType.INSIDE);
         rectangle.setWidth(664.0);
+        
+        profilrbtn.setLayoutX(604.0);
+        profilrbtn.setLayoutY(5.0);
+        profilrbtn.setMnemonicParsing(false);
+        profilrbtn.setPrefHeight(49.0);
+        profilrbtn.setPrefWidth(59.0);
+        profilrbtn.setStyle("-fx-background-color: #42C4F7;");
+        profilrbtn.setFont(new Font("Berlin Sans FB", 18.0));
+
+        profile.setFitHeight(56.0);
+        profile.setFitWidth(67.0);
+        profile.setImage(new Image(getClass().getResource("Images/icons8-username-48.png").toExternalForm()));
+        profilrbtn.setGraphic(profile);
 
         text1.setFill(javafx.scene.paint.Color.valueOf("#00000080"));
         text1.setLayoutX(73.0);
@@ -164,19 +181,19 @@ public class ChoosePlayer extends ScrollPane {
         logoutBut.setText("Log Out");
         logoutBut.setTextFill(javafx.scene.paint.Color.WHITE);
         logoutBut.setFont(new Font("Berlin Sans FB", 14.0));
-
+        
+        anchorPane.getChildren().add(profilrbtn);
         anchorPane.getChildren().add(rectangle);
         anchorPane.getChildren().add(text);
         anchorPane.getChildren().add(text0);
         anchorPane.getChildren().add(text1);
         anchorPane.getChildren().add(text2);
         anchorPane.getChildren().add(btnBack);
-        anchorPane.getChildren().add(profilrbtn);
         anchorPane.getChildren().add(text3);
         anchorPane.getChildren().add(vBox);
         anchorPane.getChildren().add(vBox0);
         anchorPane.getChildren().add(vBox1);
-        anchorPane.getChildren().add(logoutBut);
+        //anchorPane.getChildren().add(logoutBut);
 
         vBox.getChildren().clear();
         vBox0.getChildren().clear();
@@ -186,7 +203,7 @@ public class ChoosePlayer extends ScrollPane {
              {
              rectangle.setHeight(rectangle.getHeight()+((6-i)*75));
              }*/
-            
+
             Text text_name = new Text();
             text_name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
             text_name.setStrokeWidth(0.0);
@@ -242,15 +259,14 @@ public class ChoosePlayer extends ScrollPane {
         profilrbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                stage.setScene(new Scene(new ProfileHome(stage)));
+                //stage.setScene(new Scene(new ProfileHome(stage)));
             }
         });
     }
 
-    static public void listPlayers(ArrayList<PlayerDetails> player , String user) {
+    static public void listPlayers(ArrayList<PlayerDetails> player, String user) {
 
-        
-        players = player ;
+        players = player;
         vBox.getChildren().clear();
         vBox0.getChildren().clear();
         vBox1.getChildren().clear();
@@ -259,12 +275,11 @@ public class ChoosePlayer extends ScrollPane {
              {
              rectangle.setHeight(rectangle.getHeight()+((6-i)*75));
              }*/
-            
-            if(players.get(i).equals(user))
-            {
+
+            if (players.get(i).equals(user)) {
                 continue;
             }
-            
+
             Text text_name = new Text();
             text_name.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
             text_name.setStrokeWidth(0.0);
