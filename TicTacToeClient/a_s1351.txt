@@ -1,0 +1,7 @@
+s plays X at 3
+a plays O at 8
+s plays X at 2
+a plays O at 4
+s plays X at 1
+a plays O at 6
+s plays X at 0

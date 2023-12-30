@@ -31,10 +31,10 @@ public class SignIn extends AnchorPane {
     protected final ImageView imgHeader;
     protected final Button btnBack;
     Gson gson;
-    //static Stage stage;//
+    static Stage stage;
     
     public SignIn(Stage stage) {
-
+        this.stage = stage;
         anchorPane = new AnchorPane();
         btnSignIn = new Button();
         btnPlayOffline = new Button();
@@ -86,7 +86,7 @@ public class SignIn extends AnchorPane {
                 //send the gson to PlayerHandler
                 String sendSignInInformation = gson.toJson(gsonArr);
                 TicTacToeClient.playerHandler.sendRequest(sendSignInInformation);
-                playerhelper.PlayerHandler.loginResponse(stage);
+             //   playerhelper.PlayerHandler.loginResponse(stage);
 
             }
         });

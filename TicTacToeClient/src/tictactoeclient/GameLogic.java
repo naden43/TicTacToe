@@ -49,7 +49,6 @@ public class GameLogic {
         boolean flagX = false;
         boolean flagO = false;
         //horizontal
-
         for (int i = 0; i < 9; i += 3) {
             if (board[i] == 'X' && board[i + 1] == 'X' && board[i + 2] == 'X') {
                 flagX = true;
@@ -347,6 +346,30 @@ public class GameLogic {
             if ((i != indices[0]) && (i != indices[1]) && (i != indices[2])) {
                 btn[i].setDisable(true);
             }
+        }
+    }
+    
+    public static int checkExitInOnline(Stage stage) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit Alarm");
+        alert.setHeaderText("Are you sure you want to quit the game?");
+        ButtonType buttonYes = new ButtonType("Yes");
+        ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonYes, buttonCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonYes) {
+            /*ComputerMode.personScore = 0;
+            ComputerMode.computerScore = 0;
+            LocalMode.scorePlayer1 = 0;
+            LocalMode.scorePlayer2 = 0;
+            stage.setScene(new Scene(new ChooseMode(stage)));*/
+            return 1 ;
+        }
+        else
+        {
+            return 0 ;
         }
     }
 

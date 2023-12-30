@@ -1,0 +1,7 @@
+s plays X at 0
+Aaaaa1 plays O at 7
+s plays X at 2
+Aaaaa1 plays O at 6
+s plays X at 4
+Aaaaa1 plays O at 1
+s plays X at 8
