@@ -22,10 +22,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import java.util.Optional;
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -44,6 +41,8 @@ import javafx.util.Duration;
  */
 public class GameLogic {
 
+    static public boolean flagOnline = false;
+
     static public int checkWin(char[] board, Button[] btn) // 1-3(rows) 4-6(columns) 7-8(diagonal)   1-x 2-0 3-noOne
     {
         boolean flagX = false;
@@ -53,13 +52,30 @@ public class GameLogic {
             if (board[i] == 'X' && board[i + 1] == 'X' && board[i + 2] == 'X') {
                 flagX = true;
                 int[] index = {i, i + 1, i + 2};
-                highlightWinPlace(index, btn);
+                if (flagOnline && OnlineMode.myChar == 'X') {
+                    highlightWinPlace(index, btn);
+                } else if (flagOnline && OnlineMode.myChar == 'O') {
+                    highlightLosePlace(index, btn);
+
+                } else {
+                    highlightWinPlace(index, btn);
+
+                }
                 break;
             }
             if (board[i] == 'O' && board[i + 1] == 'O' && board[i + 2] == 'O') {
                 flagO = true;
                 int[] index = {i, i + 1, i + 2};
-                highlightWinPlace(index, btn);
+                if (flagOnline && OnlineMode.myChar == 'O') {
+                    highlightWinPlace(index, btn);
+                } else if (flagOnline && OnlineMode.myChar == 'X') {
+                    highlightLosePlace(index, btn);
+
+                } else {
+                    highlightWinPlace(index, btn);
+
+                }
+                //highlightWinPlace(index, btn);
                 break;
             }
         }
@@ -68,13 +84,31 @@ public class GameLogic {
             if (board[i] == 'X' && board[i + 3] == 'X' && board[i + 6] == 'X') {
                 flagX = true;
                 int[] index = {i, i + 3, i + 6};
-                highlightWinPlace(index, btn);
+                if (flagOnline && OnlineMode.myChar == 'X') {
+                    highlightWinPlace(index, btn);
+                } else if (flagOnline && OnlineMode.myChar == 'O') {
+                    highlightLosePlace(index, btn);
+
+                } else {
+                    highlightWinPlace(index, btn);
+
+                }
+                //highlightWinPlace(index, btn);
                 break;
             }
             if (board[i] == 'O' && board[i + 3] == 'O' && board[i + 6] == 'O') {
                 flagO = true;
                 int[] index = {i, i + 3, i + 6};
-                highlightWinPlace(index, btn);
+                if (flagOnline && OnlineMode.myChar == 'O') {
+                    highlightWinPlace(index, btn);
+                } else if (flagOnline && OnlineMode.myChar == 'X') {
+                    highlightLosePlace(index, btn);
+
+                } else {
+                    highlightWinPlace(index, btn);
+
+                }
+                //highlightWinPlace(index, btn);
                 break;
             }
         }
@@ -82,22 +116,56 @@ public class GameLogic {
         if (board[0] == 'X' && board[4] == 'X' && board[8] == 'X') {
             flagX = true;
             int[] index = {0, 4, 8};
-            highlightWinPlace(index, btn);
+            if (flagOnline && OnlineMode.myChar == 'X') {
+                highlightWinPlace(index, btn);
+            } else if (flagOnline && OnlineMode.myChar == 'O') {
+                highlightLosePlace(index, btn);
+
+            } else {
+                highlightWinPlace(index, btn);
+
+            }
+            //highlightWinPlace(index, btn);
 
         } else if (board[0] == 'O' && board[4] == 'O' && board[8] == 'O') {
             flagO = true;
             int[] index = {0, 4, 8};
-            highlightWinPlace(index, btn);
+            if (flagOnline && OnlineMode.myChar == 'O') {
+                highlightWinPlace(index, btn);
+            } else if (flagOnline && OnlineMode.myChar == 'X') {
+                highlightLosePlace(index, btn);
+
+            } else {
+                highlightWinPlace(index, btn);
+
+            }
+            //highlightWinPlace(index, btn);
 
         } else if (board[2] == 'O' && board[4] == 'O' && board[6] == 'O') {
             flagO = true;
             int[] index = {2, 4, 6};
-            highlightWinPlace(index, btn);
+            if (flagOnline && OnlineMode.myChar == 'O') {
+                highlightWinPlace(index, btn);
+            } else if (flagOnline && OnlineMode.myChar == 'X') {
+                highlightLosePlace(index, btn);
+
+            } else {
+                highlightWinPlace(index, btn);
+
+            }
 
         } else if (board[2] == 'X' && board[4] == 'X' && board[6] == 'X') {
             flagX = true;
             int[] index = {2, 4, 6};
-            highlightWinPlace(index, btn);
+            if (flagOnline && OnlineMode.myChar == 'X') {
+                highlightWinPlace(index, btn);
+            } else if (flagOnline && OnlineMode.myChar == 'O') {
+                highlightLosePlace(index, btn);
+
+            } else {
+                highlightWinPlace(index, btn);
+
+            }
         }
         if (flagX) {
             return 1;
@@ -143,19 +211,19 @@ public class GameLogic {
         textOnVideo.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
         textOnVideo.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
 
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1),textOnVideo );
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), textOnVideo);
         fadeIn.setFromValue(0.6);
         fadeIn.setToValue(1.0);
 
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), textOnVideo );
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), textOnVideo);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.4);
 
         SequentialTransition sequentialTransition = new SequentialTransition(fadeIn, fadeOut);
         sequentialTransition.setCycleCount(SequentialTransition.INDEFINITE);
 
-        StackPane stackPane = new StackPane(mediaView, textOnVideo );
-        StackPane.setAlignment(textOnVideo , Pos.CENTER);
+        StackPane stackPane = new StackPane(mediaView, textOnVideo);
+        StackPane.setAlignment(textOnVideo, Pos.CENTER);
         winnerDialog.getDialogPane().setContent(stackPane);
 
         mediaPlayer.setOnEndOfMedia(() -> {
@@ -208,10 +276,10 @@ public class GameLogic {
         mediaView.fitWidthProperty().bind(loserDialog.getDialogPane().widthProperty());
         mediaView.fitHeightProperty().bind(loserDialog.getDialogPane().heightProperty());
 
-        Label textOnVideo  = new Label("   ...Hard Luck...   ");
-        textOnVideo .setFont(new Font("Berlin Sans FB", 30.0));
-        textOnVideo .setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
-        textOnVideo .setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
+        Label textOnVideo = new Label("   ...Hard Luck...   ");
+        textOnVideo.setFont(new Font("Berlin Sans FB", 30.0));
+        textOnVideo.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
+        textOnVideo.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), textOnVideo);
         fadeIn.setFromValue(0.6);
@@ -230,7 +298,7 @@ public class GameLogic {
 
         mediaPlayer.setOnEndOfMedia(() -> {
             sequentialTransition.stop();
-           loserDialog.setResult(null);
+            loserDialog.setResult(null);
             loserDialog.close();
         });
 
@@ -245,7 +313,7 @@ public class GameLogic {
                 mediaPlayer.stop();
             }
         });
-       loserDialog.showAndWait();
+        loserDialog.showAndWait();
     }
 
     public void setDrawVideo(Stage stage) {
@@ -278,7 +346,7 @@ public class GameLogic {
         mediaView.fitWidthProperty().bind(drawDialog.getDialogPane().widthProperty());
         mediaView.fitHeightProperty().bind(drawDialog.getDialogPane().heightProperty());
 
-        Label textOnVideo  = new Label("     ... Draw ...     ");
+        Label textOnVideo = new Label("     ... Draw ...     ");
         textOnVideo.setFont(new Font("Berlin Sans FB", 30.0));
         textOnVideo.setTextFill(javafx.scene.paint.Color.rgb(243, 16, 16));
         textOnVideo.setStyle("-fx-background-color: #FFFF99 ; -fx-padding: 2px;");
@@ -315,7 +383,7 @@ public class GameLogic {
                 mediaPlayer.stop();
             }
         });
-       drawDialog.showAndWait();
+        drawDialog.showAndWait();
 
     }
 
@@ -346,6 +414,39 @@ public class GameLogic {
             if ((i != indices[0]) && (i != indices[1]) && (i != indices[2])) {
                 btn[i].setDisable(true);
             }
+        }
+    }
+
+    static public void highlightLosePlace(int[] indices, Button[] btn) {
+        for (int index : indices) {
+            btn[index].setStyle("-fx-background-color: #FF0000;");
+        }
+        for (int i = 0; i < 9; i++) {
+            if ((i != indices[0]) && (i != indices[1]) && (i != indices[2])) {
+                btn[i].setDisable(true);
+            }
+        }
+    }
+
+    public static int checkExitInOnline(Stage stage) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit Alarm");
+        alert.setHeaderText("Are you sure you want to quit the game?");
+        ButtonType buttonYes = new ButtonType("Yes");
+        ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonYes, buttonCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == buttonYes) {
+            /*ComputerMode.personScore = 0;
+            ComputerMode.computerScore = 0;
+            LocalMode.scorePlayer1 = 0;
+            LocalMode.scorePlayer2 = 0;
+            stage.setScene(new Scene(new ChooseMode(stage)));*/
+            return 1;
+        } else {
+            return 0;
         }
     }
 

@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -120,6 +121,7 @@ public class Invitation extends Pane {
         acceptbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                secondrystage.setResult(ButtonType.OK);
 
                 secondrystage.close();
                 
@@ -137,6 +139,7 @@ public class Invitation extends Pane {
             @Override
             public void handle(ActionEvent event) {
                 //secondrystage.close();
+                secondrystage.setResult(ButtonType.OK);
                 secondrystage.close();
                 ArrayList msg = new ArrayList();
                 msg.add(4);

@@ -2,7 +2,6 @@ package tictactoeserver;
 
 import com.google.gson.Gson;
 import database.DatabaseSupplier;
-
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -10,11 +9,11 @@ import java.net.Socket;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import database.PlayerDetails;
+import java.sql.Array;
 import java.util.ArrayList;
 
-public class ServerHandler{
+public class ServerHandler {
 
     DataInputStream ear;
     PrintStream mouth;
@@ -40,16 +39,15 @@ public class ServerHandler{
                     while (true) {
                         try {
                             String json = ear.readLine();
+                            ;
 
                             requestData = gson.fromJson(json, ArrayList.class);
-
                             double key = (double) requestData.get(0);
-
                             if (key == 1) {
                                 registration((String) requestData.get(1));
-                            } else if (key == 2) {//login()
-                                PlayerDetails player = login((String) requestData.get(1));
-                                notifyAllUpdate(player);
+                            } else if (key == 2) {
+                                signinAuthentication((String) requestData.get(1));
+                                notifyAllUpdate();
                             } else if (key == 3) {
 
                                 sendRequestToPlay((String) requestData.get(1));
@@ -58,15 +56,39 @@ public class ServerHandler{
                                 double keyAccept = (double) requestData.get(1);
                                 if (keyAccept == 1) {
                                     sendAcceptRequest((String) requestData.get(2));
+                                    //wait(10);
+                                    //notifyAllUpdate();
                                 } else if (keyAccept == 0) {
                                     sendRejectRequest((String) requestData.get(2));
                                 }
+                            } else if (key == 6) {
+                                sendPlayToAnotherPlayer((double) requestData.get(1));
+                            } else if (key == 8) { // here you are avaliable 
+                                exitGame((boolean) requestData.get(1));
+                                notifyAllUpdate();
+                            } else if (key == 9) {
+                                updateScore((double) requestData.get(1));
+                                notifyAllUpdate();
+                            } else if (key == 10) {
+                                sendPlayAgainReguest();
+                            } else if (key == 11) {
+
+                                double key2 = ((double) requestData.get(1));
+                                if (key2 == 1) {
+                                    sendPlayAgainAccept();
+                                } else {
+                                    sendPlayAgainReject();
+                                    notifyAllUpdate();
+                                }
+                            } else if (key == 16) {
+                                logout((String) requestData.get(1));
+                            } else if (key == 15) {
+                                changePass((String) requestData.get(1));
                             }
 
                         } catch (IOException ex) {
                             Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
                             break;
-
                         }
 
                     }
@@ -80,6 +102,18 @@ public class ServerHandler{
 
     }
 
+    public void sendPlayAgainReguest() {
+        for (int i = 0; i < playerList.size(); i++) {
+            if (playerList.get(i).UserName.equals(opponentUser)) {
+                ArrayList msg = new ArrayList();
+                msg.add(10);
+                msg.add(opponentUser);
+                playerList.get(i).mouth.println(gson.toJson(msg));
+                break;
+            }
+        }
+    }
+
     public void registration(String str) {
         int registrationResult = databaseSupplier.registerPlayer(str);
 
@@ -87,42 +121,51 @@ public class ServerHandler{
         requestData.clear();
         requestData.add(1);
         requestData.add(registrationResult);
-        if (registrationResult == 0) {
-            requestData.add("Username already exists");
-        } else if (registrationResult > 0) {
-            requestData.add("Username registered successfully");
-        } else {
-            requestData.add("Server failed. Please try again later");
-        }
         mouth.println(gson.toJson(requestData));
     }
 
-    public PlayerDetails login(String str) {
+    public void signinAuthentication(String str) {
+        boolean status = databaseSupplier.getPlayerStatus(str);
+        PlayerDetails playerDetails = databaseSupplier.login(str);
+        ArrayList<PlayerDetails> players = null;
+
+        requestData.clear();
+        requestData.add(2);
+        requestData.add(gson.toJson(playerDetails));
+        requestData.add(status);
+        if (playerDetails != null) {
+            UserName = playerDetails.getUserName();
+            players = databaseSupplier.getOnlineUsers(UserName);
+        }
+        requestData.add(gson.toJson(players));
+        mouth.println(gson.toJson(requestData));
+
+    }
+
+
+    /*public PlayerDetails login(String str) {
         int registrationResult = databaseSupplier.loginPlayer(str);
         resultData = new ArrayList();
         resultData.add(2);
         PlayerDetails playerDetails = gson.fromJson(str, PlayerDetails.class);
         UserName = playerDetails.getUserName();
-        System.out.println(UserName);
         resultData.add(registrationResult);
         ArrayList<PlayerDetails> players = databaseSupplier.getOnlineUsers(UserName);
-        PlayerDetails player = databaseSupplier.getPlayer(UserName);
-        for (int i = 0; i < players.size(); i++) {
-            System.out.println(players.get(i).getPassword());
-        }
+        PlayerDetails player = databaseSupplier.getPlayer(UserName);    
         resultData.add(gson.toJson(players));
-        System.out.println(resultData.get(1));
         mouth.println(gson.toJson(resultData));
         return player;
-    }
-
-    synchronized public void notifyAllUpdate(PlayerDetails player) {
+    }*/
+    synchronized public void notifyAllUpdate() {
         for (int i = 0; i < playerList.size(); i++) {
-            if (playerList.get(i).UserName != null && !(playerList.get(i).UserName.equals(UserName))) {
+
+            if (playerList.get(i).UserName != null) {
+                ArrayList<PlayerDetails> players = databaseSupplier.getOnlineUsers(playerList.get(i).UserName);
+
                 ArrayList notify = new ArrayList();
                 notify.add(5);
-                notify.add(UserName);
-                notify.add(gson.toJson(player));
+                notify.add(playerList.get(i).UserName);
+                notify.add(gson.toJson(players));
                 playerList.get(i).mouth.println(gson.toJson(notify));
             }
         }
@@ -141,6 +184,7 @@ public class ServerHandler{
     }
 
     public void sendAcceptRequest(String senderName) {
+        databaseSupplier.updateIsPlay(senderName, UserName);
         for (int i = 0; i < playerList.size(); i++) {
             if (playerList.get(i).UserName.equals(senderName)) {
                 playerList.get(i).opponentUser = UserName;
@@ -167,6 +211,47 @@ public class ServerHandler{
         msg.add(senderName);//who is playing with XXXXXXXXXXX
 
         mouth.println(gson.toJson(msg));
+
+    }
+
+    public void sendPlayAgainAccept() {
+        for (int i = 0; i < playerList.size(); i++) {
+            if (playerList.get(i).UserName.equals(opponentUser)) {
+                ArrayList msg = new ArrayList();
+                msg.add(11);
+                msg.add(1);
+                msg.add(0); // send to
+                playerList.get(i).mouth.println(gson.toJson(msg));
+                break;
+            }
+        }
+
+        ArrayList msg = new ArrayList();
+        msg.add(11);
+        msg.add(1);
+        msg.add(1);//send from
+        mouth.println(gson.toJson(msg));
+    }
+
+    public void sendPlayAgainReject() {
+        databaseSupplier.setIsPlay(UserName, opponentUser);
+        for (int i = 0; i < playerList.size(); i++) {
+            if (playerList.get(i).UserName.equals(opponentUser)) {
+                ArrayList msg = new ArrayList();
+                msg.add(11);
+                msg.add(0);
+                ArrayList<PlayerDetails> players = databaseSupplier.getOnlineUsers(playerList.get(i).UserName);
+                msg.add(gson.toJson(players));
+                playerList.get(i).mouth.println(gson.toJson(msg));
+                break;
+            }
+        }
+        ArrayList msg = new ArrayList();
+        msg.add(11);
+        msg.add(0);
+        ArrayList<PlayerDetails> players = databaseSupplier.getOnlineUsers(UserName);
+        msg.add(gson.toJson(players));
+        mouth.println(gson.toJson(msg));
     }
 
     public void sendRejectRequest(String userName) {
@@ -185,38 +270,103 @@ public class ServerHandler{
         }
     }
 
+    public void sendPlayToAnotherPlayer(double index) {
+        for (int i = 0; i < playerList.size(); i++) {
+            if (playerList.get(i).UserName.equals(opponentUser)) {
+                ArrayList msg = new ArrayList();
+                msg.add(6);
+                msg.add(index);
+                playerList.get(i).mouth.println(gson.toJson(msg));
+
+            }
+        }
+    }
+
+    public void exitGame(boolean gameStatus) {
+        ArrayList<PlayerDetails> players_player1 = databaseSupplier.getOnlineUsers(UserName);
+        ArrayList<PlayerDetails> players_player2 = databaseSupplier.getOnlineUsers(opponentUser);
+        databaseSupplier.setIsPlay(UserName, opponentUser);
+        if (gameStatus) {
+            for (int i = 0; i < playerList.size(); i++) {
+                if (playerList.get(i).UserName.equals(opponentUser)) {
+                    ArrayList msg = new ArrayList();
+                    msg.add(8);
+                    msg.add(1);
+                    msg.add(UserName); // another name ;
+                    msg.add(gson.toJson(players_player2));
+                    playerList.get(i).mouth.println(gson.toJson(msg));
+                }
+            }
+
+            ArrayList msg = new ArrayList();
+            msg.add(8);
+            msg.add(0);
+            msg.add(gson.toJson(players_player1));
+            mouth.println(gson.toJson(msg));
+        } else {
+            for (int i = 0; i < playerList.size(); i++) {
+                if (playerList.get(i).UserName.equals(opponentUser)) {
+                    ArrayList msg = new ArrayList();
+                    msg.add(8);
+                    msg.add(0);
+                    msg.add(gson.toJson(players_player2));
+                    playerList.get(i).mouth.println(gson.toJson(msg));
+                }
+            }
+
+            ArrayList msg = new ArrayList();
+            msg.add(8);
+            msg.add(0);
+            msg.add(gson.toJson(players_player1));
+            mouth.println(gson.toJson(msg));
+
+        }
+    }
+
+    synchronized public void updateScore(double score) {
+        databaseSupplier.updateScore(score, UserName);
+    }
+
+    public void changePass(String str) {
+        boolean passChangable = databaseSupplier.changePass(str);
+        requestData.clear();
+        requestData.add(15);
+        requestData.add(passChangable);
+        mouth.println(gson.toJson(requestData));
+    }
+
+    public void logout(String str) {
+        boolean status = databaseSupplier.logOut(str);
+        requestData.clear();
+        requestData.add(16);
+        requestData.add(status);
+        mouth.println(gson.toJson(requestData));
+    }
+
     synchronized public void closeConnection() {
-    
-        for (int i = 0; i<playerList.size() ;  i++) {
+        databaseSupplier.setDatabase();
+        for (int i = 0; i < playerList.size(); i++) {
             gson = new Gson();
             ArrayList msg = new ArrayList();
             msg.add(0);
             msg.add("close");
             playerList.get(i).mouth.println(gson.toJson(msg));
-           // try {
-                //playerList.get(i).clientSocket.close();
-                
-                //playerList.remove(playerList.get(i));
-            /*} catch (IOException ex) {
-                Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
         }
-       
-        for (int i = 0; i<playerList.size() ;  i++) {
-            
-           try {
-               playerList.get(i).th.stop();
+
+        for (int i = 0; i < playerList.size(); i++) {
+
+            try {
+                playerList.get(i).th.stop();
                 playerList.get(i).clientSocket.close();
-                
-                //playerList.get(i).th.stop();
-           } catch (IOException ex) {
+
+            } catch (IOException ex) {
                 Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         playerList.clear();
         th.stop();
-        
+
     }
 
 }
