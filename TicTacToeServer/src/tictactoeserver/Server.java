@@ -15,21 +15,47 @@ import java.util.logging.Logger;
  *
  * @author User
  */
-public class Server {
+public class Server extends Thread {
 
     ServerSocket serverSocket;
+    ServerHandler serverHandler;
 
     public Server() {
         try {
             serverSocket = new ServerSocket(5010);
-            while (true) {
-                Socket socket = serverSocket.accept();
-                new ServerHandler(socket);
-               
-            }
+            start();
         } catch (IOException ex) {
             System.out.println("Aser");
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void close() {
+
+        try {
+            if (!serverHandler.playerList.isEmpty()) {
+                serverHandler.closeConnection();
+            }
+            stop();
+
+            serverSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void run() {
+        while (true) {
+            Socket socket;
+            try {
+                socket = serverSocket.accept();
+                serverHandler = new ServerHandler(socket);
+
+            } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 }

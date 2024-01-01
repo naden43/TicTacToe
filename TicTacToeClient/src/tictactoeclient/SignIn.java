@@ -20,9 +20,9 @@ import playerhelper.PlayerDetails;
 public class SignIn extends AnchorPane {
 
     protected final AnchorPane anchorPane;
-    protected final Button btnSignIn;
+    public static final Button btnSignIn;
     protected final Button btnPlayOffline;
-    protected final Button btnRegister;
+    public static final Button btnRegister;
     protected final TextField txtFieldUserName;
     protected final ImageView imgUserName;
     protected final ImageView imgPassward;
@@ -30,15 +30,20 @@ public class SignIn extends AnchorPane {
     protected final Text textUserOrPassWrong;
     protected final ImageView imgHeader;
     protected final Button btnBack;
-    Gson gson ;
-    Thread th ;
+    Gson gson;
+    Thread th;
     static Stage stage;
-    public SignIn(Stage stage) {
-        this.stage = stage ;
-        anchorPane = new AnchorPane();
+
+    static {
         btnSignIn = new Button();
-        btnPlayOffline = new Button();
         btnRegister = new Button();
+    }
+
+    public SignIn(Stage stage) {
+        this.stage = stage;
+        anchorPane = new AnchorPane();
+        btnPlayOffline = new Button();
+
         txtFieldUserName = new TextField();
         imgUserName = new ImageView();
         imgPassward = new ImageView();
@@ -170,25 +175,26 @@ public class SignIn extends AnchorPane {
                 stage.setScene(new Scene(new Register(stage)));
             }
         });
+        
         btnSignIn.setOnAction(e -> {
+
             PlayerDetails playerDetails = new PlayerDetails();
             playerDetails.setUserName(txtFieldUserName.getText());
             playerDetails.setPassword(passFieldPassward.getText());
-          
-            
-            
+
             // Convert PlayerDetails object to JSON
             ArrayList jsonArr = new ArrayList();
             jsonArr.add(2);
             jsonArr.add(gson.toJson(playerDetails));
-   
+
             String jsonRegistrationRequest = gson.toJson(jsonArr);
             TicTacToeClient.playerHandler.sendRequest(jsonRegistrationRequest);
+            
             //stage.setScene(new Scene (new ChoosePlayer(stage)));
         });
     }
-    static public void trueLogin(ArrayList<PlayerDetails> players)
-    {
-        stage.setScene(new Scene(new ChoosePlayer(stage , players)));
+
+    static public void trueLogin(ArrayList<PlayerDetails> players) {
+        stage.setScene(new Scene(new ChoosePlayer(stage, players)));
     }
 }

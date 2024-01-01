@@ -34,27 +34,61 @@ public class PlayerHandler {
     PrintStream mouth;
     Socket socket;
     Gson gson = new Gson();
-    Thread th;
+    Thread th, thread;
     ArrayList responseData;
     String json;
 
-    public PlayerHandler(Stage stage) {
+    boolean firstTime = true;
+    boolean flag = true;
+    Stage stage;
 
-        try {
-            socket = new Socket("127.0.0.1", 5010);
-            ear = new DataInputStream(socket.getInputStream());
-            mouth = new PrintStream(socket.getOutputStream());
-        } catch (IOException ex) {
-            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
+public PlayerHandler(Stage primaryStage) {
+        this.stage = primaryStage;
+
+        thread = new Thread() {
+            public void run() {
+                while (flag) {
+                    try {
+                        SignIn.btnSignIn.setDisable(true);
+                        SignIn.btnRegister.setDisable(true);
+                        socket = new Socket("127.0.0.1", 5010);
+                        ear = new DataInputStream(socket.getInputStream());
+                        mouth = new PrintStream(socket.getOutputStream());
+                        if (firstTime) {
+                            th.start();
+                            firstTime = false;
+                        } else {
+                            th.resume();
+                        }
+                        thread.suspend();
+                    } catch (IOException ex1) {
+                        System.out.println("Connection Refused ");
+                    }
+                }
+            }
+        };
+        thread.start();
 
         th = new Thread() {
             public void run() {
                 while (true) {
                     try {
+                        SignIn.btnSignIn.setDisable(false);
+                        SignIn.btnRegister.setDisable(false);
                         String json = ear.readLine();
                         responseData = gson.fromJson(json, ArrayList.class);
+
+                        if (responseData == null) {
+                            continue;
+                        }
+
                         double key = (double) responseData.get(0);
+
+                        if (key == 0) {
+                            Platform.runLater(() -> handleServerShutdown());
+                            thread.resume();
+                            th.suspend();
+                        }
                         if (key == 1) {
                             Platform.runLater(new Runnable() {
                                 public void run() {
@@ -118,14 +152,14 @@ public class PlayerHandler {
                             //System.out.println(responseData.get(1).toString()+"asdy 3leeeeek entaaa");
                             double keyAccept = (double) responseData.get(1);
                             if (keyAccept == 1) {
-                               
+
                                 Platform.runLater(new Runnable() {
-                                    
+
                                     public void run() {
-                                         if (((String) responseData.get(2)).equals((String) responseData.get(4))) {
-                                             ChoosePlayer.closeAlert();
-                                         }
-                                         stage.setScene(new Scene(new OnlineMode(stage, (String) responseData.get(2), (String) responseData.get(3))));
+                                        if (((String) responseData.get(2)).equals((String) responseData.get(4))) {
+                                            ChoosePlayer.closeAlert();
+                                        }
+                                        stage.setScene(new Scene(new OnlineMode(stage, (String) responseData.get(2), (String) responseData.get(3))));
                                     }
                                 });
                             } else if (keyAccept == 0) {
@@ -159,24 +193,17 @@ public class PlayerHandler {
                 }
             }
         };
-        th.start();
+
+    }
+    private void handleServerShutdown() {
+        stage.setScene(new Scene(new SignIn(stage)));
+        SignIn.btnSignIn.setDisable(true);
+        SignIn.btnRegister.setDisable(true);
     }
 
     public void sendRequest(String json) {
         // Send the JSON registration request to ServerHandler
         mouth.println(json);
-    }
-
-    public void closeConnection() {
-        try {
-            th.stop();
-            ear.close();
-            mouth.close();
-            socket.close();
-        } catch (IOException ex) {
-            Logger.getLogger(PlayerHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
 }

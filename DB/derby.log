@@ -1,7 +1,7 @@
-Mon Dec 25 18:23:24 EET 2023 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Sun Dec 31 22:31:23 EET 2023 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Dec 25 18:23:25 EET 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018c-a1c9-c662-00003fc46bb0 
+Sun Dec 31 22:31:23 EET 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-018c-c192-f806-00003fc46bb0 
 on database directory C:\Users\Ghost-\OneDrive\Desktop\JavaProject\TicTacToe\DB\GameLogic with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Program%20Files/glassfish-4.1/javadb/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\Ghost-\OneDrive\Desktop\JavaProject\TicTacToe\DB
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Jan 01 00:25:15 EET 2024: Shutting down Derby engine
+----------------------------------------------------------------
+Mon Jan 01 00:25:15 EET 2024:
+Shutting down instance a816c00e-018c-c192-f806-00003fc46bb0 on database directory C:\Users\Ghost-\OneDrive\Desktop\JavaProject\TicTacToe\DB\GameLogic with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
+----------------------------------------------------------------

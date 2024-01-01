@@ -190,11 +190,7 @@ public class Register extends AnchorPane {
         getChildren().add(btnBack);
         
         
-        stage.setOnCloseRequest((e)->{
-            TicTacToeClient.playerHandler.closeConnection();
-            Platform.exit();
-        
-        });
+       
         
     }
     static public void trueRegister()

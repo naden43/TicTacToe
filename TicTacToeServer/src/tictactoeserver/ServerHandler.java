@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import database.PlayerDetails;
 import java.util.ArrayList;
 
-public class ServerHandler {
+public class ServerHandler{
 
     DataInputStream ear;
     PrintStream mouth;
@@ -27,8 +27,10 @@ public class ServerHandler {
     String UserName;
     String opponentUser;
     String playChar;
+    Socket clientSocket;
 
     public ServerHandler(Socket s) {
+        clientSocket = s;
         try {
             ear = new DataInputStream(s.getInputStream());
             mouth = new PrintStream(s.getOutputStream());
@@ -181,6 +183,40 @@ public class ServerHandler {
                 break;
             }
         }
+    }
+
+    synchronized public void closeConnection() {
+    
+        for (int i = 0; i<playerList.size() ;  i++) {
+            gson = new Gson();
+            ArrayList msg = new ArrayList();
+            msg.add(0);
+            msg.add("close");
+            playerList.get(i).mouth.println(gson.toJson(msg));
+           // try {
+                //playerList.get(i).clientSocket.close();
+                
+                //playerList.remove(playerList.get(i));
+            /*} catch (IOException ex) {
+                Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+        }
+       
+        for (int i = 0; i<playerList.size() ;  i++) {
+            
+           try {
+               playerList.get(i).th.stop();
+                playerList.get(i).clientSocket.close();
+                
+                //playerList.get(i).th.stop();
+           } catch (IOException ex) {
+                Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        playerList.clear();
+        th.stop();
+        
     }
 
 }

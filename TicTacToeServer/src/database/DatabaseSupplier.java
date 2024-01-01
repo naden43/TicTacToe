@@ -115,13 +115,54 @@ public class DatabaseSupplier {
 
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseSupplier.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-       
-       
+        }       
        return players;
        
    }
+   
+   public synchronized int selectOffline() {
+
+        String query = "select count(status) from player where status='false'";
+        int offlineNumber = 0;
+        try {
+            pst =con.prepareStatement(query,
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                offlineNumber = res.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
+
+        return offlineNumber;
+
+    }
+   
+   public synchronized int selectOnline() {
+
+        String query = "select count(status) from player where status='true'";
+        int onlineNumber = 0;
+        try {
+            pst =con.prepareStatement(query,
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                onlineNumber = res.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
+
+        return onlineNumber;
+
+    }
    
    public PlayerDetails getPlayer(String username)
    {
