@@ -1,6 +1,9 @@
 package tictactoeclient;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import playerhelper.PlayerDetails;
+import static tictactoeclient.SignIn.stage;
 
 public class RecordList extends AnchorPane {
 
@@ -25,12 +29,14 @@ public class RecordList extends AnchorPane {
     protected final VBox vBox;
     protected final ScrollPane scrollview;
     protected final AnchorPane anchorPane;
-    protected final ListView<String> listView; 
+    protected final ListView<String> listView;
     protected final ImageView backbtn;
+    PlayerDetails playerDetails;
 
     private ObservableList<String> records = FXCollections.observableArrayList();
 
-    public RecordList(Stage stage , PlayerDetails playerDetails) {
+    public RecordList(Stage stage, PlayerDetails playerDetails) {
+        this.playerDetails = playerDetails;
 
         label = new Label();
         imageView = new ImageView();
@@ -86,12 +92,11 @@ public class RecordList extends AnchorPane {
         backbtn.setPickOnBounds(true);
         backbtn.setPreserveRatio(true);
         backbtn.setImage(new Image(getClass().getResource("Images/back.png").toExternalForm()));
-        backbtn.setOnMouseClicked((e)->{
-          
-             stage.setScene(new Scene(new ProfileHome(stage ,playerDetails )));
+        backbtn.setOnMouseClicked((e) -> {
+
+            stage.setScene(new Scene(new ProfileHome(stage, playerDetails)));
         });
         loadRecordedGames();
-        
 
         getChildren().add(label);
         getChildren().add(imageView);
@@ -101,28 +106,39 @@ public class RecordList extends AnchorPane {
         getChildren().add(backbtn);
     }
 
-    public void loadRecordedGames() {
-        String directoryPath = "E:\\material ITI\\Courses Fundementals\\Java\\Project\\TicTacToe\\TicTacToeClient";
-        File directory = new File(directoryPath);
+   public void loadRecordedGames() {
+    String directoryPath = "E:\\program_files\\netbeans\\main java project\\TicTacToe\\TicTacToeClient";
+    File directory = new File(directoryPath);
 
-        if (directory.exists() && directory.isDirectory()) {
-            File[] gameFiles = directory.listFiles((dir, name) -> name.endsWith(".txt"));
-            if (gameFiles != null) {
-                List<String> gameFileNames = Arrays.stream(gameFiles).map(File::getName).collect(Collectors.toList());
-                records.setAll(gameFileNames);
-            }
+    if (directory.exists() && directory.isDirectory()) {
+        File[] gameFiles = directory.listFiles((dir, name) -> name.endsWith(".txt"));
+        if (gameFiles != null) {
+            List<String> gameFileNames = Arrays.stream(gameFiles)
+                    .map(file -> file.getName().replaceFirst("[.][^.]+$", "")) // Remove file extension
+                    .collect(Collectors.toList());
+            records.setAll(gameFileNames);
         }
-
-        listView.setOnMouseClicked(event -> {
-            String selectedRecord = listView.getSelectionModel().getSelectedItem();
-            if (selectedRecord != null) {
-                // Load the selected recorded game
-                loadSelectedRecord(selectedRecord);
-            }
-        });
     }
 
+    listView.setOnMouseClicked(event -> {
+        String selectedRecord = listView.getSelectionModel().getSelectedItem();
+        if (selectedRecord != null) {
+            try (BufferedReader br = new BufferedReader(new FileReader(directoryPath + "\\" + selectedRecord + ".txt"))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+                loadSelectedRecord(content.toString());
+            } catch (IOException e) {
+                System.out.println("Error reading file: " + e.getMessage());
+            }
+        }
+    });
+}
+
+
     private void loadSelectedRecord(String selectedRecord) {
-       
+        stage.setScene(new Scene(new ShowRecVideo(stage, selectedRecord , playerDetails)));
     }
 }

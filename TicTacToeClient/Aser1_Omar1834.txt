@@ -1,0 +1,6 @@
+Aser1 plays X at 4
+Omar1 plays O at 2
+Aser1 plays X at 0
+Omar1 plays O at 8
+Aser1 plays X at 6
+Omar1 plays O at 5
